@@ -32,8 +32,7 @@ a:link {
 %> --%>
 
 <jsp:include page="common/top.jsp" flush="true" /><br>
- <jsp:include page="common/menu.jsp" flush="true" /> 
-
+<a href="HouseListServlet">houseOverview</a>
 </body>
 </html>
 

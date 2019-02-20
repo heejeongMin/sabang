@@ -33,3 +33,15 @@
 	display: inline-block;
 	margin-left: 10px;
 }
+a.focusedPage{
+	background: none;
+    width: 25px;
+    color: dodgerblue;
+}
+a.unfocusedPage{
+	background: dodgerblue;
+    border-radius: 50%;
+    width: 25px;
+    color: white;
+    text-decoration: none;
+}

@@ -10,6 +10,6 @@
 <jsp:include page="common/top.jsp" flush="true"/>
 <jsp:include page="common/menu.jsp" flush="true"/>
 <hr>
-<jsp:include page="house/houseList.jsp" flush="true"/>
+<jsp:include page="house/houseOverview.jsp" flush="true"/>
 </body>
 </html>

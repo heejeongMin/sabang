@@ -7,14 +7,29 @@
 	<select id="searchList" parameterType="string" resultType="hashmap">
 		select hcode, htype, rtype, hname, area, flr, hetc, deposit, mrent, yrent, maintc
 		from house_info join house_price using(hcode)
-		where addr like '%'||#{search}||'%'
+		where addr like '%'||#{search}||'%' or hname like '%'||#{search}||'%'
 	</select>
 	
 	<select id="totalListBySearch" parameterType="string" resultType="int">
 		select count(*)
 		from house_info join house_price using(hcode)
-		where addr like '%'||#{search}||'%'
+		where addr like '%'||#{search}||'%' or hname like '%'||#{search}||'%'
 	</select>
+	
+	<select id="retrieveNewItems" resultType="hashmap">
+		select hcode, htype, rtype, hname, area, flr, hetc, deposit, mrent, yrent, maintc
+		from house_info join house_price using(hcode)
+		where registerdate > sysdate-3 
+	</select>
+	
+	<select id="retrieveHotItems" resultType="hashmap">
+		select hcode, htype, rtype, hname, area, flr, hetc, deposit, mrent, yrent, maintc
+		from house_info join house_price using(hcode)
+		where cntwish > (select max(cntwish) - 3 from house_info) 
+		order by cntwish desc
+	</select>
+	
+	
 
 </mapper>
 

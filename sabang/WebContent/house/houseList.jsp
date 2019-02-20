@@ -2,6 +2,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <link rel="stylesheet" href="css/houseList.css">
+<style>
+a.focusedPage{
+	background: none;
+    width: 25px;
+    color: dodgerblue;
+}
+a.unfocusedPage{
+	background: dodgerblue;
+    border-radius: 50%;
+    width: 25px;
+    color: white;
+    text-decoration: none;
+}
+</style>
 <c:set var="list" value="${pagingMap.list}"/>
 <h1>조건에 맞는 방 <span id="noOfHouse"> ${pagingMap.totalPage}</span>건</h1>
 <table id="outerTable">
@@ -19,13 +33,13 @@
 								원룸 
 							</c:when>
 							<c:when  test="${house.HTYPE == 't'}">
-								<td colspan="3">투룸 </td>
+								투룸
 							</c:when>
 							<c:when  test="${house.HTYPE == 'f'}">
-								<td colspan="3">오피스텔 </td>
+								오피스텔
 							</c:when>
 							<c:when  test="${house.HTYPE == 'p'}">
-								<td colspan="3">아파트 </td>
+								아파트
 							</c:when>
 						</c:choose>
 						</td>
@@ -51,14 +65,20 @@
 					검색 결과가 없습니다 :(
 				</c:when>
 				<c:otherwise><!-- 검색 결과가 0건이 아닐때  -->
-					<c:set var="repeat" value="${pagingMap.totalPage/pagingMap.perPage}"/>
-					<c:forEach var="i" begin="1" end="${fn:substring(repeat, 0, fn:indexOf(repeat, '.')) +1}">
+					<c:set var="repeat" value="${pagingMap.totalPage%pagingMap.perPage}"/>
+					<c:if test="${repeat != 0 }">
+						<c:set var="repeat" value="${(pagingMap.totalPage/pagingMap.perPage) + 1}"/>
+					</c:if>
+					<c:if test="${repeat == 0 }">
+						<c:set var="repeat" value="${(pagingMap.totalPage/pagingMap.perPage)}"/>
+					</c:if>
+					<c:forEach var="i" begin="1" end="${repeat}">
 						<c:choose>
 							<c:when test="${i == (pagingMap.curPage)}">
-								<a>${i}</a>
+								<a class="focusedPage">${i}</a>
 							</c:when>
 							<c:otherwise>
-								<a href="HouseListServlet?curPage=${i}&search=${search}">${i}</a>
+								<a href="HouseListServlet?curPage=${i}&search=${search}" class="unfocusedPage">${i}</a>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>

@@ -5,11 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
-
-
-
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <span style="color: white"> <img src="images/logo/sabanglogo_w.png" width="23px" height = "100%"> Sabang
 
 	<c:choose>
@@ -29,14 +25,14 @@
              </c:when> 
               
               <c:otherwise>
-              	<a href="LoginUIServlet">로그인</a> 
+              	<a href="LoginUIServlet" id="login">로그인</a> 
               	<a href="MemberUIServlet">회원가입</a>
               </c:otherwise>
        </c:choose>
        	</span>
  
  <!-- my page -->
-<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#delMbr").on("click", function() {

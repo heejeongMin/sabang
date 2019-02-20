@@ -7,9 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
 <jsp:include page="common/top.jsp" flush="true" /><br>
-<jsp:include page="common/menu.jsp" flush="true" /> 
 <h1>로그인</h1>
 <jsp:include page="member/loginForm.jsp" flush="true" />
 </body>

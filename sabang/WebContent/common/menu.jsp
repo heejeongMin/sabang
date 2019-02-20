@@ -21,10 +21,17 @@ $(document).ready(function(){
 		$(".searchRange").text(result+"만원~무제한");
 	});//end input[type=range] onChagne
 	
+	$("button#searchBtn").on("click", function(e){
+		if($("input[name=search]").val().trim().length == 0){
+			e.preventDefault();
+			alert("검색어를 입력하여주세요");
+		}
+	});//end searchBtn onClick
+	
 });//end ready
 </script>
 <form action="HouseListServlet" method="get" id="searchBar">
-	<input type="text" name="search">
+	<input type="text" name="search" placeholder="연희동, 신촌, 신축 ...">
 	<button id="searchBtn">검색</button>
 	<ul id="filterList">
 		<li class="filterOpt">원룸/투룸+
