@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MemberMapper">
+	
+	
+	<!-- 가입 -->
+
+	<insert id="SignMbr" parameterType="MemberDTO">
+		insert into member (userid,passwd, ssn, username,post,addr, phone, email) 
+		values( #{userid},#{passwd},#{ssn},#{username},#{post},#{addr}, #{phone},#{email})
+	</insert>
+	
+	<insert id="SignAgnt" parameterType="AgentDTO">
+		insert into agent (agntid, passwd, agntssn, agntname, agntphone, agntemail)
+		values(#{agntid},#{passwd},#{agntssn},#{agntname},#{agntphone},#{agntemail})
+	</insert>
+	
+	
+	<select id="idCheck" parameterType="string" resultType="int">
+		select
+		count(*)
+		from member
+		where userid = #{userid}
+	</select>
+	
+	<select id="agntIdCheck" parameterType="string" resultType="int">
+		select
+		count(*)
+		from agent
+		where agntid = #{userid}
+	</select>
+	
+	
+	<select id = "hasSigned" parameterType= "string" resultType = "int">
+		select
+		count(*)
+		from wdMbr
+		where userid = #{userid}
+	</select>
+	
+	
+	<select id = "SignedMbr" parameterType = "string" resultType = "wdMbrDTO"> 
+		select userid
+		from wdMbr
+		where  userid = #{userid}
+	</select>  <!-- 탈퇴회원 정보출력 -->
+	
+	
+	<select id = "overDay" parameterType = "string" resultType = "string">
+		select TO_CHAR(SYSDATE + 24/24,'YYYYMMDD HH24') 
+		from wdMbr
+		where userid = #{userid}
+	</select>
+	 
+	 
+	 
+	<!-- 로그인 -->
+	
+	
+	<select id="login" parameterType="hashmap" resultType="MemberDTO">
+		select userid,passwd, ssn, username,post,addr, phone, email, wishlist
+		from member
+		where
+		userid = #{userid}
+		and passwd = #{passwd}
+	</select>
+
+	<select id="agntlogin" parameterType="hashmap" resultType="AgentDTO">
+		select agntid, passwd, agntssn, agntname, agntphone, agntemail, hcode
+		from agent
+		where agntid = #{userid}
+		and passwd = #{passwd}
+	</select>
+
+	<!-- 기타 서비스 -->
+	
+<!-- 	
+	<select id="mypage" parameterType="string"
+		resultType="MemberDTO">
+		select userid,passwd,username,post,addr1,addr2,
+		phone1,phone2,phone3,email1,email2
+		from member
+		where userid = #{userid}
+	</select>
+	
+
+	<select id="idSearch" resultType="string"
+		parameterType="MemberDTO">
+		select userid
+		from member
+		where username=#{username} and
+		phone1=#{phone1} and phone2=#{phone2} and
+		phone3=#{phone3}
+	</select>
+
+	<update id="memberUpdate" parameterType="MemberDTO">
+		update member
+		set post =
+		#{post},
+		addr1 = #{addr1},
+		addr2 = #{addr2},
+		phone1 = #{phone1},
+		phone2 =
+		#{phone2},
+		phone3 = #{phone3},
+		email1 = #{email1},
+		email2 = #{email2}
+		where userid = #{userid}
+	</update>
+ -->
+
+
+	<!-- 회원 탈퇴 -->
+
+	<delete id="delMbrId" parameterType="string">
+		delete member 
+		where userid = #{userid}
+	</delete>
+
+	<delete id="delAgntId" parameterType="string">
+		delete agent 
+		where agntid = #{userid}
+	</delete>
+
+	<select id="checkMbrPw" parameterType="string" resultType="MemberDTO">
+		select userid,passwd, ssn, username,post,addr, phone, email, wishlist
+		from member
+		passwd = #{passwd}
+	</select>
+	
+	<select id="checkAgntPw" parameterType="string" resultType="AgentDTO">
+		select agntid, passwd, agntssn, agntname, agntphone, agntemail, hcode
+		from agent
+		passwd = #{passwd}
+	</select>
+	
+
+</mapper>

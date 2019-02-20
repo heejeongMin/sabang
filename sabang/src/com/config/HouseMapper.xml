@@ -1,0 +1,23 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="HouseMapper">
+
+	<select id="searchList" parameterType="string" resultType="hashmap">
+		select hcode, htype, rtype, hname, area, flr, hetc, deposit, mrent, yrent, maintc
+		from house_info join house_price using(hcode)
+		where addr like '%'||#{search}||'%'
+	</select>
+	
+	<select id="totalListBySearch" parameterType="string" resultType="int">
+		select count(*)
+		from house_info join house_price using(hcode)
+		where addr like '%'||#{search}||'%'
+	</select>
+
+</mapper>
+
+
+
+
