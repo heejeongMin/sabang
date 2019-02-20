@@ -7,8 +7,17 @@ $(document).ready(function(){
 	
 	//메뉴 드롭다운 슬라이드 효과
 	$("li.filterOpt").on("click", function(e){
+		$("li.filterOpt").find("ul.sublist").each(function(idx, ele){//다른 버튼을 누르면 이미 열린애들은 닫아주기
+			if(ele.clientHeight != 0) $(ele).hide(); 
+		});//end ul.sublist반복
+		
 		$(e.target).find("ul.sublist").slideToggle();
 	});//end .filterOpt onClick
+	
+	//sub메뉴가 열렸을 때 누르면 부모인 li.filterOpt에 이벤트 전파 방지
+	$("ul.sublist").on("click", function(e){
+		e.stopPropagation();
+	});//end ul.sublist onClick
 	
 	// 가격대 버튼 드롭다운 range 바
 	$("input[type=range]").on("change", function(e){
@@ -28,19 +37,27 @@ $(document).ready(function(){
 		}
 	});//end searchBtn onClick
 	
+	
+	$("input[name=rtype]").on("change", function(){
+		
+		
+	}); // end input[name=rtype] onChange
+	
 });//end ready
 </script>
+<style>
+</style>
 <form action="HouseListServlet" method="get" id="searchBar">
-	<input type="text" name="search" placeholder="연희동, 신촌, 신축 ...">
+	<input type="text" name="search" id="search" placeholder="연희동, 신촌, 신축 ...">
 	<button id="searchBtn">검색</button>
 	<ul id="filterList">
 		<li class="filterOpt">원룸/투룸+
-			<ul class="sublist">
+			<ul class="sublist subListHide">
 				<li class="subFilter">
 					<div class="rangeWrap" >
-						<input type="checkbox" name="rtype" value="oneRoom">원룸
-						<input type="checkbox" name="rtype" value="twoRoom">투룸
-						<input type="checkbox" name="rtype" value="threeRoom">쓰리룸이상
+						<input type="checkbox" name="rtype" value="oneRoom">원룸<br>
+						<input type="checkbox" name="rtype" value="twoRoom">투룸<br>
+						<input type="checkbox" name="rtype" value="threeRoom">쓰리룸이상<br>
 					</div>
 				</li>
 			</ul>
@@ -49,8 +66,8 @@ $(document).ready(function(){
 			<ul class="sublist">
 				<li class="subFilter">
 					<div class="rangeWrap" >
-						<input type="checkbox" name="rentType" value="mrent">월세
-						<input type="checkbox" name="rentType" value="yrent">전세
+						<input type="checkbox" name="rentType" value="mrent">월세<br>
+						<input type="checkbox" name="rentType" value="yrent">전세<br>
 					</div>
 				</li>
 			</ul>
@@ -83,10 +100,10 @@ $(document).ready(function(){
 			<ul class="sublist">
 				<li class="subFilter">
 					<div class="rangeWrap" >
-						<input type="radio" name="util" value="0">무관
-						<input type="radio" name="util" value="5">~5만원
-						<input type="radio" name="util" value="10">~10만원
-						<input type="radio" name="util" value="20">~20만원
+						<input type="radio" name="util" value="0">무관<br>
+						<input type="radio" name="util" value="5">~5만원<br>
+						<input type="radio" name="util" value="10">~10만원<br>
+						<input type="radio" name="util" value="20">~20만원<br>
 					</div>
 				</li>
 			</ul>
