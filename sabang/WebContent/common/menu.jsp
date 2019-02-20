@@ -38,9 +38,23 @@ $(document).ready(function(){
 	});//end searchBtn onClick
 	
 	
-	$("input[name=rtype]").on("change", function(){
-		
-		
+	$("input.filter").on("change", function(e){
+		var filters = [];
+		$("input.filter").each(function(idx, ele){
+			if(ele.checked) filters.push(ele);
+		});//end each
+		console.log(filters);
+		$.ajax({
+			type:'get',
+			url:'HouseListServlet',
+			data:{
+// 				searchFilter : $(e.target) 
+			},
+			dataType:'html',
+			success:function(data, status, xhr){
+			},
+			error:function(xhr, status, error){console.log(status)}
+		});//end ajax
 	}); // end input[name=rtype] onChange
 	
 });//end ready
@@ -55,9 +69,9 @@ $(document).ready(function(){
 			<ul class="sublist subListHide">
 				<li class="subFilter">
 					<div class="rangeWrap" >
-						<input type="checkbox" name="rtype" value="oneRoom">원룸<br>
-						<input type="checkbox" name="rtype" value="twoRoom">투룸<br>
-						<input type="checkbox" name="rtype" value="threeRoom">쓰리룸이상<br>
+						<input type="checkbox" name="rtype" class="filter" value="oneRoom">원룸<br>
+						<input type="checkbox" name="rtype" class="filter" value="twoRoom">투룸<br>
+						<input type="checkbox" name="rtype" class="filter" value="threeRoom">쓰리룸이상<br>
 					</div>
 				</li>
 			</ul>
@@ -66,8 +80,8 @@ $(document).ready(function(){
 			<ul class="sublist">
 				<li class="subFilter">
 					<div class="rangeWrap" >
-						<input type="checkbox" name="rentType" value="mrent">월세<br>
-						<input type="checkbox" name="rentType" value="yrent">전세<br>
+						<input type="checkbox" name="rentType" class="filter" value="mrent">월세<br>
+						<input type="checkbox" name="rentType" class="filter" value="yrent">전세<br>
 					</div>
 				</li>
 			</ul>
@@ -100,10 +114,10 @@ $(document).ready(function(){
 			<ul class="sublist">
 				<li class="subFilter">
 					<div class="rangeWrap" >
-						<input type="radio" name="util" value="0">무관<br>
-						<input type="radio" name="util" value="5">~5만원<br>
-						<input type="radio" name="util" value="10">~10만원<br>
-						<input type="radio" name="util" value="20">~20만원<br>
+						<input type="radio" name="util" class="filter" value="0" >무관<br>
+						<input type="radio" name="util" class="filter" value="5">~5만원<br>
+						<input type="radio" name="util" class="filter" value="10">~10만원<br>
+						<input type="radio" name="util" class="filter" value="20">~20만원<br>
 					</div>
 				</li>
 			</ul>
