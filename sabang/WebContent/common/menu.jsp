@@ -39,23 +39,27 @@ $(document).ready(function(){
 	
 	
 	$("input.filter").on("change", function(e){
-		var filters = [];
+		var filtersJSON = {};
 		$("input.filter").each(function(idx, ele){
-			if(ele.checked) filters.push(ele);
+			if(ele.checked) filtersJSON[$(ele).val()] = $(ele).val();
 		});//end each
-		console.log(filters);
+		
 		$.ajax({
 			type:'get',
 			url:'HouseListServlet',
 			data:{
-// 				searchFilter : $(e.target) 
+				test : 'test',
+				filters : JSON.stringify(filtersJSON)
 			},
 			dataType:'html',
 			success:function(data, status, xhr){
+				console.log(1);
 			},
 			error:function(xhr, status, error){console.log(status)}
 		});//end ajax
 	}); // end input[name=rtype] onChange
+	
+	
 	
 });//end ready
 </script>
@@ -90,6 +94,7 @@ $(document).ready(function(){
 			<ul class="sublist">
 				<li class="subFilter">월세
 					<select name="mrent">
+						<option value="선택해주세요">선택해주세요</option>
 						<option value="0~40">0만원~30만원</option>
 						<option value="40~60">30만원~60만원</option>
 						<option value="60~80">60만원~90만원</option>
