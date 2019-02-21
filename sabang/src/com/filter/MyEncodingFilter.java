@@ -9,8 +9,11 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-public class MyEncodingFilter implements Filter {
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+public class MyEncodingFilter implements Filter {
+	private static final Logger logger = LoggerFactory.getLogger(MyEncodingFilter.class);
 	@Override
 	public void destroy() {
 

@@ -78,7 +78,12 @@ a.unfocusedPage{
 								<a class="focusedPage">${i}</a>
 							</c:when>
 							<c:otherwise>
-								<a href="HouseListServlet?curPage=${i}&search=${search}" class="unfocusedPage">${i}</a>
+								<c:if test="${filters == null }">
+									<a href="HouseListServlet?curPage=${i}&search=${search}" class="unfocusedPage">${i}</a>
+								</c:if>
+								<c:if test="${filters != null }">
+									<a href="HouseListServlet?curPage=${i}&filters=${filters}" class="unfocusedPage">${i}</a>
+								</c:if>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>

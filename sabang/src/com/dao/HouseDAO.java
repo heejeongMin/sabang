@@ -5,8 +5,11 @@ import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class HouseDAO {
+	private static final Logger logger = LoggerFactory.getLogger(HouseDAO.class);
 	/* 
 	 * 페이징 처리
 	 * 1. curPage : 현재 페이지 
@@ -45,22 +48,22 @@ public class HouseDAO {
 	}//end retrieveHotItems
 		
 	//필터에 의한 리스트
-	public HashMap<String, Object> listByFilter(SqlSession session, List<String> filters, int curPage){
+	public HashMap<String, Object> listByFilter(SqlSession session, HashMap<String, List<String>> queryMap, int curPage){
 		HashMap<String, Object> pagingMap = new HashMap<>();
 		pagingMap.put("curPage", curPage);
 		pagingMap.put("perPage", 3);
-		pagingMap.put("totalPage", totalListByFilter(session, filters));
+		pagingMap.put("totalPage", totalListByFilter(session, queryMap));
 		
 		int offset = (curPage-1) * (int)pagingMap.get("perPage");
-		List<HashMap<String, Object>> list = session.selectList("HouseMapper.listByFilter", filters, new RowBounds(offset, (int)pagingMap.get("perPage")));
+		List<HashMap<String, Object>> list = session.selectList("HouseMapper.listByFilter", queryMap, new RowBounds(offset, (int)pagingMap.get("perPage")));
 		pagingMap.put("list", list);
 		
 		return pagingMap; 
 	}//listByFilter
 	
 	//listByFilter에서만 사용해서 private 처리
-	private int totalListByFilter(SqlSession session, List<String> filters) {
-		return session.selectOne("HouseMapper.totalListByFilter");
+	private int totalListByFilter(SqlSession session, HashMap<String, List<String>> queryMap) {
+		return session.selectOne("HouseMapper.totalListByFilter", queryMap);
 	}//totalListByFilter
 	
 

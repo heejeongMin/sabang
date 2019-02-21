@@ -43,19 +43,19 @@ $(document).ready(function(){
 		$("input.filter").each(function(idx, ele){
 			if(ele.checked) filters.push($(ele).val());
 		});//end each
-		console.log(filters);
-		$.ajax({
+		
+	 	$.ajax({
 			type:'get',
 			url:'HouseListServlet',
 			data:{
 				filters : filters.toString()
 			},
-			dataType:'html',
+			dataType: "html",
 			success:function(data, status, xhr){
-				console.log(1);
+				location.href="HouseListServlet?filters="+filters.toString();
 			},
 			error:function(xhr, status, error){console.log(status)}
-		});//end ajax
+		});//end ajax 
 	}); // end input[name=rtype] onChange
 	
 	
