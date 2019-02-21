@@ -4,13 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="stylesheet" href="css/sabangTest.css">
 </head>
 <body>
-
-<h1>회원 탈퇴 화면입니다.</h1>
 <jsp:include page="common/top.jsp" flush="true" /><br>
-<jsp:include page="common/menu.jsp" flush="true" /> 
-<jsp:include page="member/DelMbrId.jsp" flush="true" />
+<jsp:include page="member/signCheckMbrForm.jsp" flush="true" />
 </body>
 </html>

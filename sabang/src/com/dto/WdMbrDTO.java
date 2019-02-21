@@ -1,14 +1,14 @@
 package com.dto;
 
-public class wdMbrDTO {
+public class WdMbrDTO {
 
 	private String userid;
 	private String droptime;
-	public wdMbrDTO() {
+	public WdMbrDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public wdMbrDTO(String userid, String droptime) {
+	public WdMbrDTO(String userid, String droptime) {
 		super();
 		this.userid = userid;
 		this.droptime = droptime;

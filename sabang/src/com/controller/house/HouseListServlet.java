@@ -56,7 +56,7 @@ public class HouseListServlet extends HttpServlet {
 				}
 			}//end if
 			
-			pagingMap = service.listByFilter(list, Integer.parseInt(curPage));
+//			pagingMap = service.listByFilter(list, Integer.parseInt(curPage));
 //			request.setAttribute("search", search);
 //			request.setAttribute("pagingMap", pagingMap);
 			RequestDispatcher dis = request.getRequestDispatcher("houseList.jsp");

@@ -5,11 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="css/sabangTest.css">
 </head>
 <body>
+
 <jsp:include page="common/top.jsp" flush="true" /><br>
-<h1>로그인</h1>
-<jsp:include page="member/loginForm.jsp" flush="true" />
+<h1>회원 탈퇴 화면입니다.</h1>
+<jsp:include page="member/delMbrIdConfirm.jsp" flush="true" />
 </body>
 </html>

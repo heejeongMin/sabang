@@ -44,7 +44,7 @@ public class LoginServlet extends HttpServlet {
 			nextPage = "main.jsp";
 		} else if (agent != null) {
 			session.setAttribute("agentInfo", agent);
-			nextPage = "agentMain.jsp";   
+			nextPage = "main.jsp";    /*agentMain으로 변경*/
 		} else {
 			nextPage = "LoginUIServlet";	
 			session.setAttribute("mesg", "아이디 혹은 비밀번호를 확인해주세요.");

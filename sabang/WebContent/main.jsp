@@ -5,19 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- <link rel="stylesheet" type="text/css" href="sabangTest.css"> -->
- <style>
-
-body {
-background-image: url('https://wallpapercave.com/wp/tmx6W6N.png');
-}
-h1,a {
-color : white;
-}
-a:link {
-  text-decoration: none;
-}
-</style>  
+<link rel="stylesheet" href="css/sabangTest.css">
 </head>
 <body>
 <%-- <%
