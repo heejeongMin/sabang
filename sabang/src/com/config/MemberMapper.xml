@@ -127,14 +127,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="checkMbrPw" parameterType="string" resultType="MemberDTO">
 		select userid,passwd, ssn, username,post,addr, phone, email, wishlist
 		from member
-		passwd = #{passwd}
+		where passwd = #{passwd}
 	</select>
 	
 	<select id="checkAgntPw" parameterType="string" resultType="AgentDTO">
 		select agntid, passwd, agntssn, agntname, agntphone, agntemail, hcode
 		from agent
-		passwd = #{passwd}
+		where passwd = #{passwd}
 	</select>
 	
 
+
+
+	<!-- 마이페이지  -->
+   	<select id="mypage" parameterType="string" resultType="MemberDTO">
+   		select userid, passwd, username, post, addr, phone, email
+   		from member
+   		where userid = #{userid}
+   	</select>
+   	
+   	
+   	<update id="memberUpdate" parameterType="MemberDTO">
+   		update member
+   		set passwd = #{passwd}, phone = #{phone}, email = #{email}
+   		where userid = #{userid}
+   	</update>
 </mapper>

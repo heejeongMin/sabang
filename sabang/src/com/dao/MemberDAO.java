@@ -42,4 +42,18 @@ public class MemberDAO {
 		return checkMbrPw;
 	}
 
+	
+	
+	//////////////////////////////////////////////////////////////////
+	// 마이페이지
+	public MemberDTO mypage(SqlSession session,String userid) {
+	MemberDTO n = session.selectOne("MemberMapper.mypage",userid);
+	return n;
+	}
+	
+	
+	public int MemberUpdate(SqlSession session, MemberDTO dto) {
+	int n = session.update("MemberMapper.memberUpdate",dto);
+	return n;
+	}
 }
