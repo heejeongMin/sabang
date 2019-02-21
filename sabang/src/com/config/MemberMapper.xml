@@ -41,7 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
-	<select id = "SignedMbr" parameterType = "string" resultType = "wdMbrDTO"> 
+	<select id = "SignedMbr" parameterType = "string" resultType = "WdMbrDTO"> 
 		select userid
 		from wdMbr
 		where  userid = #{userid}
@@ -63,7 +63,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select userid,passwd, ssn, username,post,addr, phone, email, wishlist
 		from member
 		where
-		userid = #{userid}
+		userid = #{userid} 
 		and passwd = #{passwd}
 	</select>
 

@@ -8,9 +8,8 @@
 </head>
 <body>
 
-<h1>회원 탈퇴 화면입니다.</h1>
 <jsp:include page="common/top.jsp" flush="true" /><br>
-<jsp:include page="common/menu.jsp" flush="true" />
-<jsp:include page="member/DelMbrIdConfirm.jsp" flush="true" />
+<h1>회원 탈퇴 화면입니다.</h1>
+<jsp:include page="member/delMbrIdConfirm.jsp" flush="true" />
 </body>
 </html>

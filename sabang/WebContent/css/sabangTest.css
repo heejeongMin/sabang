@@ -1,0 +1,8 @@
+body {
+background-image: url('https://wallpapercave.com/wp/tmx6W6N.png');
+}
+h1,h3, a, p{
+color : white;
+}
+a:link {
+  text-decoration: none;

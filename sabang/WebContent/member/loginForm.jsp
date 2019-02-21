@@ -2,21 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<style>
-body {
-	background-image: url('https://wallpapercave.com/wp/tmx6W6N.png');
-}
-
-h1, a {
-	color: white;
-}
-
-a:link {
-	text-decoration: none;
-}
-</style>
-
-
+<link rel="stylesheet" href="css/sabangTest.css">
 <c:set var="mesg" value="${mesg}" scope="session" />
 <c:if test="${!(empty mesg)}">
 	<script>
@@ -24,7 +10,7 @@ a:link {
 	</script>
 </c:if>
 <c:remove var="mesg" />
-<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 
@@ -37,7 +23,6 @@ a:link {
 				/* alert('한글과 특수문자는 입력할 수 없습니다.'); */
 			}
 		});
-
 
 		$("form").on("submit", function(event) {
 			var userid = $("#userid").val();

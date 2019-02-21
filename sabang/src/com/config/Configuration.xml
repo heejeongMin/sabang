@@ -7,7 +7,7 @@
 	<typeAliases>
 		<typeAlias type="com.dto.MemberDTO" alias="MemberDTO" />
 		<typeAlias type="com.dto.AgentDTO" alias="AgentDTO" />
-		<typeAlias type="com.dto.wdMbrDTO" alias="wdMbrDTO" />
+		<typeAlias type="com.dto.WdMbrDTO" alias="WdMbrDTO" />
 		
 		<typeAlias type="com.dto.HouseInfoDTO" alias="HouseInfoDTO" />
 		<typeAlias type="com.dto.HouseOptionDTO" alias="HouseOptionDTO" />
