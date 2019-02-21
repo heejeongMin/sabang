@@ -55,23 +55,10 @@ public class HouseService {
 		return list;
 	}//retrieveHotItems
 	
-	public HashMap<String, Object> listByFilter(List<String> list, int curPage){
+	public HashMap<String, Object> listByFilter(HashMap<String, List<String>> queryMap, int curPage){
 		SqlSession session = MySqlSessionFactory.getSession();
 		HashMap<String, Object> map = null;
 		
-		HashMap<String, List<String>> queryMap = new HashMap<>(); //htype과 rtype을 따로 담아서 보내기. 
-		List<String> htype = new ArrayList<>();
-		List<String> rtype = new ArrayList<>();
-		for(int i = 0; i < list.size(); i++) {
-			if (i<4) {
-				htype.add(list.get(i));
-			} else {
-				if(list.get(i) != "na")	rtype.add(list.get(i));
-			}
-		}//end for
-		
-		queryMap.put("htype", htype);
-		queryMap.put("rtype", rtype);
 		try {
 			HouseDAO dao = new HouseDAO();
 			map = dao.listByFilter(session, queryMap, curPage);

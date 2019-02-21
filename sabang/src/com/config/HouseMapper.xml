@@ -4,61 +4,160 @@
 
 <mapper namespace="HouseMapper">
 
-	<select id="searchList" parameterType="string" resultType="hashmap">
-		select hcode, htype, rtype, hname, area, flr, hetc, deposit, mrent, yrent, maintc
-		from house_info join house_price using(hcode)
-		where addr like '%'||#{search}||'%' or hname like '%'||#{search}||'%'
+	<select id="searchList" parameterType="string"
+		resultType="hashmap">
+		select hcode, htype, rtype, hname, area, flr, hetc,
+		deposit, mrent, yrent, maintc
+		from house_info join house_price
+		using(hcode)
+		where addr like '%'||#{search}||'%' or hname like
+		'%'||#{search}||'%'
 	</select>
-	
-	<select id="totalListBySearch" parameterType="string" resultType="int">
+
+	<select id="totalListBySearch" parameterType="string"
+		resultType="int">
 		select count(*)
-		from house_info join house_price using(hcode)
-		where addr like '%'||#{search}||'%' or hname like '%'||#{search}||'%'
+		from house_info join house_price
+		using(hcode)
+		where addr like '%'||#{search}||'%' or hname like
+		'%'||#{search}||'%'
 	</select>
-	
+
 	<select id="retrieveNewItems" resultType="hashmap">
-		select hcode, htype, rtype, hname, area, flr, hetc, deposit, mrent, yrent, maintc
-		from house_info join house_price using(hcode)
-		where registerdate > sysdate-3 
+		select hcode, htype,
+		rtype, hname, area, flr, hetc, deposit, mrent, yrent, maintc
+		from
+		house_info join house_price using(hcode)
+		where registerdate > sysdate-3
 	</select>
-	
+
 	<select id="retrieveHotItems" resultType="hashmap">
-		select hcode, htype, rtype, hname, area, flr, hetc, deposit, mrent, yrent, maintc
-		from house_info join house_price using(hcode)
-		where cntwish > (select max(cntwish) - 3 from house_info) 
+		select hcode, htype,
+		rtype, hname, area, flr, hetc, deposit, mrent, yrent, maintc
+		from
+		house_info join house_price using(hcode)
+		where cntwish > (select
+		max(cntwish) - 3 from house_info)
 		order by cntwish desc
 	</select>
-	
-	<select id="listByFilter" parameterType="hashmap" resultType="hashmap">
-		select hcode, htype, rtype, hname, area, flr, hetc, deposit, mrent, yrent, maintc
+
+	<select id="listByFilter" parameterType="hashmap"
+		resultType="hashmap">
+		select hcode, htype, rtype, hname, area, flr, hetc, deposit, mrent,
+		yrent, maintc
 		from house_info join house_price using(hcode)
-		where 
-		htype in
-		<foreach item="item" collection="htype" open="(" separator="," close=")">
-				#{item}
-		</foreach>
-		<if test=" !(rtype.isEmpty())">
-		 and rtype in
-			<foreach item="item" collection="rtype" open="(" separator="," close=")">
-				#{item}
-			</foreach>
-		</if>
+		<choose>
+			<when test="!(htype.isEmpty())">
+				where htype in
+				<foreach item="item" collection="htype" open="("
+					separator="," close=")">
+					#{item}
+				</foreach>
+				<if test=" !(rtype.isEmpty())">
+					and rtype in
+					<foreach item="item" collection="rtype" open="("
+						separator="," close=")">
+						#{item}
+					</foreach>
+				</if>
+				<if test=" !(maintc.isEmpty())">
+					and maintc &lt; #{maintc}
+				</if>
+			</when>
+			<when test="!(rtype.isEmpty())">
+				where rtype in
+				<foreach item="item" collection="rtype" open="("
+					separator="," close=")">
+					#{item}
+				</foreach>
+				<if test="!(htype.isEmpty())">
+					and htype in
+					<foreach item="item" collection="htype" open="("
+						separator="," close=")">
+						#{item}
+					</foreach>
+				</if>
+				<if test=" !(maintc.isEmpty())">
+					and maintc &lt; #{maintc}
+				</if>
+			</when>
+			<when test="!(maintc.isEmpty())">
+				where maintc &lt; #{maintc}
+				<if test="!(htype.isEmpty())">
+					and htype in
+					<foreach item="item" collection="htype" open="("
+						separator="," close=")">
+						#{item}
+					</foreach>
+				</if>
+				<if test=" !(rtype.isEmpty())">
+					and rtype in
+					<foreach item="item" collection="rtype" open="("
+						separator="," close=")">
+						#{item}
+					</foreach>
+				</if>
+			</when>
+		</choose>
 	</select>
-	
-	<select id="totalListByFilter" parameterType="hashmap" resultType="int">
+
+	<select id="totalListByFilter" parameterType="hashmap"
+		resultType="int">
 		select count(*)
 		from house_info join house_price using(hcode)
-		where 
-		htype in
-		<foreach item="item" collection="htype" open="(" separator="," close=")">
-				#{item}
-		</foreach>
-		<if test=" !(rtype.isEmpty())">
-		 and rtype in
-			<foreach item="item" collection="rtype" open="(" separator="," close=")">
-				#{item}
-			</foreach>
-		</if>
+		<choose>
+			<when test="!(htype.isEmpty())">
+				where htype in
+				<foreach item="item" collection="htype" open="("
+					separator="," close=")">
+					#{item}
+				</foreach>
+				<if test=" !(rtype.isEmpty())">
+					and rtype in
+					<foreach item="item" collection="rtype" open="("
+						separator="," close=")">
+						#{item}
+					</foreach>
+				</if>
+				<if test=" !(maintc.isEmpty())">
+					and maintc &lt; #{maintc}
+				</if>
+			</when>
+			<when test="!(rtype.isEmpty())">
+				where rtype in
+				<foreach item="item" collection="rtype" open="("
+					separator="," close=")">
+					#{item}
+				</foreach>
+				<if test="!(htype.isEmpty())">
+					and htype in
+					<foreach item="item" collection="htype" open="("
+						separator="," close=")">
+						#{item}
+					</foreach>
+				</if>
+				<if test=" !(maintc.isEmpty())">
+					and maintc &lt; #{maintc}
+				</if>
+			</when>
+			<when test="!(maintc.isEmpty())">
+				where maintc &lt; #{maintc}
+				<if test="!(htype.isEmpty())">
+					and htype in
+					<foreach item="item" collection="htype" open="("
+						separator="," close=")">
+						#{item}
+					</foreach>
+				</if>
+				<if test=" !(rtype.isEmpty())">
+					and rtype in
+					<foreach item="item" collection="rtype" open="("
+						separator="," close=")">
+						#{item}
+					</foreach>
+				</if>
+			</when>
+		</choose>
 	</select>
 </mapper>
 

@@ -6,7 +6,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.6/js/swiper.min.js"></script>
   <!-- Initialize Swiper -->
-
+<div id="wrap">
 <c:set var="newList" value="${newList}"/>
 <h1>신매물 <span id="noOfHouse">${fn:length(newList)}</span>건</h1>
   <!-- Swiper -->
@@ -100,7 +100,7 @@
     <!-- Add Pagination -->
    <div class="swiper-pagination"></div>
 </div>
-
+</div>
  <script>
     var swiper = new Swiper('.swiper-container', {
       slidesPerView: 3,

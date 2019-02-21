@@ -39,11 +39,20 @@ public class HouseListServlet extends HttpServlet {
 			RequestDispatcher dis = request.getRequestDispatcher("houseList.jsp");
 			dis.forward(request, response);
 		} else if(filters != null) {//필터 버튼들 중 가격대를 제외한 버튼을 누른 경우
+			HashMap<String, List<String>> queryMap = new HashMap<>(); //htype과 rtype을 따로 담아서 보내기. 
+			List<String> htype = new ArrayList<>();
+			List<String> rtype = new ArrayList<>();
+			List<String> maintc = new ArrayList<>();
+			
 			String[] filterArray = filters.split(","); //
 			String[] inOperator = {"o", "t", "f", "p", "월세", "전세"};
 			
 			for(int i = 0; i < filterArray.length; i++) {//1. 사용자가 체크한 값을 받아서 그 길이만큼 돈다.
 				for(int n = 0; n<inOperator.length; n++) {//2. in 연산자 값에 들어갈 수 있는 가능 값 수 만큼 돈다.
+					if (filterArray[i].startsWith("maintc")) {
+						if(!(filterArray[i].substring(6).equals("0"))) maintc.add(filterArray[i].substring(6));
+						System.out.println(filterArray[i].substring(6));
+					}
 					if(!(filterArray[i].equals(inOperator[n]))) {// 사용자 값이랑 inOperator에 있는 값이랑 같지않으면
 						if(list.size() == n) {//list사이즈와 현재 n이 동일하면 추가
 							list.add(n, "na");
@@ -61,7 +70,23 @@ public class HouseListServlet extends HttpServlet {
 					list.add(i, "na");
 				}
 			}//end if
-			pagingMap = service.listByFilter(list, Integer.parseInt(curPage));
+			
+			
+			
+			for(int i = 0; i < list.size(); i++) {
+				if (i<4) {
+					htype.add(list.get(i));
+				} else {
+					if(list.get(i) != "na")	rtype.add(list.get(i));
+				}
+			}//end for
+			
+			queryMap.put("htype", htype);
+			queryMap.put("rtype", rtype);
+			queryMap.put("maintc", maintc);
+			
+			
+			pagingMap = service.listByFilter(queryMap, Integer.parseInt(curPage));
 			request.setAttribute("filters", filters);
 			request.setAttribute("pagingMap", pagingMap);
 			PrintWriter out = response.getWriter();

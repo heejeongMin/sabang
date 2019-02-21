@@ -19,6 +19,14 @@ $(document).ready(function(){
 		e.stopPropagation();
 	});//end ul.sublist onClick
 	
+	$(document).mouseup(function(e){// 버튼 눌렀다가 다른데 누르면 드롭다온 사라짐. 
+		if($(e.target).parents().filter("ul#filterList").length == 0){
+			$("li.filterOpt").find("ul.sublist").each(function(idx, ele){//다른 버튼을 누르면 이미 열린애들은 닫아주기
+				if(ele.clientHeight != 0) $(ele).hide(); 
+			});//end ul.sublist반복
+		};
+	});//end mouseup 
+	
 	// 가격대 버튼 드롭다운 range 바
 	$("input[type=range]").on("change", function(e){
 		var result = $(e.target).val();
@@ -38,12 +46,13 @@ $(document).ready(function(){
 	});//end searchBtn onClick
 	
 	
-	$("input.filter").on("change", function(e){
+	
+	 $("input.filter").on("change", function(e){
 		var filters = [];
 		$("input.filter").each(function(idx, ele){
 			if(ele.checked) filters.push($(ele).val());
 		});//end each
-		
+		console.log(filters);
 	 	$.ajax({
 			type:'get',
 			url:'HouseListServlet',
@@ -52,11 +61,35 @@ $(document).ready(function(){
 			},
 			dataType: "html",
 			success:function(data, status, xhr){
-				location.href="HouseListServlet?filters="+filters.toString();
+				$("div#wrap").html($(data).nextAll("div#wrap"));
+// 				$("html").html(data);
+// 				location.href="HouseListServlet?filters="+filters.toString();
 			},
 			error:function(xhr, status, error){console.log(status)}
 		});//end ajax 
-	}); // end input[name=rtype] onChange
+	}); // end input[name=rtype] onChange 
+	
+	var filters = [];
+	/* $("input.filter").on("change", function(e){
+		$("input.filter").each(function(idx, ele){
+			if(ele.checked) filters.push($(ele).val());
+		});//end each
+	}).delay(10000).queue(function(){
+		$.ajax({
+			type:'get',
+			url:'HouseListServlet',
+			data:{
+				filters : filters.toString()
+			},
+			dataType: "html",
+			success:function(data, status, xhr){
+				
+// 				$("html").document(data);
+// 				location.href="HouseListServlet?filters="+filters.toString();
+			},
+			error:function(xhr, status, error){console.log(status)}
+		});//end ajax 
+	}); */
 	
 	
 	
@@ -93,7 +126,7 @@ $(document).ready(function(){
 		<li class="filterOpt">가격대
 			<ul class="sublist">
 				<li class="subFilter">월세
-					<select name="mrent">
+					<select name="mrent" class="filter">
 						<option value="선택해주세요">선택해주세요</option>
 						<option value="0~40">0만원~30만원</option>
 						<option value="40~60">30만원~60만원</option>
@@ -104,7 +137,7 @@ $(document).ready(function(){
 				</li>
 				<li class="subFilter">보증금/전세가
 					<div class="rangeWrap" >
-						<input type="range" min=0 max=20000 step=100 value=10000 class="slider" id="myRange">
+						<input type="range" min=0 max=20000 step=100 value=10000 class="slider" id="myRange" class="filter" >
 						<span class="searchRange"></span>
 						<div class="rangeLable">
 							<span class="rangeValue startValue">0</span>
@@ -119,14 +152,14 @@ $(document).ready(function(){
 			<ul class="sublist">
 				<li class="subFilter">
 					<div class="rangeWrap" >
-						<input type="radio" name="util" class="filter" value="0" >무관<br>
-						<input type="radio" name="util" class="filter" value="5">~5만원<br>
-						<input type="radio" name="util" class="filter" value="10">~10만원<br>
-						<input type="radio" name="util" class="filter" value="20">~20만원<br>
+						<input type="radio" name="util" class="filter" value="maintc0" >무관<br>
+						<input type="radio" name="util" class="filter" value="maintc5">~5만원<br>
+						<input type="radio" name="util" class="filter" value="maintc10">~10만원<br>
+						<input type="radio" name="util" class="filter" value="maintc20">~20만원<br>
 					</div>
 				</li>
 			</ul>
 		</li>
 	</ul>
 </form>
-<div style="clear:both;"></div>
+<div style="clear:both;" id="test"></div>

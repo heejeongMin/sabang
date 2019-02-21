@@ -16,7 +16,9 @@ a.unfocusedPage{
     text-decoration: none;
 }
 </style>
+<div id="wrap">
 <c:set var="list" value="${pagingMap.list}"/>
+
 <h1>조건에 맞는 방 <span id="noOfHouse"> ${pagingMap.totalPage}</span>건</h1>
 <table id="outerTable">
 	<tr>
@@ -92,3 +94,4 @@ a.unfocusedPage{
 		</td>
 	</tr>
 </table>
+</div>
