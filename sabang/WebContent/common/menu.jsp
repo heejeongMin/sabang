@@ -39,17 +39,16 @@ $(document).ready(function(){
 	
 	
 	$("input.filter").on("change", function(e){
-		var filtersJSON = {};
+		var filters = [];
 		$("input.filter").each(function(idx, ele){
-			if(ele.checked) filtersJSON[$(ele).val()] = $(ele).val();
+			if(ele.checked) filters.push($(ele).val());
 		});//end each
-		
+		console.log(filters);
 		$.ajax({
 			type:'get',
 			url:'HouseListServlet',
 			data:{
-				test : 'test',
-				filters : JSON.stringify(filtersJSON)
+				filters : filters.toString()
 			},
 			dataType:'html',
 			success:function(data, status, xhr){
@@ -73,9 +72,10 @@ $(document).ready(function(){
 			<ul class="sublist subListHide">
 				<li class="subFilter">
 					<div class="rangeWrap" >
-						<input type="checkbox" name="rtype" class="filter" value="oneRoom">원룸<br>
-						<input type="checkbox" name="rtype" class="filter" value="twoRoom">투룸<br>
-						<input type="checkbox" name="rtype" class="filter" value="threeRoom">쓰리룸이상<br>
+						<input type="checkbox" name="rtype" class="filter" value="o">원룸<br>
+						<input type="checkbox" name="rtype" class="filter" value="t">투룸<br>
+						<input type="checkbox" name="rtype" class="filter" value="f">오피스텔<br>
+						<input type="checkbox" name="rtype" class="filter" value="p">아파트<br>
 					</div>
 				</li>
 			</ul>
@@ -84,8 +84,8 @@ $(document).ready(function(){
 			<ul class="sublist">
 				<li class="subFilter">
 					<div class="rangeWrap" >
-						<input type="checkbox" name="rentType" class="filter" value="mrent">월세<br>
-						<input type="checkbox" name="rentType" class="filter" value="yrent">전세<br>
+						<input type="checkbox" name="rentType" class="filter" value="월세">월세<br>
+						<input type="checkbox" name="rentType" class="filter" value="전세">전세<br>
 					</div>
 				</li>
 			</ul>

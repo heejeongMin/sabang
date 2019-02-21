@@ -29,7 +29,33 @@
 		order by cntwish desc
 	</select>
 	
+	<select id="listByFilter" parameterType="list" resultType="hashmap">
+		select hcode, htype, rtype, hname, area, flr, hetc, deposit, mrent, yrent, maintc
+		from house_info join house_price using(hcode)
+		where htype in
+		<foreach item="item" collection="list"  index="index" open="(" separator="," close=")">
+			#{item}
+		</foreach>  
+		and
+		rtype in
+		<foreach item="item" collection="list"  index="index" open="(" separator="," close=")">
+			#{item}
+		</foreach>  
+	</select>
 	
+	<select id="totalListByFilter" parameterType="list" resultType="int">
+		select count(*)
+		from house_info join house_price using(hcode)
+		where htype in
+		<foreach item="item" collection="list"  index="index" open="(" separator="," close=")">
+			#{item}
+		</foreach>  
+		and
+		rtype in
+		<foreach item="item" collection="list"  index="index" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
 
 </mapper>
 

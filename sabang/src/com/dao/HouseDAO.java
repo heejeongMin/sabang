@@ -40,10 +40,28 @@ public class HouseDAO {
 	}//end retrieveNewItems
 	
 	//핫매물 리스트
-		public List<HashMap<String, Object>> retrieveHotItems(SqlSession session){
-			return session.selectList("HouseMapper.retrieveHotItems");
-		}//end retrieveHotItems
+	public List<HashMap<String, Object>> retrieveHotItems(SqlSession session){
+		return session.selectList("HouseMapper.retrieveHotItems");
+	}//end retrieveHotItems
+		
+	//필터에 의한 리스트
+	public HashMap<String, Object> listByFilter(SqlSession session, List<String> filters, int curPage){
+		HashMap<String, Object> pagingMap = new HashMap<>();
+		pagingMap.put("curPage", curPage);
+		pagingMap.put("perPage", 3);
+		pagingMap.put("totalPage", totalListByFilter(session, filters));
+		
+		int offset = (curPage-1) * (int)pagingMap.get("perPage");
+		List<HashMap<String, Object>> list = session.selectList("HouseMapper.listByFilter", filters, new RowBounds(offset, (int)pagingMap.get("perPage")));
+		pagingMap.put("list", list);
+		
+		return pagingMap; 
+	}//listByFilter
 	
+	//listByFilter에서만 사용해서 private 처리
+	private int totalListByFilter(SqlSession session, List<String> filters) {
+		return session.selectOne("HouseMapper.totalListByFilter");
+	}//totalListByFilter
 	
 
 }

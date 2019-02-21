@@ -52,6 +52,20 @@ public class HouseService {
 		return list;
 	}//retrieveHotItems
 	
+	public HashMap<String, Object> listByFilter(List<String> list, int curPage){
+		SqlSession session = MySqlSessionFactory.getSession();
+		HashMap<String, Object> map = null;
+		try {
+			HouseDAO dao = new HouseDAO();
+			map = dao.listByFilter(session, list, curPage);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return map;
+	}//retrieveHotItems
+	
 	
 	
 	
