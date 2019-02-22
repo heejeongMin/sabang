@@ -181,4 +181,32 @@ public class MemberService {
 	
 	
 	
+	
+	// 마이페이지
+	public MemberDTO mypage(String userid) {
+		SqlSession session = MySqlSessionFactory.getSession();
+		MemberDTO dto = null;
+		try {
+			MemberDAO dao = new MemberDAO();
+			dto = dao.mypage(session, userid);
+		}finally {
+			session.close();
+		}
+		return dto;
+	}
+		
+		
+	public int MemberUpdate(MemberDTO dto) {
+		SqlSession session = MySqlSessionFactory.getSession();
+		int n = 0;
+		try {
+			MemberDAO dao = new MemberDAO();
+			n = dao.MemberUpdate(session, dto);
+			session.commit();
+		}finally {
+			session.close();
+		}
+		return n;
+	}
+	
 }
