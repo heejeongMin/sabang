@@ -3,13 +3,14 @@
 
 <h4>공인중개사 회원 가입 </h4>
 
-<form>
+<form action = "SignAgentServlet" method = "get">
  <input type="text" name="userid" id="userid" placeholder = "아이디">
 <br> 
 <input type="password" name="passwd" id="passwd" placeholder="비밀번호" ><br>
 <input type="password" name="cnfPasswd" id="cnfPasswd" placeholder="비밀번호 확인" >
 <br> 
 <input type="text" name="username" id ="username" placeholder = "이름"><br> 
+<input type = "text" name = "ssn1" id = "ssn1" placeholder = "주민등록번호 앞자리"> - <input type = "password" id = "ssn2" name = "ssn2" placeholder = "주민등록번호 뒷자리"> <br> 
 <select name="phone1" id = "phone1">
   <option value="010">010</option>
   <option value="011">011</option>
@@ -17,8 +18,9 @@
 <input type="text" name="phone2" id = "phone2">-<input type="text" name="phone3" id = "phone3">
 <br>
 <input type="text" name="email1" id="email1" placeholder="이메일">@
-<input type="text" name = "email2" id="email2">
+<input type="text" name = "email2" id="email2" placeholder = "직접 입력">
 	<select id="email3">
+		<option value="">직접 입력</option>
 		<option value="naver.com">naver.com</option>
 		<option value="hanmail.net">hanmail.net</option>
 		<option value="yahoo.co.kr">yahoo.co.kr</option>
