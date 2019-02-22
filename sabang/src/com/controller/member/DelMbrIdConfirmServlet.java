@@ -30,13 +30,11 @@ public class DelMbrIdConfirmServlet extends HttpServlet {
 				nextPage = "LoginUIServlet";	
 				session.setAttribute("mesg", "로그인이 필요한 작업입니다.");
 			}else {
-				nextPage = "../DelMbrIdConfirm.jsp";
+				nextPage = "delMbrIdConfirm.jsp";
 			}
-	     
 	      RequestDispatcher dis =
 	    		  request.getRequestDispatcher(nextPage);
 	      dis.forward(request, response);
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

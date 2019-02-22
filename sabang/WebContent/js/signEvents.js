@@ -37,6 +37,7 @@ $(document).ready(function() {
 		})// end select email
 		
 		$("body").on("submit", "#signForm", function(event){
+			/* space check */
 			$(this).find("span.live").remove();
 			var userid = $("#userid").val();
 			var passwd = $("#passwd").val();
@@ -53,6 +54,14 @@ $(document).ready(function() {
 			var email3 =  $("#email3").val();			
 			var mesg = null;
 			var liveDiv = "<span class = 'live'></span>";
+			/* Regular Expression */
+			var idRule = /^[^ㄱ-힣!@#$^&*()<>+?/{}.-]{4,10}$/gi;
+			var passRule = /^[a-z0-9_]{4,20}$/;
+			var nameRule = /^[가-힣]{2,4}$/;
+			var ssn1Rule = /^[0-9]{6}$/;
+			var ssn2Rule = /^[0-9]{7}$/;
+			var pnumRule = /^[0-9]{3,4}$/;
+			var emailRule = /^[^ㄱ-힣]{4,15}$/;
 			
 			/* length  check*/
 			if (userid.length == 0) {
@@ -81,7 +90,7 @@ $(document).ready(function() {
 				$("#phone3").after("<span class = 'live'>"+phM+"</span>");
 			} 
 			
-			if (email2.length == 0 || email3.length == 0){
+			if (email2.length == 0){
 				event.preventDefault();
 				var emM = "이메일을 입력해주세요.";
 				$("#email3").after("<span class = 'live'>"+emM+"</span>");
@@ -93,113 +102,48 @@ $(document).ready(function() {
 			 	$("#cnfPasswd").after("<span class = 'live'>"+cpM+"</span>");
 			}
 			
-			var page = $('input[type=radio]:checked').val();
-			if(page != 'agent'){
-				if(ssn1.length == 0 || ssn2.length == 0){
-			 	event.preventDefault();
+			if(ssn1.length == 0 || ssn2.length == 0){
+				event.preventDefault();
 				var snM = "주민등록번호를 입력해주세요.";
 				$("#ssn2").after("<span class = 'live'>"+snM+"</span>");
-				// $(".live");
 			}
-		 	if(addr == 0 ){
-			 	event.preventDefault();
-				var adM = "주소를 입력해주세요.";
-				$("#sample4_roadAddress").after("<span class = 'live'>"+adM+"</span>");
-				// $(".live");
-			} 
-		}// end if 
+			
+			var page = $('input[type=radio]:checked').val();
+				if(page != 'agent'){
+					if(addr == 0 ){
+						event.preventDefault();
+						var adM = "주소를 입력해주세요.";
+						$("#sample4_roadAddress").after("<span class = 'live'>"+adM+"</span>");
+					} 
+				}// end if not agent 
 			$(".live").css("font-size", "9pt"); 
 			
-			
-			/* Regular Expression */
-			/*Rules*/
-			var idRule = /^[^ㄱ-힣!@#$^&*()<>+?/{}.-]{4,10}$/gi;
-			var passRule = /^[a-z0-9_]{4,20}$/;
-			var nameRule = /^[가-힣]{2,4}$/;
-			var ssn1Rule = /^[0-9]{6}$/;
-			var ssn2Rule = /^[0-9]{7}$/;
-			var pnumRule = /^[0-9]{3,4}$/;
-			var emailRule = /^[^ㄱ-힣]{4,15}$/;
-			
-			if(!nameRule.test(username)) { 
-				alert("이름은 2글자 이상 4글자 이하의 한글만을 허용합니다.")
-			};
-			
-			if(!ssn1Rule.test(ssn1)) { 
+			if(!nameRule.test(username)) {
+				event.preventDefault();
+				alert("이름은 2글자 이상 4글자 이하의 한글만을 허용합니다.");
+			}else if(!idRule.test(userid)) { 
+				event.preventDefault();
 				alert("주민등록번호 앞자리는 여섯자리수만을 허용합니다.");
-			};
-			
-			if(!ssn2Rule.test(ssn2)) { 
+			}else if(!passRule.test(password)) { 
+				event.preventDefault();
+				alert("주민등록번호 앞자리는 여섯자리수만을 허용합니다.");
+			}else if(!ssn1Rule.test(ssn1)) { 
+				event.preventDefault();
+				alert("주민등록번호 앞자리는 여섯자리수만을 허용합니다.");
+			}else if(!ssn2Rule.test(ssn2)) { 
+				event.preventDefault();
 				alert("주민등록번호 뒷자리는 일곱자리수만을 허용합니다.");
-			};
-			
-			if(!pnumRule.test(phone2) ||!pnumRule.test(phone3)  ) { 
+			}else if(!pnumRule.test(phone2) ||!pnumRule.test(phone3)  ) { 
+				event.preventDefault();
 				alert("핸드폰번호는 세자리수 이상 네자리수 이하 숫자만을 허용합니다")
-			};
-			
-			if(!emailRule.test(email1) ||!emailRule.test(email2)  ) { 
+			}else if(!emailRule.test(email1) ||!emailRule.test(email2)  ) { 
+				event.preventDefault();
 				alert("이메일에 한글은 입력 불가능하며 4글자 이상 15자 이하 문자만을 허용합니다.");
 			};
-			
-			
-			/*if(!nameRule.test(username)) { 
-				alert("이름은 특수문자와 한글을 제외한 6~20자만 허용합니다.")
-			};
-			d
-			if(!nameRule.test(username)) { 
-				alert("이름은 특수문자와 한글을 제외한 6~20자만 허용합니다.")
-			};
-			if(!nameRule.test(username)) { 
-				alert("이름은 특수문자와 한글을 제외한 6~20자만 허용합니다.")
-			};
-			if(!nameRule.test(username)) { 
-				alert("이름은 특수문자와 한글을 제외한 6~20자만 허용합니다.")
-			};
-			if(!nameRule.test(username)) { 
-				alert("이름은 특수문자와 한글을 제외한 6~20자만 허용합니다.")
-			};
-			*/
-	//		var regId = /^[^ㄱ-힣!@#$^&*()<>+?/{}.-]/gi;
-	//		var regExp =   /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*/; /*정규식 찾아보기*/
-			/*var pattern = /[=ㄱ-힣!@#$^&*()<>+?/{}.-]/gi;*/
-			/* alert('한글과 특수문자는 입력할 수 없습니다.'); */
 		}); //end check null and multipled ID and regular expression ==> submit event
-		
-	
 		
 		
 		$("body").on("keyup", "input[type]", function(e) {
-		//		var trim = /(\s*)/g;
 				$(this).val($(this).val().replace(/(\s*)/g, ""));
-		//		if($(this).val().test(trim)) { 
-		//			alert("공백문자는 입력할 수 없습니다.");
-		//	}; // end space character expression ==> keyup event
 		});
 });
-//이메일 선택 */
-/* 
- $("#email2").on("change",function(){
- var email = $(this).val();
- if (email == 'direct'){
-
- }
-
- $("#email2").val(email);
- }); */
-
-/* 	$("#userid").on("keyup", function(event) {
-	$.ajax({
-		type : "GET",
-		url : "MemberIdCheckServlet",
-		dataType : "text",
-		data : {
-			userid : $("#userid").val()
-		},
-		success : function(responseData, status, xhr) {
-			$("#result").text(responseData);
-		},
-		error : function(xhr, status, error) {
-			console.log("error");
-		}
-	});
-}); */

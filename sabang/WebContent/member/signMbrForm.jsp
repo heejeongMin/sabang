@@ -26,7 +26,7 @@
 <input type="text" name="email1" id="email1" placeholder = "이메일">@
 <input type="text" name = "email2" id="email2" placeholder = "직접 입력">
 	<select id="email3">
-		<option value="">직접 입력</option>
+		<option value="direct">직접 입력</option>
 		<option value="naver.com">naver.com</option>
 		<option value="hanmail.net">hanmail.net</option>
 		<option value="yahoo.co.kr">yahoo.co.kr</option>

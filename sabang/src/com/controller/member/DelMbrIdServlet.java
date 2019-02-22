@@ -50,18 +50,15 @@ public class DelMbrIdServlet extends HttpServlet {
 				HttpSession htss = request.getSession();
 				htss.invalidate();
 				int n = mService.delMbrId(userid);
-				nextPage = "DelMbrId.jsp";
+				nextPage = "delMbrId.jsp";
 				request.setAttribute("mesg", "탈퇴되었습니다");
 			}
-			
 		} else{ //멤버 혹은 중개사 로그인 정보가 없다면
 			nextPage = "LoginUIServlet";
 			request.setAttribute("mesg", "로그인이 필요한 작업입니다.");
 		}
-		
 		RequestDispatcher dis = request.getRequestDispatcher(nextPage);
 		dis.forward(request, response);
-
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

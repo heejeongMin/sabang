@@ -21,6 +21,7 @@ import com.service.MemberService;
 public class SignMbrServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 			
 		String userid = request.getParameter("userid");
 		String passwd = request.getParameter("passwd");
@@ -36,7 +37,7 @@ public class SignMbrServlet extends HttpServlet {
 		String phone = phone1 + phone2 + phone3;
 		String email1 = request.getParameter("email1");
 		String email2 = request.getParameter("email2");
-		String email = email1 + email2;
+		String email = email1 + '@' + email2;
 		
 		MemberDTO member = new MemberDTO(userid, passwd, ssn, username, post, addr, phone, email);
 		
@@ -51,9 +52,7 @@ public class SignMbrServlet extends HttpServlet {
 		
 		if (hasUserId == 0 && hasSigned == 0) {
 			int n = service.signMbr(member);
-			HttpSession session = request.getSession();
 			session.setAttribute("mesg", "회원가입성공");
-			session.setMaxInactiveInterval(5);
 			response.sendRedirect("main.jsp");
 		}else if(hasSigned == 1)  { //가입 이력이 있다면
 			RequestDispatcher dis = request.getRequestDispatcher("loginForm.jsp");

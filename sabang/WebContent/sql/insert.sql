@@ -136,4 +136,14 @@ values ('P004', 'N', 'Y', 'N', 'N', 'N', 'Y', 'N', '에어컨, 세탁기, 냉장
 insert into house_option (hcode, bltin, elev, pet, vrd, loan, park, mdate, etc)
 values ('P005', 'N', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y', '싱크대'); 
 
+insert into board (pcode,hcode, pdate, ppwd, phone, title, content)
+values ('H001','O001', sysdate, '1111','01022822113','입주날짜에 관하여 문의드립니다','입주날짜가 협의로 되어있어서 문의드려요.');
+insert into board (pcode,hcode, pdate, ppwd, phone, title, content)
+values ('H003','O002', sysdate, '0000','01015425412','보증금과 월세에 관해','보증금을 올리는 대신 월세 가격 조정 가능한가요');
+insert into board (pcode,hcode, pdate, ppwd, phone, title, content)
+values ('H002','O001',sysdate, '1234','01012347895','이미지가 안떠요','이미지가 안뜨네요 수정해주세용');
+insert into board (pcode,hcode, pdate, ppwd, phone, title, content)
+values ('H004','O004',sysdate, '9999','01012355478','공인중개사와 연락이 안됩니다','전화를 안받으시네요. 메세지에도 답장이 없습니다');
+
+
 commit;
