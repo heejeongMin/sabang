@@ -22,6 +22,7 @@ cntwish number(1) default 0 check(cntwish < 6), -- 찜 회수
 himage varchar2(80), -- System.currTimeMillis()랑 같이 사용해서 좀 길어졌음..
 hetc varchar2(500),
 registerDate date default sysdate,
+agntid varchar2(10) CONSTRAINT house_info_agentid_fk REFERENCES AGENT(agntid),
 CONSTRAINT pk_hdt_cd PRIMARY KEY (hcode)
 );
 

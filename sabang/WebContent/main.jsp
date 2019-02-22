@@ -21,6 +21,7 @@
 
 <jsp:include page="common/top.jsp" flush="true" /><br>
 <a href="HouseListServlet">houseOverview</a>
+<a href="HouseManagingServlet">houseManaging</a>
 </body>
 </html>
 
