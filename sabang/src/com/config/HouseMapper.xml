@@ -4,96 +4,185 @@
 
 <mapper namespace="HouseMapper">
 
-	<select id="searchList" parameterType="string"
-		resultType="hashmap">
-		select hcode, htype, rtype, hname, area, flr, hetc,
-		deposit, mrent, yrent, maintc
-		from house_info join house_price
-		using(hcode)
+	<select id="searchList" parameterType="string" resultType="hashmap">
+		select hcode, htype, rtype, hname, area, flr, hetc, deposit, mrent, yrent, maintc
+		from house_info join house_price using(hcode)
 		where addr like '%'||#{search}||'%' or hname like
 		'%'||#{search}||'%'
 	</select>
 
-	<select id="totalListBySearch" parameterType="string"
-		resultType="int">
+	<select id="totalListBySearch" parameterType="string" resultType="int">
 		select count(*)
-		from house_info join house_price
-		using(hcode)
+		from house_info join house_price using(hcode)
 		where addr like '%'||#{search}||'%' or hname like
 		'%'||#{search}||'%'
 	</select>
 
 	<select id="retrieveNewItems" resultType="hashmap">
-		select hcode, htype,
-		rtype, hname, area, flr, hetc, deposit, mrent, yrent, maintc
-		from
-		house_info join house_price using(hcode)
+		select hcode, htype, rtype, hname, area, flr, hetc, deposit, mrent, yrent, maintc
+		from house_info join house_price using(hcode)
 		where registerdate > sysdate-3
 	</select>
 
 	<select id="retrieveHotItems" resultType="hashmap">
-		select hcode, htype,
-		rtype, hname, area, flr, hetc, deposit, mrent, yrent, maintc
-		from
-		house_info join house_price using(hcode)
+		select hcode, htype, rtype, hname, area, flr, hetc, deposit, mrent, yrent, maintc
+		from house_info join house_price using(hcode)
 		where cntwish > (select
 		max(cntwish) - 3 from house_info)
 		order by cntwish desc
 	</select>
 
-	<select id="listByFilter" parameterType="hashmap"
-		resultType="hashmap">
-		select hcode, htype, rtype, hname, area, flr, hetc, deposit, mrent,
-		yrent, maintc
+
+	<select id="listByFilter" parameterType="hashmap" resultType="hashmap">
+		select hcode, htype, rtype, hname, area, flr, hetc, deposit, mrent, yrent, maintc
 		from house_info join house_price using(hcode)
 		<choose>
 			<when test="!(htype.isEmpty())">
 				where htype in
-				<foreach item="item" collection="htype" open="("
-					separator="," close=")">
+				<foreach item="item" collection="htype" open="(" separator="," close=")">
 					#{item}
 				</foreach>
 				<if test=" !(rtype.isEmpty())">
 					and rtype in
-					<foreach item="item" collection="rtype" open="("
-						separator="," close=")">
+					<foreach item="item" collection="rtype" open="(" separator="," close=")">
 						#{item}
 					</foreach>
 				</if>
 				<if test=" !(maintc.isEmpty())">
-					and maintc &lt; #{maintc}
+					and maintc &lt; 
+					<foreach item="item" collection="maintc">
+						#{item}
+					</foreach>
+				</if>
+				<if test="!(mrent.isEmpty())">
+					and mrent between 
+					<foreach item="item" collection="mrent" separator="and">
+						#{item}
+					</foreach>
+				</if>
+				<if test="!(yrent.isEmpty())">
+					and yrent &lt; 
+					<foreach item="item" collection="yrent">
+						#{item}
+					</foreach>
 				</if>
 			</when>
 			<when test="!(rtype.isEmpty())">
 				where rtype in
-				<foreach item="item" collection="rtype" open="("
-					separator="," close=")">
+				<foreach item="item" collection="rtype" open="(" separator="," close=")">
 					#{item}
 				</foreach>
 				<if test="!(htype.isEmpty())">
 					and htype in
-					<foreach item="item" collection="htype" open="("
-						separator="," close=")">
+					<foreach item="item" collection="htype" open="(" separator="," close=")">
 						#{item}
 					</foreach>
 				</if>
 				<if test=" !(maintc.isEmpty())">
-					and maintc &lt; #{maintc}
+					and maintc &lt;
+					<foreach item="item" collection="maintc">
+						#{item}
+					</foreach>
+				</if>
+				<if test="!(mrent.isEmpty())">
+					and mrent between 
+					<foreach item="item" collection="mrent" separator="and">
+						#{item}
+					</foreach>
+				</if>
+				<if test="!(yrent.isEmpty())">
+					and yrent &lt; 
+					<foreach item="item" collection="yrent">
+						#{item}
+					</foreach>
 				</if>
 			</when>
 			<when test="!(maintc.isEmpty())">
-				where maintc &lt; #{maintc}
+				where maintc &lt; 
+				<foreach item="item" collection="maintc">
+					#{item}
+				</foreach>
 				<if test="!(htype.isEmpty())">
 					and htype in
-					<foreach item="item" collection="htype" open="("
-						separator="," close=")">
+					<foreach item="item" collection="htype" open="(" separator="," close=")">
 						#{item}
 					</foreach>
 				</if>
 				<if test=" !(rtype.isEmpty())">
 					and rtype in
-					<foreach item="item" collection="rtype" open="("
-						separator="," close=")">
+					<foreach item="item" collection="rtype" open="(" separator="," close=")">
+						#{item}
+					</foreach>
+				</if>
+				<if test="!(mrent.isEmpty())">
+					and mrent between 
+					<foreach item="item" collection="mrent" separator="and">
+						#{item}
+					</foreach>
+				</if>
+				<if test="!(yrent.isEmpty())">
+					and yrent &lt; 
+					<foreach item="item" collection="yrent">
+						#{item}
+					</foreach>
+				</if>
+			</when>
+			<when test="!(mrent.isEmpty())">
+				where mrent between 
+				<foreach item="item" collection="mrent" separator="and">
+					#{item}
+				</foreach>
+				<if test="!(htype.isEmpty())">
+					and htype in
+					<foreach item="item" collection="htype" open="(" separator="," close=")">
+						#{item}
+					</foreach>
+				</if>
+				<if test=" !(rtype.isEmpty())">
+					and rtype in
+					<foreach item="item" collection="rtype" open="(" separator="," close=")">
+						#{item}
+					</foreach>
+				</if>
+				<if test=" !(maintc.isEmpty())">
+					and maintc &lt;
+					<foreach item="item" collection="maintc">
+						#{item}
+					</foreach>
+				</if>
+				<if test="!(yrent.isEmpty())">
+					and yrent &lt; 
+					<foreach item="item" collection="yrent">
+						#{item}
+					</foreach>
+				</if>
+			</when>
+			<when test="!(yrent.isEmpty())">
+				where yrent &lt; 
+				<foreach item="item" collection="yrent">
+					#{item}
+				</foreach>
+				<if test="!(htype.isEmpty())">
+					and htype in
+					<foreach item="item" collection="htype" open="(" separator="," close=")">
+						#{item}
+					</foreach>
+				</if>
+				<if test=" !(rtype.isEmpty())">
+					and rtype in
+					<foreach item="item" collection="rtype" open="(" separator="," close=")">
+						#{item}
+					</foreach>
+				</if>
+				<if test=" !(maintc.isEmpty())">
+					and maintc &lt; 
+					<foreach item="item" collection="maintc">
+						#{item}
+					</foreach>
+				</if>
+				<if test="!(mrent.isEmpty())">
+					and mrent between 
+					<foreach item="item" collection="mrent" separator="and">
 						#{item}
 					</foreach>
 				</if>
@@ -101,64 +190,164 @@
 		</choose>
 	</select>
 
-	<select id="totalListByFilter" parameterType="hashmap"
-		resultType="int">
+	<select id="totalListByFilter" parameterType="hashmap" resultType="int">
 		select count(*)
 		from house_info join house_price using(hcode)
 		<choose>
 			<when test="!(htype.isEmpty())">
 				where htype in
-				<foreach item="item" collection="htype" open="("
-					separator="," close=")">
+				<foreach item="item" collection="htype" open="(" separator="," close=")">
 					#{item}
 				</foreach>
 				<if test=" !(rtype.isEmpty())">
 					and rtype in
-					<foreach item="item" collection="rtype" open="("
-						separator="," close=")">
+					<foreach item="item" collection="rtype" open="(" separator="," close=")">
 						#{item}
 					</foreach>
 				</if>
 				<if test=" !(maintc.isEmpty())">
-					and maintc &lt; #{maintc}
+					and maintc &lt; 
+					<foreach item="item" collection="maintc">
+						#{item}
+					</foreach>
+				</if>
+				<if test="!(mrent.isEmpty())">
+					and mrent between 
+					<foreach item="item" collection="mrent" separator="and">
+						#{item}
+					</foreach>
+				</if>
+				<if test="!(yrent.isEmpty())">
+					and yrent &lt; 
+					<foreach item="item" collection="yrent">
+						#{item}
+					</foreach>
 				</if>
 			</when>
 			<when test="!(rtype.isEmpty())">
 				where rtype in
-				<foreach item="item" collection="rtype" open="("
-					separator="," close=")">
+				<foreach item="item" collection="rtype" open="(" separator="," close=")">
 					#{item}
 				</foreach>
 				<if test="!(htype.isEmpty())">
 					and htype in
-					<foreach item="item" collection="htype" open="("
-						separator="," close=")">
+					<foreach item="item" collection="htype" open="(" separator="," close=")">
 						#{item}
 					</foreach>
 				</if>
 				<if test=" !(maintc.isEmpty())">
-					and maintc &lt; #{maintc}
+					and maintc &lt;
+					<foreach item="item" collection="maintc">
+						#{item}
+					</foreach>
+				</if>
+				<if test="!(mrent.isEmpty())">
+					and mrent between 
+					<foreach item="item" collection="mrent" separator="and">
+						#{item}
+					</foreach>
+				</if>
+				<if test="!(yrent.isEmpty())">
+					and yrent &lt; 
+					<foreach item="item" collection="yrent">
+						#{item}
+					</foreach>
 				</if>
 			</when>
 			<when test="!(maintc.isEmpty())">
-				where maintc &lt; #{maintc}
+				where maintc &lt; 
+				<foreach item="item" collection="maintc">
+					#{item}
+				</foreach>
 				<if test="!(htype.isEmpty())">
 					and htype in
-					<foreach item="item" collection="htype" open="("
-						separator="," close=")">
+					<foreach item="item" collection="htype" open="(" separator="," close=")">
 						#{item}
 					</foreach>
 				</if>
 				<if test=" !(rtype.isEmpty())">
 					and rtype in
-					<foreach item="item" collection="rtype" open="("
-						separator="," close=")">
+					<foreach item="item" collection="rtype" open="(" separator="," close=")">
+						#{item}
+					</foreach>
+				</if>
+				<if test="!(mrent.isEmpty())">
+					and mrent between 
+					<foreach item="item" collection="mrent" separator="and">
+						#{item}
+					</foreach>
+				</if>
+				<if test="!(yrent.isEmpty())">
+					and yrent &lt; 
+					<foreach item="item" collection="yrent">
+						#{item}
+					</foreach>
+				</if>
+			</when>
+			<when test="!(mrent.isEmpty())">
+				where mrent between 
+				<foreach item="item" collection="mrent" separator="and">
+					#{item}
+				</foreach>
+				<if test="!(htype.isEmpty())">
+					and htype in
+					<foreach item="item" collection="htype" open="(" separator="," close=")">
+						#{item}
+					</foreach>
+				</if>
+				<if test=" !(rtype.isEmpty())">
+					and rtype in
+					<foreach item="item" collection="rtype" open="(" separator="," close=")">
+						#{item}
+					</foreach>
+				</if>
+				<if test=" !(maintc.isEmpty())">
+					and maintc &lt;
+					<foreach item="item" collection="maintc">
+						#{item}
+					</foreach>
+				</if>
+				<if test="!(yrent.isEmpty())">
+					and yrent &lt; 
+					<foreach item="item" collection="yrent">
+						#{item}
+					</foreach>
+				</if>
+			</when>
+			<when test="!(yrent.isEmpty())">
+				where yrent &lt; 
+				<foreach item="item" collection="yrent">
+					#{item}
+				</foreach>
+				<if test="!(htype.isEmpty())">
+					and htype in
+					<foreach item="item" collection="htype" open="(" separator="," close=")">
+						#{item}
+					</foreach>
+				</if>
+				<if test=" !(rtype.isEmpty())">
+					and rtype in
+					<foreach item="item" collection="rtype" open="(" separator="," close=")">
+						#{item}
+					</foreach>
+				</if>
+				<if test=" !(maintc.isEmpty())">
+					and maintc &lt; 
+					<foreach item="item" collection="maintc">
+						#{item}
+					</foreach>
+				</if>
+				<if test="!(mrent.isEmpty())">
+					and mrent between 
+					<foreach item="item" collection="mrent" separator="and">
 						#{item}
 					</foreach>
 				</if>
 			</when>
 		</choose>
 	</select>
+	
+	
 </mapper>
 
 

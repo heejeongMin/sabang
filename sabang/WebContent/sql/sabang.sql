@@ -7,47 +7,47 @@ drop table house_option cascade constraints;
 --house info 
 create table house_info(
 hcode varchar2(6),
-htype varchar(20) check(htype in ('o','t','f','p')) not null, --ºÎµ¿»ê À¯Çü --¿ø·ë o / Åõ¾²¸®·ë t / ¿ÀÇÇ½ºÅÚ f / ¾ÆÆÄÆ® p
+htype varchar(20) check(htype in ('o','t','f','p')) not null, --ë¶€ë™ì‚° ìœ í˜• --ì›ë£¸ o / íˆ¬ì“°ë¦¬ë£¸ t / ì˜¤í”¼ìŠ¤í…” f / ì•„íŒŒíŠ¸ p
 rtype varchar(4) not null, -- rent type 
 hname varchar(100) not null, 
 addr varchar(500) not null,  
 coordX varchar(30), 
 coordY varchar(30),
-area varchar(20) not null,  -- ¸éÀû
-whlflr number(4),  -- ÀüÃ¼ Ãş 
-flr number(2) not null, -- if (flr == 0) '¹İÁöÇÏ' , if (whlflr < flr) '¿ÁÅ¾' 
-room varchar2(2) not null, -- ¹æ °³¼ö
-batr varchar(2) not null, -- ¿å½Ç °³¼ö
-cntwish number(1) default 0 check(cntwish < 6), -- Âò È¸¼ö
-himage varchar2(80), -- System.currTimeMillis()¶û °°ÀÌ »ç¿ëÇØ¼­ Á» ±æ¾îÁ³À½..
+area varchar(20) not null,  -- ë©´ì 
+whlflr number(4),  -- ì „ì²´ ì¸µ 
+flr number(2) not null, -- if (flr == 0) 'ë°˜ì§€í•˜' , if (whlflr < flr) 'ì˜¥íƒ‘' 
+room varchar2(2) not null, -- ë°© ê°œìˆ˜
+batr varchar(2) not null, -- ìš•ì‹¤ ê°œìˆ˜
+cntwish number(1) default 0 check(cntwish < 6), -- ì°œ íšŒìˆ˜
+himage varchar2(80), -- System.currTimeMillis()ë‘ ê°™ì´ ì‚¬ìš©í•´ì„œ ì¢€ ê¸¸ì–´ì¡ŒìŒ..
 hetc varchar2(500),
 registerDate date default sysdate,
 CONSTRAINT pk_hdt_cd PRIMARY KEY (hcode)
 );
 
 -- house price
-create table house_price( --´ÜÀ§ (¸¸)
+create table house_price( --ë‹¨ìœ„ (ë§Œ)
 hcode varchar2(6),
-deposit number(6), -- º¸Áõ±İ
-mrent number(3), -- ¿ù¼¼
-yrent number(6), -- Àü¼¼
-maintc number(2) not null, -- maintenance cost, °ü¸®ºñ
-parkf  number(2,1) not null, --parking fee, ÁÖÂ÷ºñ (2.5¸¸¿ø)
+deposit number(6), -- ë³´ì¦ê¸ˆ
+mrent number(3), -- ì›”ì„¸
+yrent number(6), -- ì „ì„¸
+maintc number(2) not null, -- maintenance cost, ê´€ë¦¬ë¹„
+parkf  number(2,1) not null, --parking fee, ì£¼ì°¨ë¹„ (2.5ë§Œì›)
 CONSTRAINT fk_hpr_cd FOREIGN KEY (hcode)REFERENCES house_info (hcode) on delete cascade
 );
 
 
--- house option : Y / N ÇüÅÂ + ele
+-- house option : Y / N í˜•íƒœ + ele
 create table house_option(
 hcode varchar2(6),
-bltin char(1) default 'N' check(bltin in ('Y','N')) not null, -- ºôÆ®ÀÎ
-elev char(1) default 'N' check(elev in ('Y','N')) not null, -- ¿¤·¹º£ÀÌÅÍ
-pet  char(1) default 'N' check(pet in ('Y','N')) not null , -- ¾Ö¿Ïµ¿¹°
-vrd char(1)  default 'N' check(vrd in ('Y','N')) not null , -- º£¶õ´Ù / ¹ßÄÚ´Ï
-loan char(1)  default 'N' check(loan in ('Y','N')) not null, -- Àü¼¼ÀÚ±İ´ëÃâ°¡´É¿©ºÎ
-park char(1)  default 'N' check(park in ('Y','N')) not null,  -- ÁÖÂ÷ °¡´É ¿©ºÎ
-mdate char(1) default 'N' check(mdate in ('Y','N')) not null, -- ÀÔÁÖ °¡´ÉÀÏ, Áï½Ã N / ÇùÀÇ Y
-etc varchar2(500), -- ±âÅ¸ »çÇ×
+bltin char(1) default 'N' check(bltin in ('Y','N')) not null, -- ë¹ŒíŠ¸ì¸
+elev char(1) default 'N' check(elev in ('Y','N')) not null, -- ì—˜ë ˆë² ì´í„°
+pet  char(1) default 'N' check(pet in ('Y','N')) not null , -- ì• ì™„ë™ë¬¼
+vrd char(1)  default 'N' check(vrd in ('Y','N')) not null , -- ë² ë€ë‹¤ / ë°œì½”ë‹ˆ
+loan char(1)  default 'N' check(loan in ('Y','N')) not null, -- ì „ì„¸ìê¸ˆëŒ€ì¶œê°€ëŠ¥ì—¬ë¶€
+park char(1)  default 'N' check(park in ('Y','N')) not null,  -- ì£¼ì°¨ ê°€ëŠ¥ ì—¬ë¶€
+mdate char(1) default 'N' check(mdate in ('Y','N')) not null, -- ì…ì£¼ ê°€ëŠ¥ì¼, ì¦‰ì‹œ N / í˜‘ì˜ Y
+etc varchar2(500), -- ê¸°íƒ€ ì‚¬í•­
 CONSTRAINT fk_hopt_cd FOREIGN KEY (hcode)REFERENCES house_info (hcode) on delete cascade
 );
 
@@ -63,11 +63,11 @@ create table member
   ssn varchar2(14) not null unique, 
   username varchar2(10) not null,
   post varchar2(6) not null,
-  addr varchar2(500) not null, -- ½Å ÁÖ¼ÒÇ¥±â, µµ·Î¸íÁÖ¼Ò
+  addr varchar2(500) not null, -- ì‹  ì£¼ì†Œí‘œê¸°, ë„ë¡œëª…ì£¼ì†Œ
   phone varchar2(11) not null unique,
   email varchar2(50) not null,
   wishlist varchar2(6) default 0,  --hcode 
- -- mtype varchar2(2) default 'Y' check(mtype in ('Y','N')) not null,  -- Y : default, ÀÏ¹İÈ¸¿ø / N : Áß°³»ç , radio ¹öÆ°·Î default ÀÏ¹İÈ¸¿ø, Áß°³ÀÎÀ¸·Î °¡ÀÔÇÒ °æ¿ì Áß°³ÀÎ ¹öÆ°À» Å¬¸¯ÇØ¾ßÇÏ´Â ÇüÅÂ·Î ±¸Çö 
+ -- mtype varchar2(2) default 'Y' check(mtype in ('Y','N')) not null,  -- Y : default, ì¼ë°˜íšŒì› / N : ì¤‘ê°œì‚¬ , radio ë²„íŠ¼ë¡œ default ì¼ë°˜íšŒì›, ì¤‘ê°œì¸ìœ¼ë¡œ ê°€ì…í•  ê²½ìš° ì¤‘ê°œì¸ ë²„íŠ¼ì„ í´ë¦­í•´ì•¼í•˜ëŠ” í˜•íƒœë¡œ êµ¬í˜„ 
   CONSTRAINT pk_mem_id PRIMARY KEY (userid),
    CONSTRAINT fk_mem_cd FOREIGN KEY (wishlist)REFERENCES house_info (hcode) on delete cascade
 ); 
@@ -83,7 +83,7 @@ create table agent(
   agntname varchar2(10) not null,
   agntphone varchar2(11) not null unique,
   agntemail varchar2(50) not null,
-  hcode varchar2(6), -- Áß°³ ¸Å¹° ÄÚµå 
+  hcode varchar2(6), -- ì¤‘ê°œ ë§¤ë¬¼ ì½”ë“œ 
   CONSTRAINT pk_agnt_id PRIMARY KEY (agntid),
   CONSTRAINT fk_agt_cd FOREIGN KEY (hcode)REFERENCES house_info (hcode) on delete cascade
 );
@@ -104,14 +104,14 @@ create table board
 ( 
 pcode varchar2(4) primary key,
 idx number(3) not null, -- seq
-pdate DATE DEFAULT SYSDATE, -- post date °Ô½ÃÀÏ
+pdate DATE DEFAULT SYSDATE, -- post date ê²Œì‹œì¼
 category varchar2(20) not null,
-ppwd varchar2(4) not null, --post password. °èÁ¤ ºñ¹Ğ¹øÈ£¿Í ´Ù¸§. 4byte
+ppwd varchar2(4) not null, --post password. ê³„ì • ë¹„ë°€ë²ˆí˜¸ì™€ ë‹¤ë¦„. 4byte
 phone varchar2(11) not null,
 title varchar2(30) not null,
-content varchar2(4000) not null, --max 2000ÀÚ
-filename varchar2(200), -- ¾÷·Îµå ÆÄÀÏ¸í 
-CONSTRAINT fk_brd_pn FOREIGN KEY (phone)REFERENCES member (phone) on delete cascade -- ´äº¯ ¿©ºÎ ¹®ÀÚ ¸Ş¼¼Áö
+content varchar2(4000) not null, --max 2000ì
+filename varchar2(200), -- ì—…ë¡œë“œ íŒŒì¼ëª… 
+CONSTRAINT fk_brd_pn FOREIGN KEY (phone)REFERENCES member (phone) on delete cascade -- ë‹µë³€ ì—¬ë¶€ ë¬¸ì ë©”ì„¸ì§€
 );     
 
 --sequence
