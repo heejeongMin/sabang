@@ -54,8 +54,7 @@ public class SignAgentServlet extends HttpServlet {
 		if (hasUserId == 0 && hasSigned == 0) {
 			int cnt = mService.signAgnt(agent);
 			HttpSession session = request.getSession();
-			session.setAttribute("signMsg", "회원가입성공");
-			session.setMaxInactiveInterval(5);
+			session.setAttribute("mesg", "회원가입성공");
 			response.sendRedirect("main.jsp");
 		}else if(hasSigned == 1)  { //가입 이력이 있다면
 			RequestDispatcher dis = request.getRequestDispatcher("loginForm.jsp");
