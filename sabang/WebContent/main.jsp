@@ -30,8 +30,6 @@
 	
 	</div>
 </div>
-
-<a href="HouseManagingServlet">houseManaging</a>
 </body>
 </html>
 
