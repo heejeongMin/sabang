@@ -3,7 +3,7 @@
 
 <h4>회원 가입 </h4>
 
-<form>
+<form action = "SignMbrServlet" method = "get">
  <input type="text" name="userid" id="userid" placeholder = "아이디">
 <br> 
 <input type="password" name="passwd" id="passwd" placeholder="비밀번호" ><br>
@@ -23,7 +23,7 @@
 <input type="text" name="phone2" id = "phone2">-<input type="text" name="phone3" id = "phone3">
 <br>
 <input type="text" name="email1" id="email1" placeholder = "이메일">@
-<input type="text" name = "email2" id="email2">
+<input type="text" name = "email2" id="email2" placeholder = "직접 입력">
 	<select id="email3">
 		<option value="naver.com">naver.com</option>
 		<option value="hanmail.net">hanmail.net</option>

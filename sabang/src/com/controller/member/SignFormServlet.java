@@ -19,8 +19,6 @@ import com.service.MemberService;
 @WebServlet("/SignFormServlet")
 public class SignFormServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String member = "member";
-		String agent = "agent";
 		
 		String page = request.getParameter("page");
 		

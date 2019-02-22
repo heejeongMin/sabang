@@ -4,19 +4,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="MemberMapper">
 	
-	
 	<!-- 가입 -->
 
-	<insert id="SignMbr" parameterType="MemberDTO">
+	<insert id="signMbr" parameterType="MemberDTO">
 		insert into member (userid,passwd, ssn, username,post,addr, phone, email) 
 		values( #{userid},#{passwd},#{ssn},#{username},#{post},#{addr}, #{phone},#{email})
 	</insert>
 	
-	<insert id="SignAgnt" parameterType="AgentDTO">
+	<insert id="signAgnt" parameterType="AgentDTO">
 		insert into agent (agntid, passwd, agntssn, agntname, agntphone, agntemail)
 		values(#{agntid},#{passwd},#{agntssn},#{agntname},#{agntphone},#{agntemail})
 	</insert>
-	
 	
 	<select id="idCheck" parameterType="string" resultType="int">
 		select
@@ -29,30 +27,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select
 		count(*)
 		from agent
-		where agntid = #{userid}
+		where agntid = #{agntid}
 	</select>
 	
-	
-	<select id = "hasSigned" parameterType= "string" resultType = "int">
+	<select id = "signedCheck" parameterType= "string" resultType = "int">
 		select
 		count(*)
 		from wdMbr
 		where userid = #{userid}
 	</select>
 	
-	
-	<select id = "SignedMbr" parameterType = "string" resultType = "WdMbrDTO"> 
+	<select id = "wdMbrInfo" parameterType = "string" resultType = "WdMbrDTO"> 
 		select userid
 		from wdMbr
 		where  userid = #{userid}
 	</select>  <!-- 탈퇴회원 정보출력 -->
 	
-	
-	<select id = "overDay" parameterType = "string" resultType = "string">
+<!-- 	<select id = "overDay" parameterType = "string" resultType = "string">
 		select TO_CHAR(SYSDATE + 24/24,'YYYYMMDD HH24') 
 		from wdMbr
 		where userid = #{userid}
-	</select>
+	</select> -->
 	 
 	 
 	 
@@ -62,8 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="login" parameterType="hashmap" resultType="MemberDTO">
 		select userid,passwd, ssn, username,post,addr, phone, email, wishlist
 		from member
-		where
-		userid = #{userid} 
+		where userid = #{userid} 
 		and passwd = #{passwd}
 	</select>
 
@@ -127,13 +121,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="checkMbrPw" parameterType="string" resultType="MemberDTO">
 		select userid,passwd, ssn, username,post,addr, phone, email, wishlist
 		from member
-		passwd = #{passwd}
+		where passwd = #{passwd}
 	</select>
 	
 	<select id="checkAgntPw" parameterType="string" resultType="AgentDTO">
 		select agntid, passwd, agntssn, agntname, agntphone, agntemail, hcode
 		from agent
-		passwd = #{passwd}
+		where passwd = #{passwd}
 	</select>
 	
 
