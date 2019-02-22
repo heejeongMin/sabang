@@ -8,6 +8,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.dto.HouseInfoDTO;
+import com.dto.HouseRcnlistDTO;
+
 public class HouseDAO {
 	private static final Logger logger = LoggerFactory.getLogger(HouseDAO.class);
 	/* 
@@ -66,5 +69,35 @@ public class HouseDAO {
 		return session.selectOne("HouseMapper.totalListByFilter", queryMap);
 	}//totalListByFilter
 	
+	
+	
+	
+	///////////////////////////////////////////////////////////
+	// House 자세히보기
+	public HouseInfoDTO HouseRetrieve(SqlSession session, String hcode){
+	HouseInfoDTO dto = session.selectOne("HouseMapper.houseRetrieve",hcode);
+	return dto;
+	}
+	
+	
+	
+	///////////////////////////////////////////////////////////
+	// 최근 본 House
+	public List<HouseRcnlistDTO> selectRcnlist(SqlSession session, String userid){
+		List<HouseRcnlistDTO> list = session.selectList("HouseMapper.rcnList", userid);
+		return list;
+	}
+	
+	
+	
+	public int rcnListAllDone(SqlSession session, List<HouseRcnlistDTO> rList) {
+		int n = session.insert("HouseMapper.rcnInsertAll", rList);
+		return n;
+	}
+	
+	public int deleteRcnlist(SqlSession session,List<Long> userRcnList) {
+		int n = session.delete("HouseMapper.rcnDelete",userRcnList);
+		return n;
+	}
 
 }

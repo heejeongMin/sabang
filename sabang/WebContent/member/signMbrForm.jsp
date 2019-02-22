@@ -3,7 +3,7 @@
 
 <h4>회원 가입 </h4>
 
-<form>
+<form action = "SignMbrServlet" method = "get">
  <input type="text" name="userid" id="userid" placeholder = "아이디">
 <br> 
 <input type="password" name="passwd" id="passwd" placeholder="비밀번호" ><br>
@@ -14,6 +14,7 @@
 <input type="text" name="post" id="sample4_postcode" placeholder="우편번호">
 <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
 <input type="text" name="addr" id="sample4_roadAddress" placeholder="도로명주소">
+<input type="text" name="addr2" id="sample4_jibunAddress" placeholder="지번주소" style="display: none;">
 <span id="guide"></span>
 <br>
 <select name="phone1" id = "phone1">
@@ -23,8 +24,9 @@
 <input type="text" name="phone2" id = "phone2">-<input type="text" name="phone3" id = "phone3">
 <br>
 <input type="text" name="email1" id="email1" placeholder = "이메일">@
-<input type="text" name = "email2" id="email2">
+<input type="text" name = "email2" id="email2" placeholder = "직접 입력">
 	<select id="email3">
+		<option value="">직접 입력</option>
 		<option value="naver.com">naver.com</option>
 		<option value="hanmail.net">hanmail.net</option>
 		<option value="yahoo.co.kr">yahoo.co.kr</option>

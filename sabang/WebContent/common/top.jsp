@@ -37,7 +37,7 @@
 		$("#delMbr").on("click", function() {
 			var cfm = confirm("정말 탈퇴하시겠습니까? 회원 탈퇴시 하루동안 재가입 할 수 없습니다.");
 			if (cfm == true) {
-				location.href = "DelMbrIdConfirmServlet";
+				location.href = "../DelMbrIdConfirmServlet";
 				alert("탈퇴하기를 누르셨습니다. "+'${name}'+"님의 모든 정보는 모두 삭제됩니다");
 			} else {
 				alert("감사합니다, "+'${name}'+"님께 더 나은 서비스를 제공하는 사방이 되겠습니다.");

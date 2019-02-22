@@ -1,6 +1,7 @@
 drop table house_info cascade constraints;
 drop table house_price cascade constraints; 
 drop table house_option cascade constraints;
+drop table member cascade constraints;
 
 -- **  house
 
@@ -119,3 +120,24 @@ CONSTRAINT fk_brd_pn FOREIGN KEY (phone)REFERENCES member (phone) on delete casc
 create sequence board_seq
 start with 1
 increment by 1;
+
+
+
+
+create table RCNLIST
+  (  num Number(15) PRIMARY KEY,
+     userid VARCHAR2(10),
+     hcode varchar2(20) not null
+  );   
+
+-- member테이블을 참조
+-- userid를 fk로 지정한 이유 : 로그인한 정보가 필요
+  alter table RCNLIST
+  add CONSTRAINT RCNLIST_userid_fk FOREIGN KEY(userid)
+   REFERENCES member(userid) ON DELETE CASCADE;
+   
+-- houseInfo테이블을 참조
+-- hcode를 fk로 지정한 이유 : house 정보가 필요
+  alter table RCNLIST
+  add CONSTRAINT RCNLIST_hcode_fk FOREIGN KEY(hcode)
+   REFERENCES house_info(hcode) ON DELETE CASCADE;

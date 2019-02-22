@@ -1,8 +1,8 @@
 package com.controller.member;
 
 import java.io.IOException;
+import java.util.HashMap;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,14 +16,15 @@ import com.service.MemberService;
 /**
  * Servlet implementation class MemberUIServlet
  */
-@WebServlet("/SignCheckMbrServlet")
-public class SignCheckMbrServlet extends HttpServlet {
+@WebServlet("/LogoutServlet")
+public class LogoutServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("signCheckMbrForm.jsp");
+	
+	    HttpSession session = request.getSession();
+	    session.invalidate();
+		response.sendRedirect("main.jsp");
 	}
-	
-	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -31,3 +32,6 @@ public class SignCheckMbrServlet extends HttpServlet {
 	}
 
 }
+
+
+
