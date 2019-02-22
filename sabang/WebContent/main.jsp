@@ -8,16 +8,16 @@
 <link rel="stylesheet" href="css/sabangTest.css">
 </head>
 <body>
-<%-- <%
-   String mesg = (String)session.getAttribute("memberAdd");
+<%
+   String mesg = (String)session.getAttribute("mesg");
    if(mesg!=null){
 %>
    <script type="text/javascript">
      alert('<%=mesg%>');
    </script>
 <%
-   }"WebContent/images/logo/sabanglogo_w.png"
-%> --%>
+   }
+%> 
 
 <jsp:include page="common/top.jsp" flush="true" /><br>
 <a href="HouseListServlet">houseOverview</a>

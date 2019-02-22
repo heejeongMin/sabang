@@ -24,6 +24,15 @@ public class AgentDTO {
 		this.agntemail = agntemail;
 		this.hcode = hcode;
 	}
+	public AgentDTO(String agntid, String passwd, String agntssn, String agntname, String agntphone, String agntemail) {
+		super();
+		this.agntid = agntid;
+		this.passwd = passwd;
+		this.agntssn = agntssn;
+		this.agntname = agntname;
+		this.agntphone = agntphone;
+		this.agntemail = agntemail;
+	}
 	public String getAgntid() {
 		return agntid;
 	}

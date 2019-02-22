@@ -31,6 +31,22 @@ public class MemberDTO {
 		this.wishlist = wishlist;
 	}
 
+	public MemberDTO(String userid, String passwd, String ssn, String username, String post, String addr, String phone,
+			String email) {
+		super();
+		this.userid = userid;
+		this.passwd = passwd;
+		this.ssn = ssn;
+		this.username = username;
+		this.post = post;
+		this.addr = addr;
+		this.phone = phone;
+		this.email = email;
+	}
+
+	
+	
+	
 	public String getUserid() {
 		return userid;
 	}
