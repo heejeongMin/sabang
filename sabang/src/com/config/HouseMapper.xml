@@ -56,7 +56,48 @@
 			#{item}
 		</foreach>
 	</select>
-
+	
+	
+	
+	<!-- House 자세히보기 -->
+   	<select id="houseRetrieve" parameterType="String" resultType="HouseInfoDTO">
+   		select hcode, htype, rtype, hname, addr, coordX, coordY, area, whlflr, flr, room, batr
+   			cntwish, himage, hetc, registerDate
+   		from house_info
+   		where hcode = #{hcode}
+   	</select>
+	
+	
+	
+	<!-- 최근 본 House -->
+	<select id="rcnList" parameterType="string" resultType="HouseRcnlistDTO">
+   		select num,userid,hcode
+   		from rcnlist
+   		where userid = #{userid}
+   	</select>
+   	
+   	
+   	<insert id="rcnInsertAll" parameterType="arraylist">
+    	insert all
+    		<foreach item="item" collection="list" >
+       		 	into rcnlist (num, userid, hcode)
+       		 	values(#{item.num}, #{item.userid},#{item.hcode})
+  			</foreach>
+  			select * from dual
+    </insert>
+    
+    
+    
+   	<delete id="rcnDelete" parameterType="list">
+   		delete 
+    	from rcnlist
+    	<where>
+    		num in
+    		<foreach item="item" collection="list" open="(" separator="," close=")">
+       		 	#{item}
+  			</foreach>
+    	</where>
+   	</delete>
 </mapper>
 
 

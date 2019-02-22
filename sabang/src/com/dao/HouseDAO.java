@@ -6,6 +6,9 @@ import java.util.List;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
+import com.dto.HouseInfoDTO;
+import com.dto.HouseRcnlistDTO;
+
 public class HouseDAO {
 	/* 
 	 * 페이징 처리
@@ -63,5 +66,35 @@ public class HouseDAO {
 		return session.selectOne("HouseMapper.totalListByFilter");
 	}//totalListByFilter
 	
+	
+	
+	
+	///////////////////////////////////////////////////////////
+	// House 자세히보기
+	public HouseInfoDTO HouseRetrieve(SqlSession session, String hcode){
+	HouseInfoDTO dto = session.selectOne("HouseMapper.houseRetrieve",hcode);
+	return dto;
+	}
+	
+	
+	
+	///////////////////////////////////////////////////////////
+	// 최근 본 House
+	public List<HouseRcnlistDTO> selectRcnlist(SqlSession session, String userid){
+		List<HouseRcnlistDTO> list = session.selectList("HouseMapper.rcnList", userid);
+		return list;
+	}
+	
+	
+	
+	public int rcnListAllDone(SqlSession session, List<HouseRcnlistDTO> rList) {
+		int n = session.insert("HouseMapper.rcnInsertAll", rList);
+		return n;
+	}
+	
+	public int deleteRcnlist(SqlSession session,List<Long> userRcnList) {
+		int n = session.delete("HouseMapper.rcnDelete",userRcnList);
+		return n;
+	}
 
 }
