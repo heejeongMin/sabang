@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:if test="${!(empty mesg)}">
 	<script type="text/javascript">
 		alert('${mesg}');
@@ -82,6 +83,7 @@
 					url:"MemberPwdCheckServlet",
 					type:"get",
 					data:{
+						userid:$("input[name=userid]").val(),
 						passwd:$("#passwd").val()
 					},
 					success:function(data,status,xhr){
@@ -141,11 +143,19 @@
 	   
 	   	// 업데이트
 	   	$("#updateSubmit").on("click",function(event){
-	   		var pwdCR= $("#pwdCheckResult").text()
-	   		if($("#passwd").val().length==0){
+	   		var pwdCR= $("#pwdCheckResult").text();
+	   		if($("#passwd").val().length==0){ 			
 	   			event.preventDefault();
 	   			alert("비밀번호를 입력하세요.");
-	   			
+	   			$("#passwd").focus();
+	   		}else if($("#pwdResult").text()=="비밀번호 불일치"){
+	   			event.preventDefault();
+	   			alert("비밀번호를 확인해주세요.");
+	   			$("#passwd").focus();
+	   		}else if(pwdCR!="" && pwdCR=="변경 비밀번호 불일치"){
+	   			event.preventDefault();
+	   			alert("변경할 비밀번호가 일치하지않습니다.");
+	   			$("#pwdCheck2").focus();
 	   		}else{
 	   			$("form").submit();
 	   		}
@@ -153,14 +163,30 @@
 	})
 </script>
 
-
-
 <form action="MemberUpdateServlet" method="post" >
-	<input type="hidden" value="${login.userid}" name="userid"/>
-	<table border="1">
+<c:if test='${login["class"].simpleName.equals("MemberDTO")}'>
+	<c:set var="member" value="${login}"/>
+</c:if>
+<c:if test='${login["class"].simpleName.equals("AgentDTO")}'>
+	<c:set var="agent" value="${login}"/>
+</c:if>
+
+	<c:if test="${!(empty member)}">
+		<input type="hidden" value="${member.userid}" name="userid"/>
+	</c:if>
+	<c:if test="${!(empty agent)}">
+		<input type="hidden" value="${agent.agntid}" name="userid"/>
+	</c:if> 
+	
+ <table border="1">
 		<tr>
 			<th>이름</th>
-			<td>${login.username}</td>
+			<c:if test="${!(empty member)}">
+					<td>${member.username}</td>
+			</c:if>
+			<c:if test="${!(empty agent)}">
+				<td>${agent.agntname}</td>
+			</c:if>
 		</tr>
 		<tr>
 			<th>전화번호</th>
@@ -187,8 +213,8 @@
 		<tr>
 			<th>이메일</th>
 			<td>
-				<input type="text" name="email1" value="${email[0]}">@
-				<input type="text" name="email2" placeholder="직접입력" id="email2" value="${email[1]}">
+			<input type="text" name="email1" value="${email[0]}">@
+			<input type="text" name="email2" placeholder="직접입력" id="email2" value="${email[1]}">
 				<select id="emailSelect">
 					<option value="">-- 직접 입력 --</option>
 					<option value="daum.net">daum.net</option>
@@ -234,5 +260,5 @@
 			</td>
 		</tr>
 	</table>
-</form>
+</form> 
 

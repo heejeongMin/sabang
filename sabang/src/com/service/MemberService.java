@@ -183,18 +183,49 @@ public class MemberService {
 	
 	
 	// 마이페이지
-	public MemberDTO mypage(String userid) {
+	public MemberDTO mypageMember(String userid) {
 		SqlSession session = MySqlSessionFactory.getSession();
 		MemberDTO dto = null;
 		try {
 			MemberDAO dao = new MemberDAO();
-			dto = dao.mypage(session, userid);
+			dto = dao.mypageMember(session, userid);
 		}finally {
 			session.close();
 		}
 		return dto;
 	}
-		
+	
+	
+	
+	public AgentDTO mypageAgent(String userid) {
+		SqlSession session = MySqlSessionFactory.getSession();
+		AgentDTO dto = null;
+		try {
+			MemberDAO dao = new MemberDAO();
+			dto = dao.mypageAgent(session, userid);
+		} catch ( Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return dto;
+	}
+	
+	/*
+	public MemberDTO myPageCheckMember(HashMap<String, String> map) {
+		SqlSession session = MySqlSessionFactory.getSession();
+		MemberDTO checkMbrPw = null;
+		try {
+			MemberDAO dao = new MemberDAO();
+			checkMbrPw = dao.myPageCheckMember(session, map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return checkMbrPw;
+	}// end checkMbrPw
+	*/
 		
 	public int MemberUpdate(MemberDTO dto) {
 		SqlSession session = MySqlSessionFactory.getSession();

@@ -78,14 +78,24 @@ public class MemberDAO {
 	
 	//////////////////////////////////////////////////////////////////
 	// 마이페이지
-	public MemberDTO mypage(SqlSession session,String userid) {
-	MemberDTO n = session.selectOne("MemberMapper.mypage",userid);
-	return n;
+	public MemberDTO mypageMember(SqlSession session,String userid) {
+		MemberDTO n = session.selectOne("MemberMapper.mypageMember",userid);
+		return n;
 	}
 	
+	public AgentDTO mypageAgent(SqlSession session,String userid) {
+		AgentDTO n = session.selectOne("MemberMapper.mypageAgent",userid);
+		return n;
+	}
 	
 	public int MemberUpdate(SqlSession session, MemberDTO dto) {
-	int n = session.update("MemberMapper.memberUpdate",dto);
-	return n;
+		int n = session.update("MemberMapper.memberUpdate",dto);
+		return n;
 	}
+	/*
+	public MemberDTO myPageCheckMember(SqlSession session, HashMap<String, String> map) {
+		MemberDTO checkMbrPw = session.selectOne("MemberMapper.checkMbrPw", map);
+		return checkMbrPw;
+	}
+	*/
 }

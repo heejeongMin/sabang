@@ -36,7 +36,7 @@ public class SignMbrServlet extends HttpServlet {
 		String phone = phone1 + phone2 + phone3;
 		String email1 = request.getParameter("email1");
 		String email2 = request.getParameter("email2");
-		String email = email1 + email2;
+		String email = email1 + "@" + email2;
 		
 		MemberDTO member = new MemberDTO(userid, passwd, ssn, username, post, addr, phone, email);
 		

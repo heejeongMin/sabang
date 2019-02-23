@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/sabangTest.css">
 </head>
-<body id="wrap">
+<body>
 <%-- <%
    String mesg = (String)session.getAttribute("memberAdd");
    if(mesg!=null){
