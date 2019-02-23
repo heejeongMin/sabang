@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<script src="js/innerTable.js"></script>
 <link rel="stylesheet" href="css/houseList.css">
 <style>
 a.focusedPage{
@@ -18,7 +19,6 @@ a.unfocusedPage{
 </style>
 <div id="wrap">
 <c:set var="list" value="${pagingMap.list}"/>
-
 <h1>조건에 맞는 방 <span id="noOfHouse"> ${pagingMap.totalPage}</span>건</h1>
 <table id="outerTable">
 	<tr>
@@ -26,7 +26,7 @@ a.unfocusedPage{
 			<c:forEach var="house" items="${list}">
 				<table id="innerTable">
 					<tr>
-						<td class="img"><img src="#" alt="${house.HCODE}" width="300" height="300"/></td>
+						<td class="img"><img class="goDetail" data-hcode="${house.HCODE}" src="#" alt="${house.HCODE}" width="300" height="300"/></td>
 					</tr>
 					<tr> 
 						<td class="greyText">
@@ -47,7 +47,7 @@ a.unfocusedPage{
 						</td>
  					</tr>
 					<tr>
-						<td style="padding: 6px 0 6px 0;"><font size=5><b>${house.RTYPE} ${house.DEPOSIT} / ${house.MRENT}</b></font></td>
+						<td class="goDetail" data-hcode="${house.HCODE}" style="padding: 6px 0 6px 0; cursor:pointer;"><font size=5><b class="goDetail" data-hcode="${house.HCODE}">${house.RTYPE} ${house.DEPOSIT} / ${house.MRENT}</b></font></td>
 					</tr>
  					<tr>
 						<td class="greyText">

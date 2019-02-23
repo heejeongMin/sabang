@@ -44,7 +44,7 @@ public class MyPageServlet extends HttpServlet {
 				
 			request.setAttribute("email", email);
 			request.setAttribute("phone", phone);
-			request.setAttribute("login", x);
+			session.setAttribute("login", x);
 		}else if(agent!=null) {
 			nextPage="mypage.jsp";
 			String userid = agent.getAgntid();
@@ -60,7 +60,7 @@ public class MyPageServlet extends HttpServlet {
 				
 			request.setAttribute("email", email);
 			request.setAttribute("phone", phone);
-			request.setAttribute("login", x);
+			session.setAttribute("login", x);
 		}else {
 			nextPage="LoginUIServlet";
 			session.setAttribute("mesg", "로그인이 필요한 작업입니다.");

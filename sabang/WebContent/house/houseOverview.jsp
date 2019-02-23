@@ -3,20 +3,21 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.6/css/swiper.min.css">
 <link rel="stylesheet" href="css/houseList.css">
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.6/js/swiper.min.js"></script>
+<script src="js/innerTable.js"></script>
   <!-- Initialize Swiper -->
 <div id="wrap">
 <c:set var="newList" value="${newList}"/>
 <h1>신매물 <span id="noOfHouse">${fn:length(newList)}</span>건</h1>
   <!-- Swiper -->
-  <div class="swiper-container" style="width:880px; margin-left:0; height: 360px">
+  <div class="swiper-container" style="width:880px; margin-left:0; height: 360px; padding-top: 3px;">
     <div class="swiper-wrapper">
     	<c:forEach var="newHouse" items="${newList}">
 	    	 <div class="swiper-slide">
 				<table id="innerTable">
 					<tr>
-						<td class="img"><img src="#" alt="${newHouse.HCODE}" width="300" height="300"/></td>
+						<td class="img">
+						<img class="goDetail" data-hcode="${newHouse.HCODE}" src="#" alt="${newHouse.HCODE}" width="300" height="250"/></td>
 					</tr>
 					<tr> 
 						<td class="greyText">
@@ -37,7 +38,7 @@
 						</td>
  					</tr>
 					<tr>
-						<td style="padding: 6px 0 6px 0;"><font size=5><b>${newHouse.RTYPE} ${newHouse.DEPOSIT} / ${newHouse.MRENT}</b></font></td>
+						<td class="goDetail" data-hcode="${newHouse.HCODE}" style="padding: 6px 0 6px 0;  cursor:pointer;"><font size=5><b class="goDetail" data-hcode="${newHouse.HCODE}">${newHouse.RTYPE} ${newHouse.DEPOSIT} / ${newHouse.MRENT}</b></font></td>
 					</tr>
  					<tr>
 						<td class="greyText">
@@ -57,13 +58,14 @@
 <c:set var="hotList" value="${hotList}"/>
 <h1>핫매물 <span id="noOfHouse">${fn:length(hotList)}</span>건</h1>
  <!-- Swiper -->
-  <div class="swiper-container" style="width:880px; margin-left:0; height: 360px">
+  <div class="swiper-container" style="width:880px; margin-left:0; height: 360px; padding-top: 3px;">
     <div class="swiper-wrapper">
     	<c:forEach var="hotHouse" items="${hotList}">
 	    	 <div class="swiper-slide">
 				<table id="innerTable">
 					<tr>
-						<td class="img"><img src="#" alt="${hotHouse.HCODE}" width="300" height="300"/></td>
+						<td class="img">
+						<img class="goDetail" data-hcode="${hotHouse.HCODE}" src="#" alt="${hotHouse.HCODE}" width="300" height="250"/></td>
 					</tr>
 					<tr> 
 						<td class="greyText">
@@ -84,7 +86,7 @@
 						</td>
  					</tr>
 					<tr>
-						<td style="padding: 6px 0 6px 0;"><font size=5><b>${hotHouse.RTYPE} ${hotHouse.DEPOSIT} / ${hotHouse.MRENT}</b></font></td>
+						<td class="goDetail" data-hcode="${newHouse.HCODE}" style="padding: 6px 0 6px 0;  cursor:pointer;"><font size=5><b class="goDetail" data-hcode="${hotHouse.HCODE}" >${hotHouse.RTYPE} ${hotHouse.DEPOSIT} / ${hotHouse.MRENT}</b></font></td>
 					</tr>
  					<tr>
 						<td class="greyText">

@@ -10,19 +10,19 @@
              <c:when test="${memberInfo ne null}">
              <c:set var="name" value="${memberInfo.username}" scope="request" />
 				<c:out value="${name}" />님을 위한 사방팔방 곳곳의 방
-				<a href="LogoutServlet">로그아웃</a> 
-				<a href="MyPageServlet">mypage</a>
-				<a href = "#" id ="delMbr">회원탈퇴 </a> 
+					<a href="LogoutServlet">로그아웃</a> 
+					<a href="MyPageServlet">mypage</a>
+					<a href = "#" id ="delMbr">회원탈퇴 </a>
              </c:when>
 
              <c:when test="${agentInfo ne null}">
               <c:set var="name" value="${agentInfo.agntname}" scope="request" />
 				<c:out value="${name}" />님을 위한 사방팔방 곳곳의 방
-				<a href="LogoutServlet">로그아웃</a> 
-				<a href="">지역 보기</a> <!-- 구현 -->
-				<a href="MyPageServlet">mypage</a>
-				<a href = "#" id ="delMbr">회원탈퇴 </a> 
-				<a href="SignCheckMbrServlet">회원가입</a>
+					<a href="LogoutServlet">로그아웃</a> 
+					<a href="">지역 보기</a> <!-- 구현 -->
+					<a href="MyPageServlet">mypage</a>
+					<a href = "#" id ="delMbr">회원탈퇴 </a> 
+					<a href="SignCheckMbrServlet">회원가입</a>
              </c:when> 
               
               <c:otherwise>
