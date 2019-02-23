@@ -5,11 +5,8 @@
 <a href="#">연락한 부동산</a>
 <a href="#">내가 쓴 리뷰</a>
 
-${member }
-${member.agent }
-${member.agent == 'Y' }
 <a href="InterestListServlet">관심목록</a>
-	<c:if test="${member.agent == 'Y'}">
+	<c:if test="${login.agent == 'Y'.charAt(0)}">
 		<a href="HouseManagingServlet">매물 관리</a>
 	</c:if>
 <%-- 

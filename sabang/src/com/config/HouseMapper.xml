@@ -4,6 +4,11 @@
 
 <mapper namespace="HouseMapper">
 
+<!-- houseRegister.jsp에서 가장 최근 등록된 매물 코드 가져오기 (매물타입별) -->
+	<select id="getLastCode" parameterType="string" resultType="string">
+		select max(hcode) from house_info where htype = #{htype}
+	</select>
+
 <!-- housePanel.jsp에서 agent별 매물 리스트 -->
 	<select id="houseByAgent" parameterType="string" resultType="hashmap">
 		select hcode, rtype, addr, deposit, mrent, registerdate

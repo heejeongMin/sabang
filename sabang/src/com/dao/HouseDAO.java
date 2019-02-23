@@ -69,11 +69,15 @@ public class HouseDAO {
 		return session.selectOne("HouseMapper.totalListByFilter", queryMap);
 	}//totalListByFilter
 	
-	
+	//panel에 매물리스트
 	public List<HashMap<String, Object>> houseByAgent(SqlSession session, String agntid){
 		return session.selectList("HouseMapper.houseByAgent", agntid);
-	}
+	}//houseByAgent
 	
+	//가장 최근에 등록된 매물코드가져오기
+	public String getLastCode(SqlSession session, String htype){
+		return session.selectOne("HouseMapper.getLastCode", htype);
+	}//end getLastCode
 	
 	
 	///////////////////////////////////////////////////////////

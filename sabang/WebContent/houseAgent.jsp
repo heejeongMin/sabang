@@ -23,10 +23,9 @@ p#initalMsg{font-size: 50px; font-weight: bold; color: darkblue; display: inline
 <jsp:include page="house/housePanel.jsp" flush="true"/>
 <div id="houseControlWrap">
 	<c:choose>
-		<c:when test="${empty work}"><p id="initalMsg">안녕하세요 ${login.agntname}님 :)</p></c:when>
+		<c:when test="${empty work}"><p id="initalMsg">안녕하세요 ${login.username}님 :)</p></c:when>
 		<c:when test='${work.equals("register")}'><jsp:include page="house/houseRegister.jsp" flush="true"/></c:when>
 	</c:choose>
-
 </div>
 </body>
 </html>

@@ -134,7 +134,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 마이페이지  -->
    	<select id="mypageMember" parameterType="string" resultType="MemberDTO">
-   		select userid, passwd, username, post, addr, phone, email
+   		select userid, passwd, username, post, addr, phone, email, agent
    		from member
    		where userid = #{userid}
    	</select>

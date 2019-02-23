@@ -1,8 +1,8 @@
 package com.controller.house;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.dto.AgentDTO;
 import com.dto.MemberDTO;
 import com.service.HouseService;
 
@@ -18,23 +17,30 @@ import com.service.HouseService;
 public class HouseManagingServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		MemberDTO member = (MemberDTO)session.getAttribute("memberInfo");
+		HouseService service = new HouseService();
+		MemberDTO member = (MemberDTO)session.getAttribute("login");
+		String htype = request.getParameter("htype");
 		
-		String nextPage = null;
+		
+		// panel에 리스트뽑기
 		if(member == null) {
-			nextPage="LoginUIServlet";
 			session.setAttribute("mesg", "로그인이 필요한 작업입니다.");
+			response.sendRedirect("LoginUIServlet");
 		} else {
-			System.out.println(member.getAgent() == 'Y');
-			if(member.getAgent()=='Y') {//멤버가 에이전트이면
-				nextPage = "houseAgent.jsp";
-				HouseService service = new HouseService();
-				request.setAttribute("houseByAgent", service.houseByAgent(member.getUserid()));
-			}
-		}
+			if(member.getAgent()=='Y') {//멤버가 에이전트이면 panel에 매물리스트
+				session.setAttribute("houseByAgent", service.houseByAgent(member.getUserid()));
+				response.sendRedirect("houseAgent.jsp");
+			}//end if
+		}//end if~else
 		
-		RequestDispatcher dis = request.getRequestDispatcher(nextPage);
-		dis.forward(request, response);
+		if(htype!=null) {//htype이 null이 아닐때는 register
+			String lastCode = service.getLastCode(htype);
+			PrintWriter out = response.getWriter();
+			System.out.println(lastCode + "\t" + lastCode.substring(1));
+			out.print(lastCode.substring(1));
+		} //end if
+		
+		
 		
 		
 	}//end doGet

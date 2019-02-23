@@ -13,7 +13,7 @@ form#panel{
     height: 80%;
     box-shadow: 5px 2px 0px 4px lightblue;
     padding: 10px 5px 5px 10px;
-        height: 650px;
+        height: 600px;
         position: absolute;
 }
 form#panel table{    box-shadow: -2px 6px 1px 7px aliceblue; padding: 3px;}

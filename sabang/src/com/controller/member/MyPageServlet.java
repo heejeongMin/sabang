@@ -45,14 +45,14 @@ public class MyPageServlet extends HttpServlet {
 			session.setAttribute("login", x);
 			
 			// 에이전트 체크 : 로그인 시 저장
-			char agent = 0;
+			/*char agent = 0;
 			if(member.getAgent() == 'Y') {
 				agent = member.getAgent();
 				session.setAttribute("agent", agent);
 			}else{
 				agent = member.getAgent();
 				session.setAttribute("agent", agent);
-			}
+			}*/
 			
 		}else {
 			nextPage="LoginUIServlet";

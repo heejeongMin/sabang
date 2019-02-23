@@ -1,6 +1,5 @@
 package com.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -86,6 +85,18 @@ public class HouseService {
 		}
 		return list;
 	}//houseByAgent
+	
+	public String getLastCode(String htype) {//마지막으로 등록된 코드 가져오기
+		SqlSession session = MySqlSessionFactory.getSession();
+		String lastCode = null;
+		try {
+			HouseDAO dao = new HouseDAO();
+			lastCode = dao.getLastCode(session, htype);
+		} finally {
+			session.close();
+		}
+		return lastCode;
+	}//end getLastCode
 	
 	
 	

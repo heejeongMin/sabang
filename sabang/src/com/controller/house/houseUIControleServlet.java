@@ -10,14 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.dto.AgentDTO;
-import com.service.HouseService;
+import com.dto.MemberDTO;
 
 @WebServlet("/houseUIControleServlet")
 public class houseUIControleServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		AgentDTO agent = (AgentDTO)session.getAttribute("agentInfo");	
+		MemberDTO agent = (MemberDTO)session.getAttribute("login");	
 		String work = (String) request.getParameter("work");
 		
 		String nextPage="";
@@ -27,7 +26,8 @@ public class houseUIControleServlet extends HttpServlet {
 			session.setAttribute("mesg", "로그인이 필요한 작업입니다.");
 		} else {
 			System.out.println(work.equals("regisger"));
-			nextPage = (work.equals("regisger"))? "houseRegister.jsp" : "houseUpdate.jsp";
+			nextPage="houseAgent.jsp";
+			//nextPage = (work.equals("register"))? "houseRegister.jsp" : "houseUpdate.jsp";
 			request.setAttribute("work", "register");
 		}
 		
