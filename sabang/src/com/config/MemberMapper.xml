@@ -62,7 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="agntlogin" parameterType="hashmap" resultType="AgentDTO">
-		select agntid, passwd, agntssn, agntname, agntphone, agntemail, hcode
+		select agntid, passwd, agntssn, agntname, agntphone, agntemail
 		from agent
 		where agntid = #{userid}
 		and passwd = #{passwd}
@@ -125,7 +125,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="checkAgntPw" parameterType="string" resultType="AgentDTO">
-		select agntid, passwd, agntssn, agntname, agntphone, agntemail, hcode
+		select agntid, passwd, agntssn, agntname, agntphone, agntemail
 		from agent
 		where passwd = #{passwd}
 	</select>
@@ -134,10 +134,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	<!-- 마이페이지  -->
-   	<select id="mypage" parameterType="string" resultType="MemberDTO">
+   	<select id="mypageMember" parameterType="string" resultType="MemberDTO">
    		select userid, passwd, username, post, addr, phone, email
    		from member
    		where userid = #{userid}
+   	</select>
+   	
+   	
+   	<select id="mypageAgent" parameterType="string" resultType="AgentDTO">
+   		select agntid, passwd, agntssn, agntname, agntphone, agntemail
+   		from agent
+   		where agntid = #{userid}
    	</select>
    	
    	

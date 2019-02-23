@@ -27,17 +27,32 @@ public class MyPageServlet extends HttpServlet {
 		MemberDTO member = (MemberDTO)session.getAttribute("memberInfo");
 		AgentDTO agent = (AgentDTO)session.getAttribute("agentInfo");
 		
-		
+		MemberService service = new MemberService();
 		String nextPage=null;
 		if(member!=null) {
 			nextPage="mypage.jsp";
 			String userid = member.getUserid();
 			
-			MemberService service = new MemberService();
-			MemberDTO x = service.mypage(userid);
+			MemberDTO x = service.mypageMember(userid);
 			String memberEmail = x.getEmail();
 			String [] email = memberEmail.split("@");
 			String memberPhone = x.getPhone();
+			String [] phone = new String[3];
+			phone[0] = memberPhone.substring(0, 3);
+			phone[1] = memberPhone.substring(3, 7);
+			phone[2] = memberPhone.substring(7);
+				
+			request.setAttribute("email", email);
+			request.setAttribute("phone", phone);
+			request.setAttribute("login", x);
+		}else if(agent!=null) {
+			nextPage="mypage.jsp";
+			String userid = agent.getAgntid();
+			AgentDTO x = service.mypageAgent(userid);
+			
+			String memberEmail = x.getAgntemail();
+			String [] email = memberEmail.split("@");
+			String memberPhone = x.getAgntphone();
 			String [] phone = new String[3];
 			phone[0] = memberPhone.substring(0, 3);
 			phone[1] = memberPhone.substring(3, 7);

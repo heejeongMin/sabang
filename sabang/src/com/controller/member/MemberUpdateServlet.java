@@ -27,7 +27,7 @@ public class MemberUpdateServlet extends HttpServlet {
 		if(member!=null) {
 			String userid = member.getUserid();
 			String passwd = request.getParameter("pwdCheck");
-			if(passwd==null) {
+			if(passwd==null || passwd.isEmpty()) {
 				passwd = member.getPasswd();
 			}
 			String phone = request.getParameter("phone1")+request.getParameter("phone2")+request.getParameter("phone3");
@@ -37,11 +37,6 @@ public class MemberUpdateServlet extends HttpServlet {
 			String email = request.getParameter("email1")+"@"+request.getParameter("email2");
 			MemberDTO updateDto = new MemberDTO(userid, passwd, phone, email);
 			
-			
-			System.out.println(userid);
-			System.out.println(passwd);
-			System.out.println(phone);
-			System.out.println(email);
 			
 			MemberService service = new MemberService();
 			int num = service.MemberUpdate(updateDto);
