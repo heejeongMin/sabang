@@ -140,9 +140,9 @@ public class HouseService {
 
 	
 	// 최근 본 House 리스트 보기
-	public List<HouseInfoDTO> rcnHouseInfo(List<String> hCodeList){
+	public List<HashMap<String, Object>> rcnHouseInfo(List<String> hCodeList){
 		SqlSession session = MySqlSessionFactory.getSession();
-		List<HouseInfoDTO> list = null;
+		List<HashMap<String, Object>> list = null;
 		try {
 			HouseDAO dao = new HouseDAO();
 			list = dao.rcnHouseInfo(session,hCodeList);

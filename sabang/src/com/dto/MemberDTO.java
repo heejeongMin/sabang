@@ -10,15 +10,12 @@ public class MemberDTO {
 	private String addr;
 	private String phone;
 	private String email;
-	private String wishlist;
+	private char agent;
 	
 	public MemberDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-
-	
 	public MemberDTO(String userid, String passwd, String phone) {
 		super();
 		this.userid = userid;
@@ -26,10 +23,9 @@ public class MemberDTO {
 		this.phone = phone;
 	}
 	
-	
-	
+
 	public MemberDTO(String userid, String passwd, String ssn, String username, String post, String addr, String phone,
-			String email, String wishlist) {
+			String email, char agent) {
 		super();
 		this.userid = userid;
 		this.passwd = passwd;
@@ -39,9 +35,8 @@ public class MemberDTO {
 		this.addr = addr;
 		this.phone = phone;
 		this.email = email;
-		this.wishlist = wishlist;
+		this.agent = agent;
 	}
-
 	public MemberDTO(String userid, String passwd, String ssn, String username, String post, String addr, String phone,
 			String email) {
 		super();
@@ -122,19 +117,17 @@ public class MemberDTO {
 		this.email = email;
 	}
 
-	public String getWishlist() {
-		return wishlist;
+	public char getAgent() {
+		return agent;
 	}
-
-	public void setWishlist(String wishlist) {
-		this.wishlist = wishlist;
+	public void setAgent(char agent) {
+		this.agent = agent;
 	}
-
 	@Override
 	public String toString() {
 		return "MemberDTO [userid=" + userid + ", passwd=" + passwd + ", ssn=" + ssn + ", username=" + username
-				+ ", post=" + post + ", addr=" + addr + ", phone=" + phone + ", email=" + email + ", wishlist="
-				+ wishlist + "]";
+				+ ", post=" + post + ", addr=" + addr + ", phone=" + phone + ", email=" + email + ", agent=" + agent
+				+ "]";
 	}
 
 	

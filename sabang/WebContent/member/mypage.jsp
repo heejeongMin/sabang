@@ -165,29 +165,12 @@
 </script>
 
 <form action="MemberUpdateServlet" method="post" >
-<c:if test='${login["class"].simpleName.equals("MemberDTO")}'>
-	<c:set var="member" value="${login}"/>
-</c:if>
-<c:if test='${login["class"].simpleName.equals("AgentDTO")}'>
-	<c:set var="agent" value="${login}"/>
-</c:if>
-
-	<c:if test="${!(empty member)}">
-		<input type="hidden" value="${member.userid}" name="memberid"/>
-	</c:if>
-	<c:if test="${!(empty agent)}">
-		<input type="hidden" value="${agent.agntid}" name="agentid"/>
-	</c:if>
+		<input type="hidden" value="${login.userid}" name="memberid"/>
 	
  <table border="1">
 		<tr>
 			<th>이름</th>
-			<c:if test="${!(empty member)}">
-					<td>${member.username}</td>
-			</c:if>
-			<c:if test="${!(empty agent)}">
-				<td>${agent.agntname}</td>
-			</c:if>
+			<td>${login.username}</td>
 		</tr>
 		<tr>
 			<th>이메일</th>

@@ -7,9 +7,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.6/js/swiper.min.js"></script>
   <!-- Initialize Swiper -->
 <div id="wrap">
+<c:set var="HouseInfo" value="${houseInfoList}"/>
 <a href="InterestListServlet?iCategory=rcnlist">최근 본 방</a>
 <a href="InterestListServlet?iCategory=wishlist">찜한 방</a>
-<h1>최근 본 방<span id="noOfHouse">${fn:length(newList)}</span>건</h1>
+<h1>최근 본 방<span id="noOfHouse">${fn:length(houseInfoList)}</span>건</h1>
   <!-- Swiper -->
   <div class="swiper-container" style="width:880px; margin-left:0; height: 360px">
     <div class="swiper-wrapper">
@@ -54,3 +55,4 @@
     <!-- Add Pagination -->
     <div class="swiper-pagination" ></div>
   </div>
+</div>

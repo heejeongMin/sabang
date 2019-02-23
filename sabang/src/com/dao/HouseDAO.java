@@ -101,8 +101,8 @@ public class HouseDAO {
 	}
 	
 	// 최근 본 House 리스트 보기
-	public List<HouseInfoDTO> rcnHouseInfo(SqlSession session, List<String> hCodeList){
-		List<HouseInfoDTO> list = session.selectList("HouseMapper.rcnHouseList", hCodeList);
+	public List<HashMap<String, Object>> rcnHouseInfo(SqlSession session, List<String> hCodeList){
+		List<HashMap<String, Object>> list = session.selectList("HouseMapper.rcnHouseList", hCodeList);
 		return list;
 	}
 }

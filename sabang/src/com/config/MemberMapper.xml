@@ -139,13 +139,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    		from member
    		where userid = #{userid}
    	</select>
-   	
-   	
-   	<select id="mypageAgent" parameterType="string" resultType="AgentDTO">
-   		select agntid, passwd, agntssn, agntname, agntphone, agntemail
-   		from agent
-   		where agntid = #{userid}
-   	</select>
 
    	
    	<!-- 마이페이지 비밀번호 유효성체크 ajax -->
@@ -155,23 +148,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where userid = #{userid} and passwd = #{passwd}
 	</select>
 	
-	<select id="myPageCheckAgent" parameterType="hashmap" resultType="AgentDTO">
-		select agntid, passwd, agntssn, agntname, agntphone, agntemail
-		from agent
-		where agntid = #{userid} and passwd = #{passwd}
-	</select>
-	
 	
 	<!-- 마이페이지 정보 수정 -->
 	<update id="memberUpdate" parameterType="MemberDTO">
    		update member
    		set passwd = #{passwd}, phone = #{phone}
    		where userid = #{userid}
-   	</update>
-   	
-   	<update id="agentUpdate" parameterType="AgentDTO">
-   		update agent
-   		set passwd = #{passwd}, agntphone = #{agntphone}
-   		where agntid = #{agntid}
    	</update>
 </mapper>

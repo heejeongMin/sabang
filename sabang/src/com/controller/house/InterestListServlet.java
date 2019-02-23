@@ -1,7 +1,9 @@
 package com.controller.house;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -45,9 +47,23 @@ public class InterestListServlet extends HttpServlet {
 		String nextPage=null;
 		if(member!=null) {
 			nextPage="interestList.jsp";
+			String memberid = member.getUserid();
+			// 최근 본 방
+			if(iCategory.equals("rcnlist")) {
+				List<HouseRcnlistDTO> rcnList = hService.selectRcnlist(memberid);
+				List<String> hCodeList = new ArrayList<>();
+				for(HouseRcnlistDTO rcnDto : rcnList) {
+					if(rcnDto.getUserid().equals(memberid)) {
+						hCodeList.add(rcnDto.getHcode());
+					}
+				}
+			List<HashMap<String, Object>> houseInfoList = hService.rcnHouseInfo(hCodeList);
+			request.setAttribute("houseInfoList", houseInfoList);
 			
-			
-			
+			// 찜리스트
+			}else if(iCategory.equals("wishlist")) {
+										
+			}
 		}else if(agent!=null) {
 			nextPage="interestList.jsp";
 			String agentid = agent.getAgntid();
@@ -64,7 +80,7 @@ public class InterestListServlet extends HttpServlet {
 						}
 					}
 				}
-				List<HouseInfoDTO> houseInfoList = hService.rcnHouseInfo(hCodeList);
+				List<HashMap<String, Object>> houseInfoList = hService.rcnHouseInfo(hCodeList);
 				request.setAttribute("houseInfoList", houseInfoList);
 			// 찜리스트
 			}else if(iCategory.equals("wishlist")) {

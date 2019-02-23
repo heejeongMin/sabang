@@ -29,9 +29,8 @@ public class MemberPwdCheckServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		MemberDTO member = (MemberDTO)session.getAttribute("memberInfo");
-		AgentDTO agent = (AgentDTO)session.getAttribute("agentInfo");
-		String nextPage=null;
 		
+		String nextPage=null;
 		if(member!=null) {
 			String memberid = member.getUserid();
 				map.put("userid", memberid);
@@ -40,7 +39,6 @@ public class MemberPwdCheckServlet extends HttpServlet {
 				if(member.getPasswd().equals(passwd)) {
 					member = service.myPageCheckMember(map);
 				}
-			
 			
 			String mesg = "비밀번호 불일치";
 			if(member != null) {
@@ -52,25 +50,6 @@ public class MemberPwdCheckServlet extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.print(mesg);
 			
-		}else if(agent!=null) {
-			String agentid = agent.getAgntid();
-				map.put("userid", agentid);
-				map.put("passwd", passwd);
-				
-			if(agent.getPasswd().equals(passwd)) {
-				agent = service.myPageCheckAgent(map);
-			}
-				
-			String mesg = "비밀번호 불일치";
-			if(agent != null){
-				if(agent.getPasswd().equals(passwd)) {
-					mesg = "비밀번호 일치";
-				};
-			}
-			
-			response.setContentType("type/text;charset=utf-8");
-			PrintWriter out = response.getWriter();
-			out.print(mesg);
 		}else {
 			nextPage="LoginUIServlet";
 			request.setAttribute("mesg", "로그인이 필요한 작업입니다.");
