@@ -5,6 +5,7 @@ div.rangeWrap{ height: 50px; width:350px; padding: 0 10px 0 10px; color: darkblu
 ul{list-style:none;}
 ul#filterList{ display:inline-block; margin-top:0; }
 
+
 li.filterOpt{ margin-right: 20px; border-radius:10px; padding: 4px 8px 8px 8px; background-color: darkblue; color: white; font-weight: bold; cursor: pointer; }
 ul.sublist{ display: none; background-color: white; color: darkblue; padding:5px 5px 8px 5px ; margin-top: 15px; position: absolute; float: left; box-shadow: 1px 1px 3px 3px #888888; }
 
@@ -17,6 +18,16 @@ span.endValue{ position: absolute; left: 300px; }
 span.searchRange{ float:right; margin-top: -40px; }
  
  
+ul#filterListRgn{ 
+    padding: 10px;
+    width: 300px;
+    float: right;
+    margin-right: 100px;	
+	
+	}
+li.filterRgn{ padding-right: 20px; color: white; font-weight: bold; cursor: pointer; }
+ul#rgn{width:80px;}
+li{ display : inline-block}
  
  /*******************슬라이더 스타일 *****************/
  .slider {
