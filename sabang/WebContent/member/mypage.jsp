@@ -144,6 +144,7 @@
 	   	// 업데이트
 	   	$("#updateSubmit").on("click",function(event){
 	   		var pwdCR= $("#pwdCheckResult").text();
+	   		
 	   		if($("#passwd").val().length==0){ 			
 	   			event.preventDefault();
 	   			alert("비밀번호를 입력하세요.");
@@ -164,29 +165,18 @@
 </script>
 
 <form action="MemberUpdateServlet" method="post" >
-<c:if test='${login["class"].simpleName.equals("MemberDTO")}'>
-	<c:set var="member" value="${login}"/>
-</c:if>
-<c:if test='${login["class"].simpleName.equals("AgentDTO")}'>
-	<c:set var="agent" value="${login}"/>
-</c:if>
-
-	<c:if test="${!(empty member)}">
-		<input type="hidden" value="${member.userid}" name="userid"/>
-	</c:if>
-	<c:if test="${!(empty agent)}">
-		<input type="hidden" value="${agent.agntid}" name="userid"/>
-	</c:if> 
+		<input type="hidden" value="${login.userid}" name="memberid"/>
 	
  <table border="1">
 		<tr>
 			<th>이름</th>
-			<c:if test="${!(empty member)}">
-					<td>${member.username}</td>
-			</c:if>
-			<c:if test="${!(empty agent)}">
-				<td>${agent.agntname}</td>
-			</c:if>
+			<td>${login.username}</td>
+		</tr>
+		<tr>
+			<th>이메일</th>
+			<td>
+			<input type="text" name="email1" value="${email}" size="30" readonly/>
+			</td>
 		</tr>
 		<tr>
 			<th>전화번호</th>
@@ -208,19 +198,6 @@
 				<input type="text" id="phnConfirmNum"/>
 				<input type="button" id="phnConfirm" value="인증번호 확인"/>
 				<span style="color:red" id="phnConfirmCheckNum"></span>
-			</td>
-		</tr>
-		<tr>
-			<th>이메일</th>
-			<td>
-			<input type="text" name="email1" value="${email[0]}">@
-			<input type="text" name="email2" placeholder="직접입력" id="email2" value="${email[1]}">
-				<select id="emailSelect">
-					<option value="">-- 직접 입력 --</option>
-					<option value="daum.net">daum.net</option>
-					<option value="naver.com">naver.com</option>
-					<option value="google.com">google.com</option>
-				</select>
 			</td>
 		</tr>
 		<tr>

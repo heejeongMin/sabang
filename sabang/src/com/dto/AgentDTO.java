@@ -13,6 +13,16 @@ public class AgentDTO {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	public AgentDTO(String agntid, String passwd, String agntphone) {
+		super();
+		this.agntid = agntid;
+		this.passwd = passwd;
+		this.agntphone = agntphone;
+	}
+
+
 	public AgentDTO(String agntid, String passwd, String agntssn, String agntname, String agntphone, String agntemail,
 			String hcode) {
 		super();

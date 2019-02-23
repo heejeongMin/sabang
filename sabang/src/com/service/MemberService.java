@@ -211,22 +211,37 @@ public class MemberService {
 		return dto;
 	}
 	
-	/*
+	
 	public MemberDTO myPageCheckMember(HashMap<String, String> map) {
 		SqlSession session = MySqlSessionFactory.getSession();
-		MemberDTO checkMbrPw = null;
+		MemberDTO mDto = null;
 		try {
 			MemberDAO dao = new MemberDAO();
-			checkMbrPw = dao.myPageCheckMember(session, map);
+			mDto = dao.myPageCheckMember(session, map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			session.close();
 		}
-		return checkMbrPw;
-	}// end checkMbrPw
-	*/
-		
+		return mDto;
+	}
+	
+	
+	public AgentDTO myPageCheckAgent(HashMap<String, String> map) {
+		SqlSession session = MySqlSessionFactory.getSession();
+		AgentDTO aDto = null;
+		try {
+			MemberDAO dao = new MemberDAO();
+			aDto = dao.myPageCheckAgent(session, map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return aDto;
+	}
+	
+	
 	public int MemberUpdate(MemberDTO dto) {
 		SqlSession session = MySqlSessionFactory.getSession();
 		int n = 0;
@@ -240,4 +255,17 @@ public class MemberService {
 		return n;
 	}
 	
+	
+	public int AgentUpdate(AgentDTO dto) {
+		SqlSession session = MySqlSessionFactory.getSession();
+		int n = 0;
+		try {
+			MemberDAO dao = new MemberDAO();
+			n = dao.AgentUpdate(session, dto);
+			session.commit();
+		}finally {
+			session.close();
+		}
+		return n;
+	}
 }

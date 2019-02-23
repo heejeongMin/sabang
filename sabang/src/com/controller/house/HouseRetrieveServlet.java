@@ -49,7 +49,7 @@ public class HouseRetrieveServlet extends HttpServlet {
 			List<HouseRcnlistDTO> list = service.selectRcnlist(userid);
 			if(list.size() != 0) {
 				for(HouseRcnlistDTO rcn : list) {
-					history.put(rcn.getnum(), rcn.getgCode());
+					history.put(rcn.getnum(), rcn.getHcode());
 					userRcnList.add(rcn.getnum());
 				}
 				int n = service.deleteRcnlist(userRcnList);
@@ -59,7 +59,7 @@ public class HouseRetrieveServlet extends HttpServlet {
 			if(history.size()==0) {//없으면 map 새로 생성하고, 값 새로 저장
 				history.put(System.currentTimeMillis(), hcode);
 				session.setAttribute("history", history);
-			}else if(history.size() > 0 && history.size() < 4 ){//map은 있는데 아직 3개 다 안찬경우
+			}else if(history.size() > 0 && history.size() < 7 ){//map은 있는데 아직 6개 다 안찬경우
 				Long[] keys = new Long[history.size()];
 				String[] values = new String[history.size()];
 				int index=0;
@@ -78,7 +78,7 @@ public class HouseRetrieveServlet extends HttpServlet {
 				session.setAttribute("history", history);
 				
 				Set<Long> keySet = history.keySet();
-				if(keySet.size()>3) {
+				if(keySet.size()>6) {
 					long oldest = Long.MAX_VALUE;
 					for(long key: keySet) { 
 						oldest = (oldest < key)? oldest : key;

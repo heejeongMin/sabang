@@ -22,7 +22,6 @@ public class MemberUpdateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		MemberDTO member = (MemberDTO)session.getAttribute("memberInfo");
-		AgentDTO agent = (AgentDTO)session.getAttribute("agentInfo");
 		String nextPage=null;
 		if(member!=null) {
 			String userid = member.getUserid();
@@ -34,12 +33,11 @@ public class MemberUpdateServlet extends HttpServlet {
 			if(phone.equals("nullnullnull")) {
 				phone = member.getPhone();
 			}
-			String email = request.getParameter("email1")+"@"+request.getParameter("email2");
-			MemberDTO updateDto = new MemberDTO(userid, passwd, phone, email);
+			MemberDTO updateMDto = new MemberDTO(userid, passwd, phone);
 			
 			
 			MemberService service = new MemberService();
-			int num = service.MemberUpdate(updateDto);
+			int num = service.MemberUpdate(updateMDto);
 			nextPage="MyPageServlet";
 			request.setAttribute("mesg", "성공적으로 업데이트 되었습니다.");
 			RequestDispatcher dis = request.getRequestDispatcher(nextPage);

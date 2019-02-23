@@ -106,7 +106,7 @@ public class HouseService {
 	
 	
 	///////////////////////////////////////////////////////////
-	// 최근 본 House
+	// 최근 본 House 테이블 보기
 	public List<HouseRcnlistDTO> selectRcnlist(String userid){
 		SqlSession session = MySqlSessionFactory.getSession();
 		List<HouseRcnlistDTO> list = null;
@@ -120,18 +120,16 @@ public class HouseService {
 	}
 	
 	
-	
+	// 최근 본 House DB 데이터 저장
 	public int rcnListAllDone(List<HouseRcnlistDTO> rList){
 		SqlSession session = MySqlSessionFactory.getSession();
 		int n = 0;
 		try {
 			HouseDAO dao = new HouseDAO();
 			n = dao.rcnListAllDone(session,rList);
-			// n = dao.cartAllDel(session, numList);
 			session.commit();
 		}catch(Exception e) {
 			e.printStackTrace();
-			// session.rollback();
 		}finally {
 			session.close();
 		}
@@ -139,18 +137,16 @@ public class HouseService {
 	}
 	
 	
-	
+	// 최근 본 House DB 데이터 삭제
 	public int deleteRcnlist(List<Long> userRcnList) {
 		SqlSession session = MySqlSessionFactory.getSession();
 		int n = 0;
 		try {
 			HouseDAO dao = new HouseDAO();
 			n = dao.deleteRcnlist(session,userRcnList);
-			// n = dao.cartAllDel(session, numList);
 			session.commit();
 		}catch(Exception e) {
 			e.printStackTrace();
-			// session.rollback();
 		}finally {
 			session.close();
 		}
@@ -158,4 +154,19 @@ public class HouseService {
 	}
 
 	
+	// 최근 본 House 리스트 보기
+	public List<HashMap<String, Object>> rcnHouseInfo(List<String> hCodeList){
+		SqlSession session = MySqlSessionFactory.getSession();
+		List<HashMap<String, Object>> list = null;
+		try {
+			HouseDAO dao = new HouseDAO();
+			list = dao.rcnHouseInfo(session,hCodeList);
+			session.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return list;
+	}
 }

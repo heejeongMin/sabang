@@ -3,7 +3,7 @@ package com.dto;
 public class HouseRcnlistDTO {
 	private Long num;
 	private String userid;
-	private String gCode;
+	private String hcode;
 	
 	
 	public HouseRcnlistDTO() {
@@ -12,11 +12,11 @@ public class HouseRcnlistDTO {
 	}
 
 
-	public HouseRcnlistDTO(Long num, String userid, String gCode) {
+	public HouseRcnlistDTO(Long num, String userid, String hcode) {
 		super();
 		this.num = num;
 		this.userid = userid;
-		this.gCode = gCode;
+		this.hcode = hcode;
 	}
 
 
@@ -40,18 +40,18 @@ public class HouseRcnlistDTO {
 	}
 
 
-	public String getgCode() {
-		return gCode;
+	public String getHcode() {
+		return hcode;
 	}
 
 
-	public void setgCode(String gCode) {
-		this.gCode = gCode;
+	public void setHcode(String gCode) {
+		this.hcode = gCode;
 	}
 
 
 	@Override
 	public String toString() {
-		return "RcnlistDTO [num=" + num + ", userid=" + userid + ", gCode=" + gCode + "]";
+		return "RcnlistDTO [num=" + num + ", userid=" + userid + ", hcode=" + hcode + "]";
 	}
 }
