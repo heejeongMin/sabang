@@ -16,7 +16,7 @@
 }
 
 .main-element {
-	margin-bottom: .7rem;
+	margin-bottom: 2rem;
 	width: 100%;
 	height: 100px;
 	background: white;
@@ -28,33 +28,40 @@
 }
 
 #rightElement {
-	width: 53%;
-	height: 220px;
+	width: 56%;
+	height: 500px;
 	background: orange;
-}
-#leftElement {
-	width: 46%;
-	height: 220px;
-	background: orange;
-}
-#rightElement > div{
-	background: silver;
-	height : 48%;
-}
-#rightElement > :first-child{
-	background: white;
-	height : 48%;
-	margin-bottom : 10px;
 }
 
+#leftElement {
+	width: 43%;
+	height: 600px;
+	background: orange;
+}
+
+/* houseImg, agent */
+#rightElement > div{
+	background: silver;
+	padding : 10px;
+}
+
+/* houseImg */
+#rightElement > :first-child{
+	margin-bottom : 2rem;
+}
+
+/* housePrice, board */
 #leftElement > div{
 	background: silver;
 	height : 48%;
 }
-#leftElement > :first-child{
+
+
+/* housePrice */
+#leftElement > :first-child{ 
 	background: white;
 	height : 48%;
-	margin-bottom : 10px;
+	margin-bottom : .3rem;
 }
 
 </style>
