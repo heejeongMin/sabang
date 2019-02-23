@@ -82,22 +82,27 @@ public class HouseDAO {
 	
 	
 	///////////////////////////////////////////////////////////
-	// 최근 본 House
+	// 최근 본 House 테이블 보기
 	public List<HouseRcnlistDTO> selectRcnlist(SqlSession session, String userid){
 		List<HouseRcnlistDTO> list = session.selectList("HouseMapper.rcnList", userid);
 		return list;
 	}
 	
-	
-	
+	// 최근 본 House DB 데이터 저장
 	public int rcnListAllDone(SqlSession session, List<HouseRcnlistDTO> rList) {
 		int n = session.insert("HouseMapper.rcnInsertAll", rList);
 		return n;
 	}
 	
+	// 최근 본 House DB 데이터 삭제
 	public int deleteRcnlist(SqlSession session,List<Long> userRcnList) {
 		int n = session.delete("HouseMapper.rcnDelete",userRcnList);
 		return n;
 	}
-
+	
+	// 최근 본 House 리스트 보기
+	public List<HouseInfoDTO> rcnHouseInfo(SqlSession session, List<String> hCodeList){
+		List<HouseInfoDTO> list = session.selectList("HouseMapper.rcnHouseList", hCodeList);
+		return list;
+	}
 }

@@ -355,7 +355,7 @@
 			</when>
 		</choose>
 	</select>
-		<!-- House 자세히보기 -->
+	<!-- House 자세히보기 -->
    	<select id="houseRetrieve" parameterType="String" resultType="HouseInfoDTO">
    		select hcode, htype, rtype, hname, addr, coordX, coordY, area, whlflr, flr, room, batr
    			cntwish, himage, hetc, registerDate
@@ -365,15 +365,15 @@
 	
 	
 	
-	<!-- 최근 본 House -->
+	<!-- 최근 본 House 테이블보기 -->
 	<select id="rcnList" parameterType="string" resultType="HouseRcnlistDTO">
    		select num,userid,hcode
    		from rcnlist
    		where userid = #{userid}
    	</select>
    	
-   	
-   	<insert id="rcnInsertAll" parameterType="arraylist">
+   	<!-- 최근 본 House DB 데이터 저장 -->
+   	<insert id="rcnInsertAll" parameterType="list">
     	insert all
     		<foreach item="item" collection="list" >
        		 	into rcnlist (num, userid, hcode)
@@ -382,9 +382,8 @@
   			select * from dual
     </insert>
     
-    
-    
-   	<delete id="rcnDelete" parameterType="list">
+    <!-- 최근 본 House DB 데이터 삭제 -->
+   	<delete id="rcnDelete" parameterType="list">                                                                                                                                                                                                                                                                                                                                                    	
    		delete 
     	from rcnlist
     	<where>
@@ -394,6 +393,18 @@
   			</foreach>
     	</where>
    	</delete>
-	
+   	
+   	<!-- 최근 본 House 리스트 보기 -->
+   	<select id="" parameterType="list" resultType="HouseInfoDTO">
+   		select hcode, htype, rtype, hname, addr, coordX, coordY, area, whlflr, flr, room, batr
+   			cntwish, himage, hetc, registerDate
+   		from house_info
+   		<where>
+    		hcode in
+    		<foreach item="item" collection="list" open="(" separator="," close=")">
+       		 	#{item}
+  			</foreach>
+    	</where>
+   	</select>
 </mapper>
 
