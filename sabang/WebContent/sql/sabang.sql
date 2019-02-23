@@ -101,27 +101,20 @@ create table wdMbr
 
 -- ** board
 
---board 
+--board -- hcode를 fk로 지정한 이유 : 각 house의 상세 페이지에 보드가 들어가므로 hcode 필요
 create table board
 ( 
 pcode varchar2(4) primary key,
-idx number(3) not null, -- seq
+hcode varchar2(6), 
 pdate DATE DEFAULT SYSDATE, -- post date 게시일
-category varchar2(20) not null,
 ppwd varchar2(4) not null, --post password. 계정 비밀번호와 다름. 4byte
 phone varchar2(11) not null,
 title varchar2(30) not null,
 content varchar2(4000) not null, --max 2000자
 filename varchar2(200), -- 업로드 파일명 
 CONSTRAINT fk_brd_pn FOREIGN KEY (phone)REFERENCES member (phone) on delete cascade -- 답변 여부 문자 메세지
+CONSTRAINT fk_brd_cd FOREIGN KEY (hcode)REFERENCES house_info (hcode) on delete cascade
 );     
-
---sequence
-create sequence board_seq
-start with 1
-increment by 1;
-
-
 
 
 create table RCNLIST
