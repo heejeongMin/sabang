@@ -4,4 +4,4 @@
 <a href="#">연락한 부동산</a>
 <a href="#">내가 쓴 리뷰</a>
 <a href="RcnListServlet">관심목록</a>
-<a href="#">매물 관리</a>
+<a href="HouseManagingServlet">매물 관리</a>

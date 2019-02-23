@@ -4,13 +4,23 @@
 
 <mapper namespace="HouseMapper">
 
+<!-- housePanel.jsp에서 agent별 매물 리스트 -->
+	<select id="houseByAgent" parameterType="string" resultType="hashmap">
+		select hcode, rtype, addr, deposit, mrent, registerdate
+		from house_info join house_price using(hcode)
+		where agntid = #{agntid}
+	</select>
+
+
+<!-- houseList.jsp 검색해서 나오는 매물 w paging  -->
 	<select id="searchList" parameterType="string" resultType="hashmap">
 		select hcode, htype, rtype, hname, area, flr, hetc, deposit, mrent, yrent, maintc
 		from house_info join house_price using(hcode)
 		where addr like '%'||#{search}||'%' or hname like
 		'%'||#{search}||'%'
 	</select>
-
+	
+<!-- houseList.jsp  검색해서 나오는 개수 for paging  -->
 	<select id="totalListBySearch" parameterType="string" resultType="int">
 		select count(*)
 		from house_info join house_price using(hcode)
@@ -18,12 +28,14 @@
 		'%'||#{search}||'%'
 	</select>
 
+<!-- houseOverview.jsp에서 신매물 최근 3일기준 w/o paging  -->
 	<select id="retrieveNewItems" resultType="hashmap">
 		select hcode, htype, rtype, hname, area, flr, hetc, deposit, mrent, yrent, maintc
 		from house_info join house_price using(hcode)
 		where registerdate > sysdate-3
 	</select>
 
+<!-- houseOverview.jsp에서 핫매물 cntwish 기준   w/o paging -->
 	<select id="retrieveHotItems" resultType="hashmap">
 		select hcode, htype, rtype, hname, area, flr, hetc, deposit, mrent, yrent, maintc
 		from house_info join house_price using(hcode)
@@ -32,7 +44,7 @@
 		order by cntwish desc
 	</select>
 
-
+<!-- houseOverview.jsp&houseList.jsp 에서 필터 버튼으로 리스트 불러올때 w paging  -->
 	<select id="listByFilter" parameterType="hashmap" resultType="hashmap">
 		select hcode, htype, rtype, hname, area, flr, hetc, deposit, mrent, yrent, maintc
 		from house_info join house_price using(hcode)
@@ -190,6 +202,7 @@
 		</choose>
 	</select>
 
+<!-- houseOverview.jsp&houseList.jsp 에서 필터 버튼으로 리스트 불로오는 개수 for paging  -->
 	<select id="totalListByFilter" parameterType="hashmap" resultType="int">
 		select count(*)
 		from house_info join house_price using(hcode)
@@ -291,16 +304,7 @@
 				</foreach>
 				<if test="!(htype.isEmpty())">
 					and htype in
-	
-	
-	
-	
 					<foreach item="item" collection="htype" open="(" separator="," close=")">
-	
-	
-	
-	
-	
 							#{item}
 					</foreach>
 				</if>
@@ -355,6 +359,8 @@
 			</when>
 		</choose>
 	</select>
+	
+	
 		<!-- House 자세히보기 -->
    	<select id="houseRetrieve" parameterType="String" resultType="HouseInfoDTO">
    		select hcode, htype, rtype, hname, addr, coordX, coordY, area, whlflr, flr, room, batr

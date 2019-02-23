@@ -25,10 +25,10 @@ form#panel{
 <button id="registerBtn">매물 등록</button>
 <button id="updateBtn">매물 수정</button>
 <ul>
-<c:forEach var="" items="">
+<c:forEach var="house" items="${houseByAgent}">
 	<li>
-		<input type="checkbox" name="check" value="">
-		
+		<input type="checkbox" name="check" value="${house.hcode}">
+		${house.hcode} ${house.rtype} ${house.addr} ${house.deposit} ${house.mrent} ${registerdate}
 	</li>
 </c:forEach>
 </ul>

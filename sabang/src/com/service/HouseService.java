@@ -15,7 +15,8 @@ import com.dto.HouseRcnlistDTO;
 
 public class HouseService {
 	private static final Logger logger = LoggerFactory.getLogger(HouseService.class);
-	public HashMap<String, Object> searchList(String search, int curPage){
+	
+	public HashMap<String, Object> searchList(String search, int curPage){//검색에 의한 결과 리스트 페이징 처리
 		SqlSession session = MySqlSessionFactory.getSession();
 		HashMap<String, Object> pagingMap = null;
 		try {
@@ -29,7 +30,7 @@ public class HouseService {
 		return pagingMap;
 	}//searchList
 	
-	public List<HashMap<String, Object>> retrieveNewItems(){
+	public List<HashMap<String, Object>> retrieveNewItems(){//신매물 리스트
 		SqlSession session = MySqlSessionFactory.getSession();
 		List<HashMap<String, Object>> list = null;
 		try {
@@ -43,7 +44,7 @@ public class HouseService {
 		return list;
 	}//retrieveNewItems
 	
-	public List<HashMap<String, Object>> retrieveHotItems(){
+	public List<HashMap<String, Object>> retrieveHotItems(){//핫매물 리스트
 		SqlSession session = MySqlSessionFactory.getSession();
 		List<HashMap<String, Object>> list = null;
 		try {
@@ -57,7 +58,7 @@ public class HouseService {
 		return list;
 	}//retrieveHotItems
 	
-	public HashMap<String, Object> listByFilter(HashMap<String, List<String>> queryMap, int curPage){
+	public HashMap<String, Object> listByFilter(HashMap<String, List<String>> queryMap, int curPage){//필터에 의한 리스트
 		SqlSession session = MySqlSessionFactory.getSession();
 		HashMap<String, Object> map = null;
 		
@@ -71,6 +72,20 @@ public class HouseService {
 		}
 		return map;
 	}//retrieveHotItems
+	
+	public List<HashMap<String, Object>> houseByAgent(String agntid){//listByFilter에서만 사용해서 private 처리
+		SqlSession session = MySqlSessionFactory.getSession();
+		List<HashMap<String, Object>> list = null;
+		try {
+			HouseDAO dao = new HouseDAO();
+			list = dao.houseByAgent(session, agntid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return list;
+	}//houseByAgent
 	
 	
 	

@@ -70,6 +70,10 @@ public class HouseDAO {
 	}//totalListByFilter
 	
 	
+	public List<HashMap<String, Object>> houseByAgent(SqlSession session, String agntid){
+		return session.selectList("HouseMapper.houseByAgent", agntid);
+	}
+	
 	
 	
 	///////////////////////////////////////////////////////////
