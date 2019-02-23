@@ -52,10 +52,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 
 	 
 	<!-- 로그인 -->
-	<!-- login수정  -->
 	
 	<select id="login" parameterType="hashmap" resultType="MemberDTO">
-		select userid,passwd, ssn, username,post,addr, phone, email
+		select userid,passwd, ssn, username,post,addr, phone, email, agent
 		from member
 		where userid = #{userid} 
 		and passwd = #{passwd}
