@@ -19,12 +19,11 @@ public class MemberDTO {
 
 
 	
-	public MemberDTO(String userid, String passwd, String phone, String email) {
+	public MemberDTO(String userid, String passwd, String phone) {
 		super();
 		this.userid = userid;
 		this.passwd = passwd;
 		this.phone = phone;
-		this.email = email;
 	}
 	
 	

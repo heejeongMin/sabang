@@ -34,12 +34,30 @@ public class MemberUpdateServlet extends HttpServlet {
 			if(phone.equals("nullnullnull")) {
 				phone = member.getPhone();
 			}
-			String email = request.getParameter("email1")+"@"+request.getParameter("email2");
-			MemberDTO updateDto = new MemberDTO(userid, passwd, phone, email);
+			MemberDTO updateMDto = new MemberDTO(userid, passwd, phone);
 			
 			
 			MemberService service = new MemberService();
-			int num = service.MemberUpdate(updateDto);
+			int num = service.MemberUpdate(updateMDto);
+			nextPage="MyPageServlet";
+			request.setAttribute("mesg", "성공적으로 업데이트 되었습니다.");
+			RequestDispatcher dis = request.getRequestDispatcher(nextPage);
+			dis.forward(request, response);
+		}else if(agent!=null) {
+			String userid = agent.getAgntid();
+			String passwd = request.getParameter("pwdCheck");
+			if(passwd==null || passwd.isEmpty()) {
+				passwd = agent.getPasswd();
+			}
+			String phone = request.getParameter("phone1")+request.getParameter("phone2")+request.getParameter("phone3");
+			if(phone.equals("nullnullnull")) {
+				phone = agent.getAgntphone();
+			}
+			AgentDTO updateADto = new AgentDTO(userid, passwd, phone);
+			
+			
+			MemberService service = new MemberService();
+			int num = service.AgentUpdate(updateADto);
 			nextPage="MyPageServlet";
 			request.setAttribute("mesg", "성공적으로 업데이트 되었습니다.");
 			RequestDispatcher dis = request.getRequestDispatcher(nextPage);

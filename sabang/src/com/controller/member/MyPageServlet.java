@@ -34,8 +34,7 @@ public class MyPageServlet extends HttpServlet {
 			String userid = member.getUserid();
 			
 			MemberDTO x = service.mypageMember(userid);
-			String memberEmail = x.getEmail();
-			String [] email = memberEmail.split("@");
+			String email = x.getEmail();
 			String memberPhone = x.getPhone();
 			String [] phone = new String[3];
 			phone[0] = memberPhone.substring(0, 3);
@@ -50,8 +49,7 @@ public class MyPageServlet extends HttpServlet {
 			String userid = agent.getAgntid();
 			AgentDTO x = service.mypageAgent(userid);
 			
-			String memberEmail = x.getAgntemail();
-			String [] email = memberEmail.split("@");
+			String email = x.getAgntemail();
 			String memberPhone = x.getAgntphone();
 			String [] phone = new String[3];
 			phone[0] = memberPhone.substring(0, 3);

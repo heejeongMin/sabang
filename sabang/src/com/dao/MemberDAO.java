@@ -88,14 +88,24 @@ public class MemberDAO {
 		return n;
 	}
 	
+	public MemberDTO myPageCheckMember(SqlSession session, HashMap<String, String> map) {
+		MemberDTO mDto = session.selectOne("MemberMapper.myPageCheckMember", map);
+		return mDto;
+	}
+	
+	public AgentDTO myPageCheckAgent(SqlSession session, HashMap<String, String> map) {
+		AgentDTO aDto = session.selectOne("MemberMapper.myPageCheckAgent", map);
+		return aDto;
+	}
+	
+	
 	public int MemberUpdate(SqlSession session, MemberDTO dto) {
 		int n = session.update("MemberMapper.memberUpdate",dto);
 		return n;
 	}
-	/*
-	public MemberDTO myPageCheckMember(SqlSession session, HashMap<String, String> map) {
-		MemberDTO checkMbrPw = session.selectOne("MemberMapper.checkMbrPw", map);
-		return checkMbrPw;
+	
+	public int AgentUpdate(SqlSession session, AgentDTO dto) {
+		int n = session.update("MemberMapper.agentUpdate",dto);
+		return n;
 	}
-	*/
 }
