@@ -30,7 +30,6 @@ public class InterestListServlet extends HttpServlet {
 		//로그인 정보 확인
 		HttpSession session = request.getSession();
 		MemberDTO member = (MemberDTO)session.getAttribute("memberInfo");
-		AgentDTO agent = (AgentDTO)session.getAttribute("agentInfo");
 		
 		
 		
@@ -57,34 +56,12 @@ public class InterestListServlet extends HttpServlet {
 						hCodeList.add(rcnDto.getHcode());
 					}
 				}
-			List<HashMap<String, Object>> houseInfoList = hService.rcnHouseInfo(hCodeList);
-			request.setAttribute("houseInfoList", houseInfoList);
+				List<HashMap<String, Object>> houseInfoList = hService.rcnHouseInfo(hCodeList);
+				request.setAttribute("houseInfoList", houseInfoList);
 			
 			// 찜리스트
 			}else if(iCategory.equals("wishlist")) {
-										
-			}
-		}else if(agent!=null) {
-			nextPage="interestList.jsp";
-			String agentid = agent.getAgntid();
-			System.out.println("agentid"+agentid);
-			// 최근 본 방
-			if(iCategory.equals("rcnlist")) {
-				List<HouseRcnlistDTO> rcnList = hService.selectRcnlist(agentid);
-				List<String> hCodeList = null;
-				for(int i=0 ; i<rcnList.size() ; i++) {
-					for(HouseRcnlistDTO rcnDto : rcnList) {
-						if(rcnDto.getUserid().equals(agentid)) {
-							System.out.println("agenthCode"+rcnDto.getHcode());
-							Arrays.asList(rcnDto.getHcode());
-						}
-					}
-				}
-				List<HashMap<String, Object>> houseInfoList = hService.rcnHouseInfo(hCodeList);
-				request.setAttribute("houseInfoList", houseInfoList);
-			// 찜리스트
-			}else if(iCategory.equals("wishlist")) {
-							
+						
 			}
 		}else {
 			nextPage="LoginUIServlet";
