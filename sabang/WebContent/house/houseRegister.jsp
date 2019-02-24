@@ -55,8 +55,11 @@
 		
 		
 		$("textarea").on("keyup", function(e){//상품설명 글자수 세기
-			console.log($("p#textLength>span"));
 			$("p#textLength>span").text($(e.target).val().length);
+			
+			/* if($("p#textLength>span").text($(e.target).val().length == 250){
+				e.preventDefault();
+			} */
 		});//end textarea onKeyup
 		
 	});//end ready
@@ -103,7 +106,7 @@
 					<tr>
 						<td class="td_title">매물명</td>
 						<td class="td_default" id="updateName" colspan="2" style='padding-left: 30px'>
-							<input type="text" name="gname" placeholder="25자 이내" required>
+							<input type="text" name="gname" placeholder="50자 이내" size=68.5 required>
 						</td>
 					</tr>
 					<tr> <td height="10"></td> </tr>
@@ -111,7 +114,7 @@
 						<td class="td_title">매물설명</td>
 						<td class="td_default" id="updateName" colspan="2" style="padding-left: 30px; text-align: left; position:relative">
 							<textarea cols="70" rows="10" name="gcontent" maxlength="2000" required></textarea>
-							<p id="textLength">(<span>0</span>/2000)</p>
+							<p id="textLength">(<span>0</span>/250)</p>
 						</td>
 					</tr>
 					<tr> <td height="10"></td> </tr>
