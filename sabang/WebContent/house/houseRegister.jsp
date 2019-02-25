@@ -1,4 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%><style type="text/css">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.6/css/swiper.min.css">
+<style type="text/css">
 	form#register{
     	margin-top: 40px;
 	}
@@ -10,13 +12,20 @@
     float: left;
     position: absolute;
     color: lightgrey;
-    left: 460px;
+    left: 430px;
     top: 110px;
+    text-align: right;
 	}
 	textarea{
 		resize: none;
 	}
+	h1#registerH1{
+		text-align: left;
+		color: darkblue;
+		text-shadow: 5px 4px aliceblue;
+	}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.6/js/swiper.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -72,12 +81,19 @@
 		});//end select gcategory change
 		
 		$("form").on("submit", function(e){//submit전 유효성체크
+			console.log(Number.isNaN(Number.parseInt($("input[name=whlflr]").val())));
 			if($("select[name=gcategory]").val()==""){
 				e.preventDefault();
 				alert("상품 카테고리를 선택하여주세요");
-			} else if (Number.isNaN(Number.parseInt($("input[name=gprice]").val()))){//가격은 숫자로 입력
+			}  else if(Number.isNaN(Number.parseInt($("input[name=area]").val()))){
 				e.preventDefault();
-				alert("가격은 숫자로 입력하세요");
+				alert("평수는 숫자로만 입력해주세요.");
+			} else if (Number.isNaN(Number.parseInt($("input[name=flr]").val()))){
+				e.preventDefault();
+				alert("매물층수는 숫자로만 입력해주세요.");
+			} else if (Number.isNaN(Number.parseInt($("input[name=whflr]").val()))){
+				e.preventDefault();
+				alert("건물층수는 숫자로만 입력해주세요.");
 			} else if ($("input[name=gimage]").val().length < 1){
 				e.preventDefault();
 				alert("사진을 등록하여주세요");
@@ -87,105 +103,210 @@
 		
 		$("textarea").on("keyup", function(e){//상품설명 글자수 세기
 			$("p#textLength>span").text($(e.target).val().length);
-			
-			/* if($("p#textLength>span").text($(e.target).val().length == 250){
-				e.preventDefault();
-			} */
 		});//end textarea onKeyup
+		
 		
 	});//end ready
 </script>
-	<form method="POST" enctype="multipart/form-data" action="GoodsRegisterServlet" id="register">
-	<table width="800px" cellspacing="0" cellpadding="0">
-		<tr>
-			<td class="td_default" style="text-align:center;"><font size="5"><b>- 새로운 매물 등록하기 -</b></font> &nbsp;</td>
-		</tr>
-		<tr> <td height="20"> </tr>
-		<tr>
-			<td>
-				<table align="center" width="710" cellspacing="0" cellpadding="0" border="0" style='margin-left: 30px'>
-					<tr> <td height="1" colspan="8" bgcolor="CECECE"></td> </tr>
-					<tr> <td height="10"></td> </tr>
+	<h1 id="registerH1">새로운 매물 등록하기</h1>
+	<form method="POST" enctype="multipart/form-data" action="HouseRegisterServlet" id="register">
+	 	<div class="swiper-container">
+		    <div class="swiper-wrapper">
+		      <div class="swiper-slide">
+		      	<table width="800px" style="margin: 30px 0 0 50px;">
+		      		<tr>
+						<td class="td_default" style="text-align:center;"><font size="5"><b>매물 기본 정보</b></font> &nbsp;</td>
+					</tr>
+					<tr> <td height="20"> </tr>
 					<tr>
-						<td class="td_title">매물타입</td>
-						<td class="td_default update" id="updateName" colspan="2" style='padding-left: 30px;text-align: left;'>
-							<select name="htype">
-								<option value="">선택해주세요</option>	
-								<option value="o">아파트</option>	
-								<option value="t">투룸</option>	
-								<option value="f">오피스텔</option>	
-								<option value="p">아파트</option>	
-							</select>
-						</td>
+						<table align="center" width="710" cellspacing="0" cellpadding="0" border="0" style='margin-left: 100px'>
+							<tr> <td height="1" colspan="8" bgcolor="CECECE"></td> </tr>
+							<tr> <td height="10"></td> </tr>
+							<td class="td_title">매물타입</td>
+							<td class="td_default update" id="updateName" colspan="2" style='padding-left: 30px;text-align: left;'>
+								<select name="htype">
+									<option value="">선택해주세요</option>	
+									<option value="o">아파트</option>	
+									<option value="t">투룸</option>	
+									<option value="f">오피스텔</option>	
+									<option value="p">아파트</option>	
+								</select>
+							</td>
+							<tr> <td height="10"></td> </tr>
+							<tr>
+								<td class="td_title">매물코드</td>
+								<td class="td_default" colspan="2" style='padding-left: 30px' id="hcode">
+									<input type="text" name="hcode" value="" readonly>
+								</td>
+							</tr>
+							<tr> <td height="10"></td> </tr>
+							<tr>
+								<td class="td_title">세타입</td>
+								<td class="td_default update" id="" colspan="2" style='padding-left: 30px;text-align: left;'>
+									<input type="radio" name="rtype" value="월세"><span style="margin-left: -15px;">월세</span>
+									<input type="radio" name="rtype" value="전세" style="float: left; position: relative; left: 50px;"><span style="margin-left: 35px;">전세</span>
+								</td>
+							</tr>
+							<tr> <td height="10"></td> </tr>
+							<tr>
+								<td class="td_title">매물명</td>
+								<td class="td_default" id="" colspan="2" style='padding-left: 30px'>
+									<input type="text" name="hname" placeholder="50자 이내" size=40 required>
+								</td>
+							</tr>
+							<tr> <td height="10"></td> </tr>
+							<tr>
+								<td class="td_title">매물설명</td>
+								<td class="td_default" id="" colspan="2" style="padding-left: 30px; text-align: left; position:relative">
+									<textarea cols="70" rows="10" name="hetc" maxlength="250" required></textarea>
+									<p id="textLength">(<span>0</span>/250)</p>
+								</td>
+							</tr>
+							<tr> <td height="10"></td> </tr>
+							<tr>
+								<td class="td_title">평수</td>
+								<td class="td_red" id="" colspan="2" style='padding-left: 30px; text-align: left;' >
+									<input type="text" name="area" size ="4" style="margin-right: 10px;"> (단위: 제곱미터)
+								</td>
+							</tr>
+							<tr> <td height="10"></td> </tr>
+							<tr>
+								<td class="td_title">층수</td>
+								<td class="td_red" id="" colspan="2"  style='padding-left: 30px; text-align: left;' >
+									<input type="text" name="flr" size="2" placeholder="매물층" style="margin-right:10px;">/
+									<input type="text" name="whflr" size="2" placeholder="건물층" style="position: absolute; margin-left: 10px;">
+								</td>
+							</tr>
+							<tr> <td height="10"></td> </tr>
+							<tr>
+								<td class="td_title">방개수</td>
+								<td class="td_red" id="" colspan="2" style='padding-left: 30px; text-align:left; ' >
+									<input type="text" name="room" size="2" style="margin-right:10px;"> 개
+								</td>
+							</tr>
+							<tr> <td height="10"></td> </tr>
+							<tr>
+								<td class="td_title">욕실개수</td>
+								<td class="td_red" id="" colspan= "2" style='padding-left: 30px; text-align:left;' >
+									<input type="text" name="batr" size="2" style="margin-right:10px;"> 개 
+								</td>
+							</tr>
+							<tr> <td height="10"></td> </tr>
+							<tr> <td class="td_title">주소</td>
+								 <td class="td_red" colspan="2" style='padding-left: 30px' >
+									<input type="text" name="post" id="sample4_postcode" placeholder="우편번호">
+									<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" style="margin: 0 10px;">
+									<input type="text" name="addr" id="sample4_roadAddress" placeholder="도로명주소">
+									<input type="text" id="sample4_jibunAddress" placeholder="지번주소" style="display: none;">
+									<span id="guide"></span>	
+								 </td>
+							</tr>
+							<tr> <td height="10"></td> </tr>
+							<tr>
+								<td class="td_title">사진등록</td>
+								<td class="td_default" colspan="2" style='padding-left: 30px'> 
+									<input type="file" name="himage"/>
+								</td>
+							</tr>
+							<tr> <td height="30"></td> </tr>
+						</table>
 					</tr>
-					<tr> <td height="10"></td> </tr>
+		      	</table>
+		      </div>
+		      <div class="swiper-slide">
+		      	<table width="800px" style="margin: 30px 0 0 50px;">
+		      		<tr>
+						<td class="td_default" style="text-align:center;"><font size="5"><b>매물 가격 정보</b></font> &nbsp;</td>
+					</tr>
+					<tr> <td height="20"> </tr>
 					<tr>
-						<td class="td_title">매물코드</td>
-						<td class="td_default" colspan="2" style='padding-left: 30px' id="hcode">
-							<input type="text" name="hcode" value="" readonly>
-						</td>
+						<table align="center" width="710" cellspacing="0" cellpadding="0" border="0" style='margin-left: 100px'>
+							<tr> <td height="1" colspan="8" bgcolor="CECECE"></td> </tr>
+							<tr> <td height="50"></td> </tr>
+							<tr>
+								<td class="td_title">보증금</td>
+								<td class="td_red" id="" colspan="2" style='padding-left: 30px; text-align: left;' >
+									<input type="text" name="deposit" size ="4" style="margin-right: 10px;"> (단위: 만원)
+								</td>
+							</tr>
+							<tr> <td height="10"></td> </tr>
+							<tr>
+								<td class="td_title">월세</td>
+								<td class="td_red" id="" colspan="2"  style='padding-left: 30px; text-align: left;' >
+									<input type="text" name="mrent" size="4" style="margin-right:10px;"> (단위: 만원)
+								</td>
+							</tr>
+							<tr> <td height="10"></td> </tr>
+							<tr>
+								<td class="td_title">전세</td>
+								<td class="td_red" id="" colspan="2" style='padding-left: 30px; text-align:left; ' >
+									<input type="text" name="yrent" size="4" style="margin-right:10px;"> (단위: 만원)
+								</td>
+							</tr>
+							<tr> <td height="10"></td> </tr>
+							<tr>
+								<td class="td_title">관리비</td>
+								<td class="td_red" id="" colspan="2" style='padding-left: 30px; text-align:left; ' >
+									<input type="text" name="maintc" size="4" style="margin-right:10px;"> (단위: 만원)
+								</td>
+							</tr>
+							<tr> <td height="10"></td> </tr>
+							<tr>
+								<td class="td_title">주차비</td>
+								<td class="td_red" id="" colspan="2" style='padding-left: 30px; text-align:left; ' >
+									<input type="text" name="parkf" size="4" style="margin-right:10px;"> (단위: 만원)
+								</td>
+							</tr>
+						</table>
 					</tr>
-					<tr> <td height="10"></td> </tr>
+		      	</table>
+		      </div>
+		      <div class="swiper-slide">
+		      	     	<table width="800px" style="margin: 30px 0 0 50px;">
+		      		<tr>
+						<td class="td_default" style="text-align:center;"><font size="5"><b>매물 가격 정보</b></font> &nbsp;</td>
+					</tr>
+					<tr> <td height="20"> </tr>
 					<tr>
-						<td class="td_title">세타입</td>
-						<td class="td_default update" id="" colspan="2" style='padding-left: 30px;text-align: left;'>
-							<input type="radio" name="rtype" value="월세"><span style="margin-left: -15px;">월세</span>
-							<input type="radio" name="rtype" value="전세" style="float: left; position: relative; left: 50px;"><span style="margin-left: 35px;">전세</span>
-						</td>
+						<table align="center" width="710" cellspacing="0" cellpadding="0" border="0" style='margin-left: 100px'>
+							<tr> <td height="1" colspan="8" bgcolor="CECECE"></td> </tr>
+							<tr> <td height="50"></td> </tr>
+							<tr>
+								<td class="td_title">옵션유무</td>
+								<td class="td_red" id="" colspan="2" style='padding-left: 30px; text-align: left;' >
+									<input type="checkbox" name="options" value="BLTIN" style="margin-right: 10px;"> 빌트인<br>
+									<input type="checkbox" name="options" value="ELEV" style="margin-right: 10px;"> 엘레베이터<br>
+									<input type="checkbox" name="options" value="PET" style="margin-right: 10px;"> 반려동물<br>
+									<input type="checkbox" name="options" value="VRD" style="margin-right: 10px;"> 베란다/발코니<br>
+									<input type="checkbox" name="options" value="LOAN" style="margin-right: 10px;"> 전세자금대출<br>
+									<input type="checkbox" name="options" value="PARK" style="margin-right: 10px;"> 주차<br>
+									<input type="checkbox" name="options" value="MDDATE" style="margin-right: 10px;"> 입주날짜 협의 가능<br>
+								</td>
+							</tr>
+							<tr> <td height="10"></td> </tr>
+							<tr>
+								<td class="td_title">기타사항</td>
+								<td class="td_default" id="updateName" colspan="2" style="padding-left: 30px; text-align: left; position:relative">
+									<textarea cols="70" rows="10" name="etc" maxlength="250" placeholder="냉장고, 책상, 에어컨..."></textarea>
+									<p id="textLength">(<span>0</span>/250)</p>
+								</td>
+							</tr>
+						</table>
 					</tr>
-					<tr> <td height="10"></td> </tr>
-					<tr>
-						<td class="td_title">매물명</td>
-						<td class="td_default" id="updateName" colspan="2" style='padding-left: 30px'>
-							<input type="text" name="gname" placeholder="50자 이내" size=40 required>
-						</td>
-					</tr>
-					<tr> <td height="10"></td> </tr>
-					<tr>
-						<td class="td_title">매물설명</td>
-						<td class="td_default" id="updateName" colspan="2" style="padding-left: 30px; text-align: left; position:relative">
-							<textarea cols="70" rows="10" name="gcontent" maxlength="2000" required></textarea>
-							<p id="textLength">(<span>0</span>/250)</p>
-						</td>
-					</tr>
-					<tr> <td height="10"></td> </tr>
-					<tr>
-						<td class="td_title">보증금/전세가</td>
-						<td class="td_red" id="updateYrent" colspan="2" style='padding-left: 30px' >
-							<input type="text" name="yrent">
-						</td>
-					</tr>
-					<tr> <td height="10"></td> </tr>
-					<tr>
-						<td class="td_title">월세가</td>
-						<td class="td_red" id="updateMrent" colspan="2" style='padding-left: 30px' >
-							<input type="text" name="mrent">
-						</td>
-					</tr>
-					<tr> <td height="10"></td> </tr>
-					<tr> <td class="td_title">주소</td>
-						 <td class="td_red" colspan="2" style='padding-left: 30px' >
-							<input type="text" name="post" id="sample4_postcode" placeholder="우편번호">
-							<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" style="margin: 0 10px;">
-							<input type="text" name="addr" id="sample4_roadAddress" placeholder="도로명주소">
-							<input type="text" name="addr2" id="sample4_jibunAddress" placeholder="지번주소" style="display: none;">
-							<span id="guide"></span>	
-						 </td>
-					</tr>
-					<tr> <td height="10"></td> </tr>
-						
-					<tr>
-						<td class="td_title">사진등록</td>
-						<td class="td_default" colspan="2" style='padding-left: 30px'> 
-							<input type="file" name="himage"/>
-						</td>
-					</tr>
-					<tr> <td height="30"></td> </tr>
-	</table>
-	<div id="registerDiv">
-		<input type="submit" value="등록하기">
-		<input type="reset" value="다시작성">
-	</div>
+		      	</table>
+		      </div>
+		    </div>
+		    <!-- Add Pagination -->
+		    <div class="swiper-pagination"></div>
+		    
+		    <!-- Add Arrows -->
+		    <div class="swiper-button-next"></div>
+		    <div class="swiper-button-prev"></div>
+		  </div>
+			<div id="registerDiv">
+				<input type="submit" value="등록하기">
+				<input type="reset"	value="다시작성">
+			</div>
 </form>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
@@ -240,3 +361,15 @@
         }).open();
     }
 </script>
+  <script>
+    var swiper = new Swiper('.swiper-container', {
+      pagination: {
+        el: '.swiper-pagination',
+        type: 'progressbar',
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  </script>

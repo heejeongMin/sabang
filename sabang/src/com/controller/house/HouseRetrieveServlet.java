@@ -15,6 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.dto.AgentDTO;
 import com.dto.HouseInfoDTO;
 import com.dto.MemberDTO;
@@ -26,6 +29,7 @@ import com.service.HouseService;
  */
 @WebServlet("/HouseRetrieveServlet")
 public class HouseRetrieveServlet extends HttpServlet {
+	private static final Logger logger = LoggerFactory.getLogger(HouseRetrieveServlet.class);
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String hcode = request.getParameter("hcode");
 		

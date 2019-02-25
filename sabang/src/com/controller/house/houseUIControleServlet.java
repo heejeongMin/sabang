@@ -10,10 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.dto.MemberDTO;
 
 @WebServlet("/houseUIControleServlet")
 public class houseUIControleServlet extends HttpServlet {
+	private static final Logger logger = LoggerFactory.getLogger(houseUIControleServlet.class);
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		MemberDTO agent = (MemberDTO)session.getAttribute("login");	
