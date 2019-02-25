@@ -40,7 +40,6 @@ public class InterestListServlet extends HttpServlet {
 		HouseService hService = new HouseService();
 		
 		
-		
 		String nextPage=null;
 		List<String> hCodeList = new ArrayList<>();
 		if(member!=null) {
@@ -61,10 +60,9 @@ public class InterestListServlet extends HttpServlet {
 			}else if(iCategory.equals("wishlist")) {
 				List<HouseWishlistDTO> wishList = hService.selectWishlist(userid);
 				for(HouseWishlistDTO wishDto : wishList) {
-					if(wishDto.getUserid().equals(userid)) {
-						hCodeList.add(wishDto.getHcode());
-					}
+					hCodeList.add(wishDto.getHcode());
 				}
+				
 				List<HashMap<String, Object>> houseInfoList = hService.rcnHouseInfo(hCodeList);
 				request.setAttribute("houseInfoWishList", houseInfoList);
 			}
