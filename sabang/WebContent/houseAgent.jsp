@@ -37,9 +37,8 @@ p#initalMsg{font-size: 50px; font-weight: bold; color: darkblue; display: inline
 	<c:choose>
 		<c:when test="${empty work}"><p id="initalMsg">안녕하세요 ${login.username}님 :)</p></c:when>
 		<c:when test='${work.equals("register")}'><jsp:include page="house/houseRegister.jsp" flush="true"/></c:when>
-		<c:when test='${work.equals("update")}'><jsp:include page="house/houseUpdate.jsp" flush="true"/></c:when>
+<%-- 		<c:when test='${work.equals("update")}'><jsp:include page="house/houseUpdate.jsp" flush="true"/></c:when> --%>
 	</c:choose>
-	<c:remove var="work"/>
 </div>
 </body>
 </html>

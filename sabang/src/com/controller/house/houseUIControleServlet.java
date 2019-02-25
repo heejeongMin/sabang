@@ -29,8 +29,8 @@ public class houseUIControleServlet extends HttpServlet {
 			nextPage="LoginUIServlet";
 			session.setAttribute("mesg", "로그인이 필요한 작업입니다.");
 		} else {
-			session.setAttribute("work", work);
-			nextPage = (work.equals("update"))? nextPage="HouseUpdateServlet":"houseAgent.jsp";
+			request.setAttribute("work", work);
+			nextPage = "houseAgent.jsp";
 		}
 		
 		RequestDispatcher dis = request.getRequestDispatcher(nextPage);

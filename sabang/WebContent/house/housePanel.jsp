@@ -85,17 +85,21 @@ $(document).ready(function(){
 	});
 	
 	$("#updateBtn").on("click", function(e){//수정 버튼 클릭시
-		e.preventDefault();
 		var count = 0;
+		var item = "";
 		$("input[name=check]").each(function(idx, ele){//아무것도 체크하지 않으면 alert
-			if(ele.checked) count++;
+			if(ele.checked) {
+				count++;
+				item = $(ele).val();
+				console.log($(ele).val());
+			}
 		});
 		if (count == 0 ){
 			alert ("수정할 매물을 선택해주세요");
 		} else if ( count > 1) {
 			alert ("한번에 하나의 매물만 수정이 가능합니다. 매물 한개만 체크하고 수정버튼을 눌러주세요.");
 		} else {
-			location.href="houseUIControleServlet?work=update";
+			location.href="HouseUpdateServlet?hcode="+item;
 		}
 	});
 	
