@@ -7,8 +7,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 가입 -->
 
 	<insert id="signMbr" parameterType="MemberDTO">
-		insert into member (userid,passwd, ssn, username,post,addr, phone, email) 
-		values( #{userid},#{passwd},#{ssn},#{username},#{post},#{addr}, #{phone},#{email})
+		insert into member (userid,passwd, ssn, username,post,addr, phone, email,agent) 
+		values( #{userid},#{passwd},#{ssn},#{username},#{post},#{addr}, #{phone},#{email},{agent})
 	</insert>
 	
 	<insert id="signAgnt" parameterType="AgentDTO">
