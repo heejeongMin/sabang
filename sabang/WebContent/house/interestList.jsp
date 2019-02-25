@@ -7,52 +7,102 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.6/js/swiper.min.js"></script>
   <!-- Initialize Swiper -->
 <div id="wrap">
-<c:set var="HouseInfo" value="${houseInfoList}"/>
+<c:set var="HInfoRcn" value="${houseInfoRcnList}"/>
+<c:set var="HInfoWish" value="${houseInfoWishList}"/>
 <a href="InterestListServlet?iCategory=rcnlist">최근 본 방</a>
 <a href="InterestListServlet?iCategory=wishlist">찜한 방</a>
-<h1>최근 본 방<span id="noOfHouse">${fn:length(houseInfoList)}</span>건</h1>
-  <!-- Swiper -->
-  <div class="swiper-container" style="width:880px; margin-left:0; height: 360px">
-    <div class="swiper-wrapper">
-    	<c:forEach var="HouseInfo" items="${houseInfoList}">
-	    	 <div class="swiper-slide">
-				<table id="innerTable">
-					<tr>
-						<td class="img"><img src="#" alt="${HouseInfo.HCODE}" width="300" height="300"/></td>
-					</tr>
-					<tr> 
-						<td class="greyText">
-						<c:choose>
-							<c:when  test="${HouseInfo.HTYPE == 'o'}">
-								원룸 
-							</c:when>
-							<c:when  test="${HouseInfo.HTYPE == 't'}">
-								투룸
-							</c:when>
-							<c:when  test="${HouseInfo.HTYPE == 'f'}">
-								오피스텔
-							</c:when>
-							<c:when  test="${HouseInfo.HTYPE == 'p'}">
-								아파트
-							</c:when>
-						</c:choose>
-						</td>
- 					</tr>
-					<tr>
-						<td style="padding: 6px 0 6px 0;"><font size=5><b>${HouseInfo.RTYPE} ${HouseInfo.DEPOSIT} / ${HouseInfo.MRENT}</b></font></td>
-					</tr>
- 					<tr>
-						<td class="greyText">
-							<span>${HouseInfo.AREA},</span>
-							<span>관리비 ${HouseInfo.MAINTC}</span>
-						</td>
-					</tr>
-					<tr> <td class="greyText"><p class="hetc">${HouseInfo.HETC}</p></td> </tr>
-				</table>
-		 	</div>
-    	</c:forEach>
-    </div>
-    <!-- Add Pagination -->
-    <div class="swiper-pagination" ></div>
-  </div>
+	<c:if test="${!empty HInfoRcn}">
+	<h1>최근 본 방<span id="noOfHouse">${fn:length(houseInfoRcnList)}</span>건</h1>
+	  <!-- Swiper -->
+	  <div class="swiper-container" style="width:880px; margin-left:0; height: 360px">
+	    <div class="swiper-wrapper">
+	    	<c:forEach var="HouseInfo" items="${houseInfoRcnList}">
+		    	 <div class="swiper-slide">
+					<table id="innerTable">
+						<tr>
+							<td class="img"><img src="#" alt="${HouseInfo.HCODE}" width="300" height="300"/></td>
+						</tr>
+						<tr> 
+							<td class="greyText">
+							<c:choose>
+								<c:when  test="${HouseInfo.HTYPE == 'o'}">
+									원룸 
+								</c:when>
+								<c:when  test="${HouseInfo.HTYPE == 't'}">
+									투룸
+								</c:when>
+								<c:when  test="${HouseInfo.HTYPE == 'f'}">
+									오피스텔
+								</c:when>
+								<c:when  test="${HouseInfo.HTYPE == 'p'}">
+									아파트
+								</c:when>
+							</c:choose>
+							</td>
+	 					</tr>
+						<tr>
+							<td style="padding: 6px 0 6px 0;"><font size=5><b>${HouseInfo.RTYPE} ${HouseInfo.DEPOSIT} / ${HouseInfo.MRENT}</b></font></td>
+						</tr>
+	 					<tr>
+							<td class="greyText">
+								<span>${HouseInfo.AREA},</span>
+								<span>관리비 ${HouseInfo.MAINTC}</span>
+							</td>
+						</tr>
+						<tr> <td class="greyText"><p class="hetc">${HouseInfo.HETC}</p></td> </tr>
+					</table>
+			 	</div>
+	    	</c:forEach>
+	    </div>
+	    <!-- Add Pagination -->
+	    <div class="swiper-pagination" ></div>
+	</div>
+	</c:if>
+	<c:if test="${!empty HInfoWish}">
+	<h1>찜한 방<span id="noOfHouse">${fn:length(houseInfoWishList)}</span>건</h1>
+	  <!-- Swiper -->
+	  <div class="swiper-container" style="width:880px; margin-left:0; height: 360px">
+	    <div class="swiper-wrapper">
+	    	<c:forEach var="HouseInfo" items="${houseInfoWishList}">
+		    	 <div class="swiper-slide">
+					<table id="innerTable">
+						<tr>
+							<td class="img"><img src="#" alt="${HouseInfo.HCODE}" width="300" height="300"/></td>
+						</tr>
+						<tr> 
+							<td class="greyText">
+							<c:choose>
+								<c:when  test="${HouseInfo.HTYPE == 'o'}">
+									원룸 
+								</c:when>
+								<c:when  test="${HouseInfo.HTYPE == 't'}">
+									투룸
+								</c:when>
+								<c:when  test="${HouseInfo.HTYPE == 'f'}">
+									오피스텔
+								</c:when>
+								<c:when  test="${HouseInfo.HTYPE == 'p'}">
+									아파트
+								</c:when>
+							</c:choose>
+							</td>
+	 					</tr>
+						<tr>
+							<td style="padding: 6px 0 6px 0;"><font size=5><b>${HouseInfo.RTYPE} ${HouseInfo.DEPOSIT} / ${HouseInfo.MRENT}</b></font></td>
+						</tr>
+	 					<tr>
+							<td class="greyText">
+								<span>${HouseInfo.AREA},</span>
+								<span>관리비 ${HouseInfo.MAINTC}</span>
+							</td>
+						</tr>
+						<tr> <td class="greyText"><p class="hetc">${HouseInfo.HETC}</p></td> </tr>
+					</table>
+			 	</div>
+	    	</c:forEach>
+	    </div>
+	    <!-- Add Pagination -->
+	    <div class="swiper-pagination" ></div>
+	</div>
+	</c:if>
 </div>

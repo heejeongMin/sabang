@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import com.dto.HouseInfoDTO;
 import com.dto.HouseRcnlistDTO;
+import com.dto.HouseWishlistDTO;
 
 public class HouseDAO {
 	private static final Logger logger = LoggerFactory.getLogger(HouseDAO.class);
@@ -104,9 +105,15 @@ public class HouseDAO {
 		return n;
 	}
 	
-	// 최근 본 House 리스트 보기
+	// 최근 본 / 찜한 House 리스트 보기
 	public List<HashMap<String, Object>> rcnHouseInfo(SqlSession session, List<String> hCodeList){
 		List<HashMap<String, Object>> list = session.selectList("HouseMapper.rcnHouseList", hCodeList);
+		return list;
+	}
+	
+	// 찜한 House 테이블 보기
+	public List<HouseWishlistDTO> selectWishlist(SqlSession session, String userid){
+		List<HouseWishlistDTO> list = session.selectList("HouseMapper.wishList", userid);
 		return list;
 	}
 }

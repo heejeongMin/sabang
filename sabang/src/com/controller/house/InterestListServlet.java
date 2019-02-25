@@ -2,7 +2,6 @@ package com.controller.house;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,9 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.dto.AgentDTO;
-import com.dto.HouseInfoDTO;
 import com.dto.HouseRcnlistDTO;
+import com.dto.HouseWishlistDTO;
 import com.dto.MemberDTO;
 import com.service.HouseService;
 
@@ -44,24 +42,31 @@ public class InterestListServlet extends HttpServlet {
 		
 		
 		String nextPage=null;
+		List<String> hCodeList = new ArrayList<>();
 		if(member!=null) {
 			nextPage="interestList.jsp";
-			String memberid = member.getUserid();
+			String userid = member.getUserid();
 			// 최근 본 방
 			if(iCategory.equals("rcnlist")) {
-				List<HouseRcnlistDTO> rcnList = hService.selectRcnlist(memberid);
-				List<String> hCodeList = new ArrayList<>();
+				List<HouseRcnlistDTO> rcnList = hService.selectRcnlist(userid);
 				for(HouseRcnlistDTO rcnDto : rcnList) {
-					if(rcnDto.getUserid().equals(memberid)) {
+					if(rcnDto.getUserid().equals(userid)) {
 						hCodeList.add(rcnDto.getHcode());
 					}
 				}
 				List<HashMap<String, Object>> houseInfoList = hService.rcnHouseInfo(hCodeList);
-				request.setAttribute("houseInfoList", houseInfoList);
+				request.setAttribute("houseInfoRcnList", houseInfoList);
 			
 			// 찜리스트
 			}else if(iCategory.equals("wishlist")) {
-						
+				List<HouseWishlistDTO> wishList = hService.selectWishlist(userid);
+				for(HouseWishlistDTO wishDto : wishList) {
+					if(wishDto.getUserid().equals(userid)) {
+						hCodeList.add(wishDto.getHcode());
+					}
+				}
+				List<HashMap<String, Object>> houseInfoList = hService.rcnHouseInfo(hCodeList);
+				request.setAttribute("houseInfoWishList", houseInfoList);
 			}
 		}else {
 			nextPage="LoginUIServlet";
