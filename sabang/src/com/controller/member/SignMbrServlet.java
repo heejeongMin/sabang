@@ -38,8 +38,13 @@ public class SignMbrServlet extends HttpServlet {
 		String email1 = request.getParameter("email1");
 		String email2 = request.getParameter("email2");
 		String email = email1 + '@' + email2;
+	
+		char agent = (char) session.getAttribute("agent");
 		
-		MemberDTO member = new MemberDTO(userid, passwd, ssn, username, post, addr, phone, email);
+		MemberDTO member = new MemberDTO(userid, passwd, ssn, username, post, addr, phone, email,agent);
+		
+		System.out.println("* * * * SignMbrServlet  :  agent is     " + agent); 
+		
 		
 		MemberService service = new MemberService();
 		// 받은 아이디로 두 개의 쿼리문 작업 수행

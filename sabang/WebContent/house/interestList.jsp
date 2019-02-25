@@ -1,7 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<script src="js/innerTable.js"></script>
 <link rel="stylesheet" href="css/houseList.css">
+<style>
+a.focusedPage{
+	background: none;
+    width: 25px;
+    color: dodgerblue;
+}
+a.unfocusedPage{
+	background: dodgerblue;
+    border-radius: 50%;
+    width: 25px;
+    color: white;
+    text-decoration: none;
+}
+</style>
 <div id="wrap">
 <c:set var="HInfoRcn" value="${houseInfoRcnList}"/>
 <c:set var="HInfoWish" value="${houseInfoWishList}"/>

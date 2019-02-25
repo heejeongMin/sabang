@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MemberMapper">
+	
+	<!-- basic : hcode에 따른 보드가져오기 -->
+
+	<select id="boardList" parameterType="string" resultType="BoardDTO">
+		select pcode, pdate, ppwd, phone, title, content, filename, hcode
+		from board
+		where hcode = #{hcode}
+	</select>
+</mapper>

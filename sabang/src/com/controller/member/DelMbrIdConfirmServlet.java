@@ -26,7 +26,7 @@ public class DelMbrIdConfirmServlet extends HttpServlet {
 	     AgentDTO agent = (AgentDTO)session.getAttribute("agentInfo");
 	     
 	     String nextPage = null;
-	     if(member == null && agent == null) {  // 최상위 조건 체크, 해당 회원 정보 없다면.
+	     if(member == null) {  // 최상위 조건 체크, 해당 회원 정보 없다면.
 				nextPage = "LoginUIServlet";	
 				session.setAttribute("mesg", "로그인이 필요한 작업입니다.");
 			}else {
@@ -36,6 +36,25 @@ public class DelMbrIdConfirmServlet extends HttpServlet {
 	    		  request.getRequestDispatcher(nextPage);
 	      dis.forward(request, response);
 	}
+	
+	
+//	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		
+//		 HttpSession session = request.getSession();
+//	     MemberDTO member = (MemberDTO)session.getAttribute("memberInfo");
+//	     AgentDTO agent = (AgentDTO)session.getAttribute("agentInfo");
+//	     
+//	     String nextPage = null;
+//	     if(member == null && agent == null) {  // 최상위 조건 체크, 해당 회원 정보 없다면.
+//				nextPage = "LoginUIServlet";	
+//				session.setAttribute("mesg", "로그인이 필요한 작업입니다.");
+//			}else {
+//				nextPage = "delMbrIdConfirm.jsp";
+//			}
+//	      RequestDispatcher dis =
+//	    		  request.getRequestDispatcher(nextPage);
+//	      dis.forward(request, response);
+//	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
