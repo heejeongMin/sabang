@@ -6,14 +6,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.6/js/swiper.min.js"></script>
 <script src="js/innerTable.js"></script>
   <!-- Initialize Swiper -->
-<div id="wrap">
 <c:set var="newList" value="${newList}"/>
 <h1>신매물 <span id="noOfHouse">${fn:length(newList)}</span>건</h1>
   <!-- Swiper -->
   <div class="swiper-container" style="width:880px; margin-left:0; height: 360px; padding-top: 3px;">
     <div class="swiper-wrapper">
     	<c:forEach var="newHouse" items="${newList}">
-	    	 <div class="swiper-slide">
+	    	 <div class="swiper-slide" style="margin-right:-10px;">
 				<table id="innerTable">
 					<tr>
 						<td class="img">
@@ -101,7 +100,6 @@
     </div>
     <!-- Add Pagination -->
    <div class="swiper-pagination"></div>
-</div>
 </div>
  <script>
     var swiper = new Swiper('.swiper-container', {
