@@ -10,8 +10,8 @@
     float: left;
     position: absolute;
     color: lightgrey;
-    left: 420px;
-    top: 100px;
+    left: 460px;
+    top: 110px;
 	}
 	textarea{
 		resize: none;
@@ -23,20 +23,51 @@
 		$("select[name=htype]").on("change", function(e){ //상품 코드 값 정하기
 			$.ajax({
 				type:'get',
-				url:'HouseManagingServlet',
+				url:'HouseRegisterServlet',
 				data:{ htype:$(e.target).val()},
 				dataType:'text',
 				success:function(data, status, xhr){
-					console.log(data);
 					var newCode = Number.parseInt(data)+1;
 					switch($(e.target).val()){
-					case "o": $("#hcode>input").val("O"+newCode); break;
-					case "t": $("#hcode>input").val("T"+newCode); break;
-					case "f": $("#hcode>input").val("F"+newCode); break;
-					case "p": $("#hcode>input").val("P"+newCode); break;
+					case "o": 
+						if(newCode < 10){
+							$("#hcode>input").val("O00"+newCode);
+						} else if (newCode < 100){
+							$("#hcode>input").val("O0"+newCode);
+						} else {
+							$("#hcode>input").val("O"+newCode);
+						}
+						 break;
+					case "t": 
+						if(newCode < 10 ){
+							$("#hcode>input").val("T00"+newCode); 
+						} else if (newCode < 100){
+							$("#hcode>input").val("T0"+newCode);
+						} else {
+							$("#hcode>input").val("T"+newCode);
+						}
+						break;
+					case "f": 
+						if(newCode < 10){
+							$("#hcode>input").val("F00"+newCode);
+						} else if (newCode < 100){
+							$("#hcode>input").val("F0"+newCode);
+						} else {
+							$("#hcode>input").val("F"+newCode);
+						}
+						 break;
+					case "p":
+						if(newCode < 10){
+							$("#hcode>input").val("P00"+newCode);
+						} else if (newCode < 100){
+							$("#hcode>input").val("P0"+newCode);
+						} else {
+							$("#hcode>input").val("P"+newCode);
+						}
+						break;
 					}
 				},
-				error:function(xhr, status, data){ }
+				error:function(xhr, status, data){ console.log(status); }
 			});//end ajax
 		});//end select gcategory change
 		
@@ -106,7 +137,7 @@
 					<tr>
 						<td class="td_title">매물명</td>
 						<td class="td_default" id="updateName" colspan="2" style='padding-left: 30px'>
-							<input type="text" name="gname" placeholder="50자 이내" size=68.5 required>
+							<input type="text" name="gname" placeholder="50자 이내" size=40 required>
 						</td>
 					</tr>
 					<tr> <td height="10"></td> </tr>
