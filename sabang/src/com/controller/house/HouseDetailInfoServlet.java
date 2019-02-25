@@ -37,9 +37,9 @@ public class HouseDetailInfoServlet extends HttpServlet {
 		BoardService bService = new BoardService();
 		MemberService mService = new MemberService();
 		
-		HouseInfoDTO info = hService.HouseRetrieve(hcode);
-		HousePriceDTO price = hService.HousePrice(hcode);
-		HouseOptionDTO option = hService.HouseOption(hcode);
+		HouseInfoDTO info = hService.houseRetrieve(hcode);
+		HousePriceDTO price = hService.housePrice(hcode);
+		HouseOptionDTO option = hService.houseOption(hcode);
 		List<BoardDTO> board = bService.boardList(hcode);
 		
 		String agntid = info.getAgntid();

@@ -139,12 +139,12 @@ public class HouseService {
 	
 	///////////////////////////////////////////////////////////
 	// Basic : House 자세히보기
-	public HouseInfoDTO HouseRetrieve(String hcode){
+	public HouseInfoDTO houseRetrieve(String hcode){
 	SqlSession session = MySqlSessionFactory.getSession();
 	HouseInfoDTO dto = null;
 	try {
 	HouseDAO dao = new HouseDAO();
-	dto = dao.HouseRetrieve(session,hcode);
+	dto = dao.houseRetrieve(session,hcode);
 	}finally {
 	session.close();
 	}
@@ -152,12 +152,12 @@ public class HouseService {
 	}
 	
 	// Basic : house 가격 
-	public HousePriceDTO HousePrice(String hcode) {
+	public HousePriceDTO housePrice(String hcode) {
 		SqlSession session = MySqlSessionFactory.getSession();
 		HousePriceDTO dto = null;
 		try {
 			HouseDAO dao = new HouseDAO();
-			dto = dao.HousePrice(session, hcode);
+			dto = dao.housePrice(session, hcode);
 		} finally {
 			session.close();
 		}
@@ -165,12 +165,12 @@ public class HouseService {
 	}
 	
 	// Basic : house 옵션
-	public HouseOptionDTO HouseOption(String hcode) {
+	public HouseOptionDTO houseOption(String hcode) {
 		SqlSession session = MySqlSessionFactory.getSession();
 		HouseOptionDTO dto = null;
 		try {
 			HouseDAO dao = new HouseDAO();
-			dto = dao.HouseOption(session, hcode);
+			dto = dao.houseOption(session, hcode);
 		} finally {
 			session.close();
 		}

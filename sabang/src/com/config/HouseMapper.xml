@@ -351,16 +351,7 @@
 				</foreach>
 				<if test="!(htype.isEmpty())">
 					and htype in
-	
-	
-	
-	
 					<foreach item="item" collection="htype" open="(" separator="," close=")">
-	
-	
-	
-	
-	
 							#{item}
 					</foreach>
 				</if>
@@ -418,9 +409,8 @@
 	
 	
 	<!-- Basic : House 자세히보기 -->
-   	<select id="houseRetrieve" parameterType="String" resultType="HouseInfoDTO">
-   		select hcode, htype, rtype, hname, addr, coordX, coordY, area, whlflr, flr, room, batr
-   			cntwish, himage, hetc, registerDate, agntid
+   	<select id="houseRetrieve" parameterType="string" resultType="HouseInfoDTO">
+   		select hcode, htype, rtype, hname, addr, coordX, coordY, area, whlflr, flr, room, batr,	cntwish, himage, hetc, registerDate, agntid
    		from house_info
    		where hcode = #{hcode}
    	</select>

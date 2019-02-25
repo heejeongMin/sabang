@@ -85,6 +85,7 @@ $(document).ready(function(){
 	});
 	
 	$("#updateBtn").on("click", function(e){//수정 버튼 클릭시
+		e.preventDefault();
 		var count = 0;
 		var item = "";
 		$("input[name=check]").each(function(idx, ele){//아무것도 체크하지 않으면 alert
@@ -94,6 +95,7 @@ $(document).ready(function(){
 				console.log($(ele).val());
 			}
 		});
+		
 		if (count == 0 ){
 			alert ("수정할 매물을 선택해주세요");
 		} else if ( count > 1) {
