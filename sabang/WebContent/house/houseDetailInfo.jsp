@@ -27,7 +27,7 @@
 						</div>
 					<div class="option">
 						<c:forEach var="option" items="${option}">
-							<c:choose>
+							<c:choose>s
 								<c:when test="${option.loan == 'Y'}">
 									<img src="loan.png" height="42" width="42">
 								</c:when>
