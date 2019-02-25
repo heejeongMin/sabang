@@ -70,7 +70,7 @@ $(document).ready(function(){
 			},
 			dataType: "html",
 			success:function(data, status, xhr){
-				$("div#wrap").html($(data).nextAll("div#wrap"));
+				$("div#mainWrap").html($(data).nextAll("div#mainWrap"));
 			},
 			error:function(xhr, status, error){console.log(status)}
 		});//end ajax 
