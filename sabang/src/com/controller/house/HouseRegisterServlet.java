@@ -3,6 +3,8 @@ package com.controller.house;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -37,7 +39,10 @@ public class HouseRegisterServlet extends HttpServlet {
 		MemberDTO member = (MemberDTO)session.getAttribute("login");
 		String htype = request.getParameter("htype");
 		
-		if(htype!=null) {//htype이 null이 아닐때는 register
+		if(member == null) {
+			session.setAttribute("mesg", "로그인이 필요한 작업입니다.");
+			response.sendRedirect("LoginUIServlet");
+		} else if(htype!=null) {//htype이 null이 아닐때는 register
 			String lastCode = service.getLastCode(htype);
 			PrintWriter out = response.getWriter();
 			out.print(lastCode.substring(1));
@@ -60,17 +65,22 @@ public class HouseRegisterServlet extends HttpServlet {
 		HousePriceDTO priceDTO = new HousePriceDTO();
 		HouseOptionDTO optionDTO = new HouseOptionDTO();
 		
+		FileItem item = null; 
+		String fileName = null;
 		// Parse the request
 		try {
 			List<FileItem> items = upload.parseRequest(request);
 			// Process the uploaded items
 			Iterator<FileItem> iter = items.iterator();
 			while (iter.hasNext()) {
-			    FileItem item = iter.next();
+			    item = iter.next();
 			    if (item.isFormField()) {// 일반 텍스트 가져오기
 			    	switch (item.getFieldName()) {
 			    	case "htype" : infoDTO.setHtype(item.getString("utf-8")); break;
-			    	case "hcode": infoDTO.setHcode(item.getString("utf-8")); break;
+			    	case "hcode": infoDTO.setHcode(item.getString("utf-8")); 
+			    				  priceDTO.setHcode(item.getString("utf-8"));
+			    				  optionDTO.setHcode(item.getString("utf-8"));
+			    				  break;
 			    	case "rtype" : infoDTO.setRtype(item.getString("utf-8")); break;
 			    	case "hname" : infoDTO.setHname(item.getString("utf-8")); break;
 			    	case "hetc" : infoDTO.setHetc(item.getString("utf-8")); break;
@@ -99,22 +109,25 @@ public class HouseRegisterServlet extends HttpServlet {
 			    	}
 			    } else { // System.currentTimeMills() 사용으로 DB에 gimage 데이터타입을 varchar2(20)에서 varchar2(80)으로 변경
 			    	String[] fileNames = item.getName().split("\\.");
-			    	String fileName = fileNames[0] + System.currentTimeMillis() + "." + fileNames[1];
-			    	System.out.println(fileName);
+			    	fileName = fileNames[0] + System.currentTimeMillis() + "." + fileNames[1];
 			    	infoDTO.setHimage(fileName);
-			    	
-
-			    	//Image 업로드
-			    	File f = new File("C:\\Projects\\sabang\\masterGit\\sabang\\WebContent\\images", fileName);
-			    	item.write(f);
-//			    	getServletContextFile(); getServletContextPath(); 혹은 가상 디렉토리 
-			    	
-//			    	DB에 저장
-//			    	int n = service.goodsRegister(dto);
-//					logger.info("성공실패: " + String.valueOf(n));
 			    }
 			}
-			
+			System.out.println(optionDTO);
+			System.out.println(optionDTO.getBltin() == 'Y');
+			//Image 업로드
+	    	File f = new File("C:\\Projects\\sabang\\masterGit\\sabang\\WebContent\\images", fileName);
+	    	item.write(f);
+	    	
+	    	HashMap<String, Object> registerMap = new HashMap<>();
+	    	infoDTO.setAgntid(member.getUserid());//session에 잇는 에이전트의 유저 아이디도 가져온다. 
+	    	
+	    	registerMap.put("info", infoDTO);
+	    	registerMap.put("price", priceDTO);
+	    	registerMap.put("option", optionDTO);
+	    	
+	    //	DB에 저장
+	    	int n = service.houseRegister(registerMap);
 			
 		} catch (FileUploadException e) {
 			// TODO Auto-generated catch block

@@ -4,6 +4,41 @@
 
 <mapper namespace="HouseMapper">
 
+<!-- 매물 등록 - house_info 테이블 -->
+	<insert id="houseRegister_info" parameterType="HouseInfoDTO">
+		insert into house_info (hcode, htype, rtype, hname, addr, coordx, coordy, area, whlflr, flr, room, batr, cntwish, himage, hetc, registerdate, agntid)
+		values (#{hcode}, #{htype}, #{rtype}, #{hname}, #{addr}, 'null', 'null', #{area}, #{whlflr}, #{flr}, #{room}, #{batr}, 0, #{himage}, #{hetc}, sysdate, #{agntid})
+	</insert>
+	
+<!-- 매물 등록 - house_price 테이블 -->
+	<insert id="houseRegister_price" parameterType="HousePriceDTO">
+		insert into house_price (hcode, deposit, mrent, yrent, maintc, parkf)
+		values (#{hcode}, #{deposit}, #{mrent}, #{yrent}, #{maintc}, #{parkf})
+	</insert>
+	
+<!-- 매물 등록 - house_option 테이블 -->
+<!-- 	<insert id="houseRegister_option" parameterType="HousePriceDTO"> -->
+<!-- 		insert into house_option (hcode, bltin, elev, pet, vrd, loan, park, mdate, etc)  -->
+<!-- 		values (#{hcode}, -->
+<!-- 			<choose> -->
+<!-- 				<when test="bltin != 'Y' "> 'N' </when> -->
+<!-- 				<when test = "bltin == 'Y' ">  #{bltin} </when> -->
+<!-- 				<when test="elev != 'Y' "> 'N'</when> -->
+<!-- 				<when test="elev == 'Y'">  #{elev} </when> -->
+<!-- 				<when test="pet != 'Y' "> 'N' </when> -->
+<!-- 				<when test="pet == 'Y'">  #{pet} </when> -->
+<!-- 				<when test="vrd != 'Y' ">'N' </when> -->
+<!-- 				<when test="vrd == 'Y'"> #{vrd}  </when> -->
+<!-- 				<when test="loan != 'Y' "> 'N' </when> -->
+<!-- 				<when test="loan == 'Y'"> #{loan} </when> -->
+<!-- 				<when test="park != 'Y' "> 'N' </when> -->
+<!-- 				<when test="park == 'Y'"> #{park} </when> -->
+<!-- 				<when test="mdate != 'Y' "> 'N' </when> -->
+<!-- 				<when test="mdate == 'Y'"> #{mdate} </when> -->
+<!-- 			</choose> -->
+<!-- 		#{etc}) -->
+<!-- 	</insert> -->
+
 <!-- houseRegister.jsp에서 가장 최근 등록된 매물 코드 가져오기 (매물타입별) -->
 	<select id="getLastCode" parameterType="string" resultType="string">
 		select max(hcode) from house_info where htype = #{htype}

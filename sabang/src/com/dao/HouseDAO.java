@@ -9,6 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.dto.HouseInfoDTO;
+import com.dto.HouseOptionDTO;
+import com.dto.HousePriceDTO;
 import com.dto.HouseRcnlistDTO;
 
 public class HouseDAO {
@@ -78,6 +80,21 @@ public class HouseDAO {
 	public String getLastCode(SqlSession session, String htype){
 		return session.selectOne("HouseMapper.getLastCode", htype);
 	}//end getLastCode
+	
+	//매물 올리기- info - info&price&option 트랜잭션 처리
+	public int houseRegister_info(SqlSession session, HouseInfoDTO infoDTO){
+		return session.insert("HouseMapper.houseRegister_info", infoDTO);
+	}//end houseRegister_info
+	
+	//매물 올리기- price - info&price&option 트랜잭션 처리
+	public int houseRegister_price(SqlSession session, HousePriceDTO priceDTO){
+		return session.insert("HouseMapper.houseRegister_price", priceDTO);
+	}//end houseRegister_price
+	
+	//매물 올리기- option - info&price&option 트랜잭션 처리
+	public int houseRegister_option(SqlSession session, HouseOptionDTO optionDTO){
+		return session.insert("HouseMapper.houseRegister_option", optionDTO);
+	}//end houseRegister_price
 	
 	
 	///////////////////////////////////////////////////////////

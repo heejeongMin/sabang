@@ -126,7 +126,7 @@
 							<td class="td_default update" id="updateName" colspan="2" style='padding-left: 30px;text-align: left;'>
 								<select name="htype">
 									<option value="">선택해주세요</option>	
-									<option value="o">아파트</option>	
+									<option value="o">원룸</option>	
 									<option value="t">투룸</option>	
 									<option value="f">오피스텔</option>	
 									<option value="p">아파트</option>	

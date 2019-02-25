@@ -17,11 +17,12 @@ public class HouseInfoDTO {
 	private String himage;
 	private String hetc;
 	private String registerDate;
+	private String agntid;
 	
 	public HouseInfoDTO() { }
 	public HouseInfoDTO(String hcode, String htype, String rtype, String hname, String addr, String coordX,
 			String coordY, String area, int whlflr, int flr, int room, String batr, int cntwish, String himage,
-			String hetc, String registerDate) {
+			String hetc, String registerDate, String agntid) {
 		this.hcode = hcode;
 		this.htype = htype;
 		this.rtype = rtype;
@@ -38,6 +39,7 @@ public class HouseInfoDTO {
 		this.himage = himage;
 		this.hetc = hetc;
 		this.registerDate = registerDate;
+		this.agntid = agntid;
 	}
 
 	@Override
@@ -45,7 +47,7 @@ public class HouseInfoDTO {
 		return "HouseInfoDTO [hcode=" + hcode + ", htype=" + htype + ", rtype=" + rtype + ", hname=" + hname + ", addr="
 				+ addr + ", coordX=" + coordX + ", coordY=" + coordY + ", area=" + area + ", whlflr=" + whlflr
 				+ ", flr=" + flr + ", room=" + room + ", batr=" + batr + ", cntwish=" + cntwish + ", himage=" + himage
-				+ ", hetc=" + hetc + ", registerDate=" + registerDate + "]";
+				+ ", hetc=" + hetc + ", registerDate=" + registerDate + ", agntid=" + agntid + "]";
 	}
 	
 	public String getHcode() {
@@ -143,5 +145,11 @@ public class HouseInfoDTO {
 	}
 	public void setRegisterDate(String registerDate) {
 		this.registerDate = registerDate;
+	}
+	public String getAgntid() {
+		return agntid;
+	}
+	public void setAgntid(String agntid) {
+		this.agntid = agntid;
 	}
 }
