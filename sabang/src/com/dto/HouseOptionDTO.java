@@ -6,20 +6,20 @@ public class HouseOptionDTO {
 	private char elev;
 	private char pet;
 	private char vrd;
-	private char load;
+	private char loan;
 	private char park;
 	private char mdate;
 	private String etc;
 	
 	public HouseOptionDTO() { }
-	public HouseOptionDTO(String hcode, char bltin, char elev, char pet, char vrd, char load, char park, char mdate,
+	public HouseOptionDTO(String hcode, char bltin, char elev, char pet, char vrd, char loan, char park, char mdate,
 			String etc) {
 		this.hcode = hcode;
 		this.bltin = bltin;
 		this.elev = elev;
 		this.pet = pet;
 		this.vrd = vrd;
-		this.load = load;
+		this.loan = loan;
 		this.park = park;
 		this.mdate = mdate;
 		this.etc = etc;
@@ -27,7 +27,7 @@ public class HouseOptionDTO {
 	@Override
 	public String toString() {
 		return "HouseOptionDTO [hcode=" + hcode + ", bltin=" + bltin + ", elev=" + elev + ", pet=" + pet + ", vrd="
-				+ vrd + ", load=" + load + ", park=" + park + ", mdate=" + mdate + ", etc=" + etc + "]";
+				+ vrd + ", loan=" + loan + ", park=" + park + ", mdate=" + mdate + ", etc=" + etc + "]";
 	}
 	public String getHcode() {
 		return hcode;
@@ -59,11 +59,11 @@ public class HouseOptionDTO {
 	public void setVrd(char vrd) {
 		this.vrd = vrd;
 	}
-	public char getLoad() {
-		return load;
+	public char getLoan() {
+		return loan;
 	}
-	public void setLoad(char load) {
-		this.load = load;
+	public void setLoan(char loan) {
+		this.loan = loan;
 	}
 	public char getPark() {
 		return park;

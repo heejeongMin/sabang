@@ -9,6 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.dto.HouseInfoDTO;
+import com.dto.HouseOptionDTO;
+import com.dto.HousePriceDTO;
 import com.dto.HouseRcnlistDTO;
 
 public class HouseDAO {
@@ -77,12 +79,22 @@ public class HouseDAO {
 	
 	
 	///////////////////////////////////////////////////////////
-	// House 자세히보기
+	// Basic: House 자세히보기
 	public HouseInfoDTO HouseRetrieve(SqlSession session, String hcode){
 	HouseInfoDTO dto = session.selectOne("HouseMapper.houseRetrieve",hcode);
 	return dto;
 	}
 	
+	// Basic: House 가격
+	public HousePriceDTO HousePrice(SqlSession session, String hcode){
+	HousePriceDTO dto = session.selectOne("HouseMapper.housePrice",hcode);
+	return dto;
+	}
+	// Basic: House 옵션
+	public HouseOptionDTO HouseOption(SqlSession session, String hcode){
+	HouseOptionDTO dto = session.selectOne("HouseMapper.houseOption",hcode);
+	return dto;
+	}
 	
 	
 	///////////////////////////////////////////////////////////

@@ -32,7 +32,7 @@ public class LoginServlet extends HttpServlet {
 		
 		MemberService service = new MemberService();
 		MemberDTO member = service.login(map); 
-		AgentDTO agent = service.agntlogin(map);
+		//AgentDTO agent = service.agntlogin(map);
 		
 	/*	System.out.println(member);
 		System.out.println(agent);
@@ -42,10 +42,12 @@ public class LoginServlet extends HttpServlet {
 		if ( member != null) {
 			session.setAttribute("memberInfo", member);
 			nextPage = "main.jsp";
-		} else if (agent != null) {
+		}
+		/*else if (agent != null) {
 			session.setAttribute("agentInfo", agent);
-			nextPage = "main.jsp";    /*agentMain으로 변경*/
-		} else {
+			nextPage = "main.jsp";    agentMain으로 변경
+		} */
+		else {
 			nextPage = "LoginUIServlet";	
 			session.setAttribute("mesg", "아이디 혹은 비밀번호를 확인해주세요.");
 		}

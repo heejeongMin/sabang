@@ -14,7 +14,7 @@ import com.dto.AgentDTO;
 import com.service.MemberService;
 
 /**
- * Servlet implementation class MemberUIServlet
+ * 삭제할것
  */
 @WebServlet("/SignAgentServlet")
 public class SignAgentServlet extends HttpServlet {

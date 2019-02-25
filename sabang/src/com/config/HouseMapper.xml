@@ -368,14 +368,29 @@
 			</when>
 		</choose>
 	</select>
-	<!-- House 자세히보기 -->
+	
+	
+	<!-- Basic : House 자세히보기 -->
    	<select id="houseRetrieve" parameterType="String" resultType="HouseInfoDTO">
    		select hcode, htype, rtype, hname, addr, coordX, coordY, area, whlflr, flr, room, batr
-   			cntwish, himage, hetc, registerDate
+   			cntwish, himage, hetc, registerDate, agntid
    		from house_info
    		where hcode = #{hcode}
    	</select>
 	
+	<!-- Basic : House 가격 -->
+   	<select id = "housePrice" parameterType="string" resultType = "HousePriceDTO">
+   		select hcode, deposit, mrent, yrent, maintc, parkf
+   		from house_price
+   		where hcode = #{hcode}
+   	</select> 
+   	
+	<!-- Basic : House 옵션 -->
+   	<select id = "houseOption" parameterType="string" resultType = "HouseOptionDTO">
+   		select bltin, elev, pet, vrd, loan, park, mdate, etc
+   		from house_option
+   		where hcode = #{hcode}
+   	</select> 
 	
 	
 	<!-- 최근 본 House 테이블보기 -->
@@ -418,5 +433,6 @@
   			</foreach>
     	</where>
    	</select>
+   	
 </mapper>
   	

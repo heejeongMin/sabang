@@ -39,7 +39,7 @@ $(document).ready(function() {
 		$("body").on("submit", "#signForm", function(event){
 			/* space check */
 			$(this).find("span.live").remove();
-			var page = $('input[type=radio]:checked').val();
+		//	var page = $('input[type=radio]:checked').val();
 			var userid = $("#userid").val();
 			var passwd = $("#passwd").val();
 			var cnfPw = $("#cnfPasswd").val();
@@ -97,13 +97,13 @@ $(document).ready(function() {
 				}
 			} 
 			
-			if(page != 'agent'){
+/*			if(page != 'N'){
 				if(addr == 0 ){
 					event.preventDefault();
 					$("#sample4_roadAddress").after("<span class = 'live'>"+adM+"</span>");
 				} 
 			}// end if not agent
-			
+*/			
 			if( ssn1.length == 0 || ssn2.length == 0 || !ssn1Rule.test(ssn1) || !ssn2Rule.test(ssn2) ){
 				event.preventDefault();
 				if(ssn1.length == 0 || ssn2.length == 0){

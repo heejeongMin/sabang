@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+*{
+ padding: 0;
+ margin:0;
+}
+
+/*  상세 페이지 전체 wrap */
+.wrapper {
+	padding: 1rem;
+}
+
+/*  title	*/
+.main-element {
+	margin-bottom: .7rem;
+	width: 100%;
+	height: 100px;
+	background: white;
+}
+
+/*  title 텍스트	 */
+.main-element > p {
+	color : grey;
+}
+
+/*  contents */
+.element-container {
+	display: flex;
+ 	justify-content: space-between; 
+}
+
+/*  image , agent side */
+#leftElement {
+	width: 53%;
+	height: 220px;
+	background: orange;
+}
+
+
+/*  price , option , board side */
+#rightElement {
+	width: 46%;
+	height: 220px;
+	background: orange;
+}
+
+/*  price */
+#leftElement > :first-child{
+	background: white;
+	margin-bottom : 10px
+}
+
+/*  option, board */
+#leftElement > div{
+	background: silver;
+	height : 48%;
+}
+
+/*  agent */
+#rightElement > div{
+	background: silver;
+	height : 48%;
+}
+
+/*  img */
+#rightElement > :first-child{
+	background: white;
+	height : 48%;
+	margin-bottom : 10px;
+}
