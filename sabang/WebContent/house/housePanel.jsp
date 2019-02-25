@@ -37,7 +37,7 @@ div#btnBox>button {
 </style>
 </head>
 <body>
-<form action="HouseDelServlet" method="get" id="panel">
+<form action="#" method="get" id="panel">
 <table id="panel">
 	<tr>
 		<th></th>
@@ -66,9 +66,37 @@ div#btnBox>button {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	$("#registerBtn").on("click", function(e){
+	$("#registerBtn").on("click", function(e){//등록버튼 클릭시
 		e.preventDefault();
 		location.href="houseUIControleServlet?work=register";
+	});
+	
+	$("#delBtn").on("click", function(e){//삭제버튼 클릭시
+		var count = 0;
+		$("input[name=check]").each(function(idx, ele){//아무것도 체크하지 않으면 alert
+			if(ele.checked) count++;
+		});
+		if (count == 0 ){
+			e.preventDefault();
+			alert ("삭제할 매물을 선택해주세요");
+		} else {
+			$("form#panel").attr("action", "HouseDelServlet");
+		}
+	});
+	
+	$("#updateBtn").on("click", function(e){//수정 버튼 클릭시
+		e.preventDefault();
+		var count = 0;
+		$("input[name=check]").each(function(idx, ele){//아무것도 체크하지 않으면 alert
+			if(ele.checked) count++;
+		});
+		if (count == 0 ){
+			alert ("수정할 매물을 선택해주세요");
+		} else if ( count > 1) {
+			alert ("한번에 하나의 매물만 수정이 가능합니다. 매물 한개만 체크하고 수정버튼을 눌러주세요.");
+		} else {
+			location.href="houseUIControleServlet?work=update";
+		}
 	});
 	
 });//end ready

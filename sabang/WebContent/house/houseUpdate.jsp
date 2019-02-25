@@ -108,8 +108,8 @@
 		
 	});//end ready
 </script>
-	<h1 id="registerH1">새로운 매물 등록하기</h1>
-	<form method="POST" enctype="multipart/form-data" action="HouseRegisterServlet" id="register">
+	<h1 id="registerH1">매물 수정하기</h1>
+	<form method="POST" enctype="multipart/form-data" action="HouseUpdateServlet" id="register">
 	 	<div class="swiper-container">
 		    <div class="swiper-wrapper">
 		      <div class="swiper-slide">
@@ -124,25 +124,22 @@
 							<tr> <td height="10"></td> </tr>
 							<td class="td_title">매물타입</td>
 							<td class="td_default update" id="updateName" colspan="2" style='padding-left: 30px;text-align: left;'>
-								<select name="htype">
-									<option value="">선택해주세요</option>	
-									<option value="o">원룸</option>	
-									<option value="t">투룸</option>	
-									<option value="f">오피스텔</option>	
-									<option value="p">아파트</option>	
-								</select>
+								<input type="text" name="htype" value="${test}" readonly>
 							</td>
 							<tr> <td height="10"></td> </tr>
 							<tr>
 								<td class="td_title">매물코드</td>
 								<td class="td_default" colspan="2" style='padding-left: 30px' id="hcode">
-									<input type="text" name="hcode" value="" readonly>
+									<input type="text" name="hcode" value="${test}" readonly>
 								</td>
 							</tr>
 							<tr> <td height="10"></td> </tr>
 							<tr>
 								<td class="td_title">세타입</td>
 								<td class="td_default update" id="" colspan="2" style='padding-left: 30px;text-align: left;'>
+ 								<%--<c:if test="${test}"> --%>
+									<!-- 월세/전세 checked해놓는 조건 -->
+								<%--</c:if>--%>
 									<input type="radio" name="rtype" value="월세"><span style="margin-left: -15px;">월세</span>
 									<input type="radio" name="rtype" value="전세" style="float: left; position: relative; left: 50px;"><span style="margin-left: 35px;">전세</span>
 								</td>
@@ -151,14 +148,14 @@
 							<tr>
 								<td class="td_title">매물명</td>
 								<td class="td_default" id="" colspan="2" style='padding-left: 30px'>
-									<input type="text" name="hname" placeholder="50자 이내" size=40 required>
+									<input type="text" name="hname" placeholder="50자 이내" size=40 value="${test}" >
 								</td>
 							</tr>
 							<tr> <td height="10"></td> </tr>
 							<tr>
 								<td class="td_title">매물설명</td>
 								<td class="td_default" id="" colspan="2" style="padding-left: 30px; text-align: left; position:relative">
-									<textarea cols="70" rows="10" name="hetc" maxlength="250" required></textarea>
+									<textarea cols="70" rows="10" name="hetc" maxlength="250" required>"${test}"</textarea>
 									<p id="textLength">(<span>0</span>/250)</p>
 								</td>
 							</tr>
@@ -166,37 +163,37 @@
 							<tr>
 								<td class="td_title">평수</td>
 								<td class="td_red" id="" colspan="2" style='padding-left: 30px; text-align: left;' >
-									<input type="text" name="area" size ="4" style="margin-right: 10px;"> (단위: 제곱미터)
+									<input type="text" name="area" size ="4" style="margin-right: 10px;" value="${test }"> (단위: 제곱미터)
 								</td>
 							</tr>
 							<tr> <td height="10"></td> </tr>
 							<tr>
 								<td class="td_title">층수</td>
 								<td class="td_red" id="" colspan="2"  style='padding-left: 30px; text-align: left;' >
-									<input type="text" name="flr" size="2" placeholder="매물층" style="margin-right:10px;">/
-									<input type="text" name="whflr" size="2" placeholder="건물층" style="position: absolute; margin-left: 10px;">
+									<input type="text" name="flr" size="2" placeholder="매물층" value="${test }" style="margin-right:10px; ">/
+									<input type="text" name="whflr" size="2" placeholder="건물층" value="${test }" style="position: absolute; margin-left: 10px;">
 								</td>
 							</tr>
 							<tr> <td height="10"></td> </tr>
 							<tr>
 								<td class="td_title">방개수</td>
 								<td class="td_red" id="" colspan="2" style='padding-left: 30px; text-align:left; ' >
-									<input type="text" name="room" size="2" style="margin-right:10px;"> 개
+									<input type="text" name="room" size="2" value="${test }" style="margin-right:10px;"> 개
 								</td>
 							</tr>
 							<tr> <td height="10"></td> </tr>
 							<tr>
 								<td class="td_title">욕실개수</td>
 								<td class="td_red" id="" colspan= "2" style='padding-left: 30px; text-align:left;' >
-									<input type="text" name="batr" size="2" style="margin-right:10px;"> 개 
+									<input type="text" name="batr" size="2" value="${test }" style="margin-right:10px;"> 개 
 								</td>
 							</tr>
 							<tr> <td height="10"></td> </tr>
 							<tr> <td class="td_title">주소</td>
 								 <td class="td_red" colspan="2" style='padding-left: 30px' >
-									<input type="text" name="post" id="sample4_postcode" placeholder="우편번호">
+									<input type="text" name="post" id="sample4_postcode" value="${test }" placeholder="우편번호">
 									<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" style="margin: 0 10px;">
-									<input type="text" name="addr" id="sample4_roadAddress" placeholder="도로명주소">
+									<input type="text" name="addr" id="sample4_roadAddress" value="${test }" placeholder="도로명주소">
 									<input type="text" id="sample4_jibunAddress" placeholder="지번주소" style="display: none;">
 									<span id="guide"></span>	
 								 </td>
@@ -226,35 +223,35 @@
 							<tr>
 								<td class="td_title">보증금</td>
 								<td class="td_red" id="" colspan="2" style='padding-left: 30px; text-align: left;' >
-									<input type="text" name="deposit" size ="4" style="margin-right: 10px;"> (단위: 만원)
+									<input type="text" name="deposit" size ="4" value="${test }" style="margin-right: 10px;"> (단위: 만원)
 								</td>
 							</tr>
 							<tr> <td height="10"></td> </tr>
 							<tr>
 								<td class="td_title">월세</td>
 								<td class="td_red" id="" colspan="2"  style='padding-left: 30px; text-align: left;' >
-									<input type="text" name="mrent" size="4" style="margin-right:10px;"> (단위: 만원)
+									<input type="text" name="mrent" size="4" value="${test }" style="margin-right:10px;"> (단위: 만원)
 								</td>
 							</tr>
 							<tr> <td height="10"></td> </tr>
 							<tr>
 								<td class="td_title">전세</td>
 								<td class="td_red" id="" colspan="2" style='padding-left: 30px; text-align:left; ' >
-									<input type="text" name="yrent" size="4" style="margin-right:10px;"> (단위: 만원)
+									<input type="text" name="yrent" size="4" value="${test }" style="margin-right:10px;"> (단위: 만원)
 								</td>
 							</tr>
 							<tr> <td height="10"></td> </tr>
 							<tr>
 								<td class="td_title">관리비</td>
 								<td class="td_red" id="" colspan="2" style='padding-left: 30px; text-align:left; ' >
-									<input type="text" name="maintc" size="4" style="margin-right:10px;"> (단위: 만원)
+									<input type="text" name="maintc" size="4" value="${test }" style="margin-right:10px;"> (단위: 만원)
 								</td>
 							</tr>
 							<tr> <td height="10"></td> </tr>
 							<tr>
 								<td class="td_title">주차비</td>
 								<td class="td_red" id="" colspan="2" style='padding-left: 30px; text-align:left; ' >
-									<input type="text" name="parkf" size="4" style="margin-right:10px;"> (단위: 만원)
+									<input type="text" name="parkf" size="4" value="${test }" style="margin-right:10px;"> (단위: 만원)
 								</td>
 							</tr>
 						</table>
@@ -274,6 +271,7 @@
 							<tr>
 								<td class="td_title">옵션유무</td>
 								<td class="td_red" id="" colspan="2" style='padding-left: 30px; text-align: left;' >
+								<!-- db 정보로 checked 조건 추가 -->
 									<input type="checkbox" name="options" value="BLTIN" style="margin-right: 10px;"> 빌트인<br>
 									<input type="checkbox" name="options" value="ELEV" style="margin-right: 10px;"> 엘레베이터<br>
 									<input type="checkbox" name="options" value="PET" style="margin-right: 10px;"> 반려동물<br>
@@ -287,7 +285,7 @@
 							<tr>
 								<td class="td_title">기타사항</td>
 								<td class="td_default" id="updateName" colspan="2" style="padding-left: 30px; text-align: left; position:relative">
-									<textarea cols="70" rows="10" name="etc" maxlength="250" placeholder="냉장고, 책상, 에어컨..."></textarea>
+									<textarea cols="70" rows="10" name="etc" maxlength="250" placeholder="냉장고, 책상, 에어컨...">"${test }"</textarea>
 									<p id="textLength">(<span>0</span>/250)</p>
 								</td>
 							</tr>
