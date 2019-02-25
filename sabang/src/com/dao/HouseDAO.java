@@ -97,6 +97,12 @@ public class HouseDAO {
 		return session.insert("HouseMapper.houseRegister_option", optionDTO);
 	}//end houseRegister_price
 	
+	//매물 삭제
+	public int houseDel(SqlSession session, List<String> list){
+		return session.delete("HouseMapper.houseDel", list);
+	}//end houseRegister_price
+		
+	
 	
 	///////////////////////////////////////////////////////////
 	// Basic: House 자세히보기

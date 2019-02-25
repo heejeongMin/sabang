@@ -108,7 +108,23 @@ public class HouseService {
 			HouseDAO dao = new HouseDAO();
 			n = dao.houseRegister_info(session, (HouseInfoDTO) registerMap.get("info"));
 			n = dao.houseRegister_price(session, (HousePriceDTO) registerMap.get("price"));
-//			n = dao.houseRegister_option(session, (HouseOptionDTO) registerMap.get("option"));
+			n = dao.houseRegister_option(session, (HouseOptionDTO) registerMap.get("option"));
+			session.commit();
+		} catch (Exception e) {
+			session.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return n;
+	}//end getLastCode
+	
+	public int houseDel(List<String> list) {//마지막으로 등록된 코드 가져오기
+		SqlSession session = MySqlSessionFactory.getSession();
+		int n = 0;
+		try {
+			HouseDAO dao = new HouseDAO();
+			n = dao.houseDel(session, list);
 			session.commit();
 		} catch (Exception e) {
 			session.rollback();

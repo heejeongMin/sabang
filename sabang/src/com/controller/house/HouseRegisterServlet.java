@@ -46,7 +46,7 @@ public class HouseRegisterServlet extends HttpServlet {
 			String lastCode = service.getLastCode(htype);
 			PrintWriter out = response.getWriter();
 			out.print(lastCode.substring(1));
-		} //end if
+		} else {
 		
 		
 		//>>>>>>>>>>>>>>>>>>>>>>>>>> 파일 업로드
@@ -67,6 +67,7 @@ public class HouseRegisterServlet extends HttpServlet {
 		
 		FileItem item = null; 
 		String fileName = null;
+		int n = 0;
 		// Parse the request
 		try {
 			List<FileItem> items = upload.parseRequest(request);
@@ -127,7 +128,7 @@ public class HouseRegisterServlet extends HttpServlet {
 	    	registerMap.put("option", optionDTO);
 	    	
 	    //	DB에 저장
-	    	int n = service.houseRegister(registerMap);
+	    	n = service.houseRegister(registerMap);
 			
 		} catch (FileUploadException e) {
 			// TODO Auto-generated catch block
@@ -135,11 +136,12 @@ public class HouseRegisterServlet extends HttpServlet {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			String registerMsg = (n==1)? "매물등록에 성공하였습니다. Happy Sabang~" : "매물등록에 실패하였습니다. 관리자에게 문의해주세요.";
+			session.setAttribute("registerMsg", registerMsg);
+			response.sendRedirect("HouseManagingServlet");
 		}
-		
-		
-		
-		
+	}
 	}//end doGet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -37,7 +37,7 @@ div#btnBox>button {
 </style>
 </head>
 <body>
-<form action="" method="get" id="panel">
+<form action="HouseDelServlet" method="get" id="panel">
 <table id="panel">
 	<tr>
 		<th></th>

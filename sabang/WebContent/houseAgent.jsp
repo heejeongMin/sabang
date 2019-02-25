@@ -15,6 +15,18 @@ div#houseControlWrap{    width: 900px;
 p#initalMsg{font-size: 50px; font-weight: bold; color: darkblue; display: inline-block;
     margin-top: 200px;}
 </style>
+<c:if test="${registerMsg !=null}">
+	<script>
+		alert("${registerMsg}");
+	</script>
+	<c:remove  var="registerMsg" scope="session"/>
+</c:if>
+<c:if test="${deleteMsg !=null}">
+	<script>
+		alert("${deleteMsg}");
+	</script>
+	<c:remove  var="deleteMsg" scope="session"/>
+</c:if>
 </head>
 <body>
 <jsp:include page="common/top.jsp" flush="true"/><br>
