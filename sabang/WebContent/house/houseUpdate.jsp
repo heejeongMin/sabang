@@ -89,11 +89,11 @@
 							<tr>
 								<td class="td_title">세타입</td>
 								<td class="td_default update" id="" colspan="2" style='padding-left: 30px;text-align: left;'>
-	 								<c:if test="${info.rtype.equals('월세')}">
+	 								<c:if test='${infoDTO.rtype.equals("월세")}'>
 										<input type="radio" name="rtype" value="월세" checked><span style="margin-left: -15px;">월세</span>
 										<input type="radio" name="rtype" value="전세" style="float: left; position: relative; left: 50px;"><span style="margin-left: 35px;">전세</span>
 									</c:if>
-									<c:if test="${info.rtype.equals('전세')}">
+									<c:if test='${infoDTO.rtype.equals("전세")}'>
 										<input type="radio" name="rtype" value="월세"><span style="margin-left: -15px;">월세</span>
 										<input type="radio" name="rtype" value="전세" checked style="float: left; position: relative; left: 50px;"><span style="margin-left: 35px;">전세</span>
 									</c:if>
