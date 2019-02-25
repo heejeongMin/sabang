@@ -11,5 +11,6 @@
 <jsp:include page="common/menu.jsp" flush="true"/>
 <hr>
 <jsp:include page="house/houseList.jsp" flush="true"/>
+
 </body>
 </html>

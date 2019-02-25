@@ -54,7 +54,6 @@ public class HouseListServlet extends HttpServlet {
 					if(filterArray[i].startsWith("yrent")) {//보증금/전세가 범위
 						if(yrent.size() == 0) {
 							yrent.add(filterArray[i].substring(5));
-							System.out.println(filterArray[i].substring(5));
 						} else {
 							continue;
 						}// end if~else yrent.size
