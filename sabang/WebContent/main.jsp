@@ -14,6 +14,7 @@
 	</script>
 	<c:remove var="mesg" />
 </c:if>
+</script>
 </head>
 
 <body id="wrap">

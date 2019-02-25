@@ -57,10 +57,11 @@ $(document).ready(function(){
 		if($("select.filter").val() != "선택해주세요") {
 			filters.push($(this).val());
 		}
-		
 		if(yrent != undefined){
 			filters.push("yrent" + yrent);
 		}
+		
+		
 		////// ajax 시작
 	 	$.ajax({
 			type:'get',
@@ -70,7 +71,8 @@ $(document).ready(function(){
 			},
 			dataType: "html",
 			success:function(data, status, xhr){
-				$("div#wrap").html($(data).nextAll("div#wrap"));
+				console.log(data);
+				$("div#mainWrap").html($(data).nextAll("div#mainWrap"));
 			},
 			error:function(xhr, status, error){console.log(status)}
 		});//end ajax 
