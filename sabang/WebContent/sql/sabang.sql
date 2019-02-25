@@ -108,13 +108,13 @@ pcode varchar2(4) primary key,
 hcode varchar2(6), 
 pdate DATE DEFAULT SYSDATE, -- post date 게시일
 ppwd varchar2(4) not null, --post password. 계정 비밀번호와 다름. 4byte
-phone varchar2(11) not null,
+userid varchar2(10) not null,
 title varchar2(30) not null,
 content varchar2(4000) not null, --max 2000자
 filename varchar2(200), -- 업로드 파일명 
-CONSTRAINT fk_brd_pn FOREIGN KEY (phone)REFERENCES member (phone) on delete cascade -- 답변 여부 문자 메세지
+CONSTRAINT fk_brd_id FOREIGN KEY (userid)REFERENCES member (userid) on delete cascade, -- 답변 여부 맴버 확인
 CONSTRAINT fk_brd_cd FOREIGN KEY (hcode)REFERENCES house_info (hcode) on delete cascade
-);     
+);   
 
 
 create table RCNLIST

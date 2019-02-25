@@ -136,32 +136,32 @@ values ('P004', 'N', 'Y', 'N', 'N', 'N', 'Y', 'N', '에어컨, 세탁기, 냉장
 insert into house_option (hcode, bltin, elev, pet, vrd, loan, park, mdate, etc)
 values ('P005', 'N', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y', '싱크대'); 
 
-insert into board (pcode,hcode, pdate, ppwd, phone, title, content)
-values ('H001','O001', sysdate, '1111','01022822113','입주날짜에 관하여 문의드립니다','입주날짜가 협의로 되어있어서 문의드려요.');
-insert into board (pcode,hcode, pdate, ppwd, phone, title, content)
-values ('H003','O002', sysdate, '0000','01015425412','보증금과 월세에 관해','보증금을 올리는 대신 월세 가격 조정 가능한가요');
-insert into board (pcode,hcode, pdate, ppwd, phone, title, content)
-values ('H002','O001',sysdate, '1234','01012347895','이미지가 안떠요','이미지가 안뜨네요 수정해주세용');
-insert into board (pcode,hcode, pdate, ppwd, phone, title, content)
-values ('H005','O005',sysdate, '0000','01775939986','월세 조정 가능한가요','혹시 월세 조정 가능한가요?');
-insert into board (pcode,hcode, pdate, ppwd, phone, title, content)
-values ('H006','F001',sysdate, '3333','01020026600','주차장 사진은 없나요','주차장 사진을 보고싶습니다');
-insert into board (pcode,hcode, pdate, ppwd, phone, title, content)
-values ('H007','F002',sysdate, '4822','01066666666','날짜 협의드립니다','다음주 금요일 괜찮으신지요');
-insert into board (pcode,hcode, pdate, ppwd, phone, title, content)
-values ('H008','F002',sysdate, '9999','01077777777','문의드립니다','핸드폰 번호로 연락부탁드립니다');
-insert into board (pcode,hcode, pdate, ppwd, phone, title, content)
-values ('H009','P004',sysdate, '9999','01055555555','자세한 내부 사진 더 없나요','사진이 너무 안보여요 다른 사진은 없는지');
-insert into board (pcode,hcode, pdate, ppwd, phone, title, content)
-values ('H010','P002',sysdate, '4666','01023856600','내일 내방하고 싶습니다','연락 부탁드립니다');
-insert into board (pcode,hcode, pdate, ppwd, phone, title, content)
-values ('H011','P002',sysdate, '1111','01020026600','층간소음은 어떤가요','층간소음에 스트레스를 많이 받는지라 궁금합니다');
-insert into board (pcode,hcode, pdate, ppwd, phone, title, content)
-values ('H012','P004',sysdate, '5555','01088888888','저희 강아지가 많이 짖는데','방음 잘 되나요');
-insert into board (pcode,hcode, pdate, ppwd, phone, title, content)
-values ('H013','T004',sysdate, '6666','01099999999','내방 예약 문의드려여','이번주 토요일 괜찮은가여');
-insert into board (pcode,hcode, pdate, ppwd, phone, title, content)
-values ('H014','T005',sysdate, '8888','01023856600','공인중개사 번호가 없는 번호','없는 번호라네요 업데이트해주세요..');
+insert into board (pcode,hcode, pdate, ppwd, userid, title, content)
+values ('H001','O001', sysdate, '1111','agent2','입주날짜에 관하여 문의드립니다','입주날짜가 협의로 되어있어서 문의드려요.');
+insert into board (pcode,hcode, pdate, ppwd, userid, title, content)
+values ('H003','O002', sysdate, '0000','sssss','보증금과 월세에 관해','보증금을 올리는 대신 월세 가격 조정 가능한가요');
+insert into board (pcode,hcode, pdate, ppwd, userid, title, content)
+values ('H002','O001',sysdate, '1234','hollys','이미지가 안떠요','이미지가 안뜨네요 수정해주세용');
+insert into board (pcode,hcode, pdate, ppwd, userid, title, content)
+values ('H005','O005',sysdate, '0000','COFFEE','월세 조정 가능한가요','혹시 월세 조정 가능한가요?');
+insert into board (pcode,hcode, pdate, ppwd, userid, title, content)
+values ('H006','F001',sysdate, '3333','agent','주차장 사진은 없나요','주차장 사진을 보고싶습니다');
+insert into board (pcode,hcode, pdate, ppwd, userid, title, content)
+values ('H007','F002',sysdate, '4822','APPLES','날짜 협의드립니다','다음주 금요일 괜찮으신지요');
+insert into board (pcode,hcode, pdate, ppwd, userid, title, content)
+values ('H008','F002',sysdate, '9999','JELLY','문의드립니다','핸드폰 번호로 연락부탁드립니다');
+insert into board (pcode,hcode, pdate, ppwd, userid, title, content)
+values ('H009','P004',sysdate, '9999','pts','자세한 내부 사진 더 없나요','사진이 너무 안보여요 다른 사진은 없는지');
+insert into board (pcode,hcode, pdate, ppwd, userid, title, content)
+values ('H010','P002',sysdate, '4666','tester3','내일 내방하고 싶습니다','연락 부탁드립니다');
+insert into board (pcode,hcode, pdate, ppwd, userid, title, content)
+values ('H011','P002',sysdate, '1111','membertest','층간소음은 어떤가요','층간소음에 스트레스를 많이 받는지라 궁금합니다');
+insert into board (pcode,hcode, pdate, ppwd, userid, title, content)
+values ('H012','P004',sysdate, '5555','tester4','저희 강아지가 많이 짖는데','방음 잘 되나요');
+insert into board (pcode,hcode, pdate, ppwd, userid, title, content)
+values ('H013','T004',sysdate, '6666','aaaas','내방 예약 문의드려여','이번주 토요일 괜찮은가여');
+insert into board (pcode,hcode, pdate, ppwd, userid, title, content)
+values ('H014','T005',sysdate, '8888','agent2','공인중개사 번호가 없는 번호','없는 번호라네요 업데이트해주세요..');
 
 
 commit;

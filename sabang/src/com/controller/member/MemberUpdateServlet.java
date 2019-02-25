@@ -26,8 +26,11 @@ public class MemberUpdateServlet extends HttpServlet {
 		if(member!=null) {
 			String userid = member.getUserid();
 			String passwd = request.getParameter("pwdCheck");
+			
+			MemberService service = new MemberService();
+			MemberDTO mDto = service.mypageMember(userid);
 			if(passwd==null || passwd.isEmpty()) {
-				passwd = member.getPasswd();
+				passwd = mDto.getPasswd();
 			}
 			String phone = request.getParameter("phone1")+request.getParameter("phone2")+request.getParameter("phone3");
 			if(phone.equals("nullnullnull")) {
@@ -36,7 +39,6 @@ public class MemberUpdateServlet extends HttpServlet {
 			MemberDTO updateMDto = new MemberDTO(userid, passwd, phone);
 			
 			
-			MemberService service = new MemberService();
 			int num = service.MemberUpdate(updateMDto);
 			
 			nextPage="MyPageServlet";
