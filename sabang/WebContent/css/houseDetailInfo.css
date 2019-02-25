@@ -14,7 +14,6 @@
 .main-element {
 	margin-bottom: .7rem;
 	width: 100%;
-	height: 100px;
 	background: white;
 }
 
@@ -23,48 +22,66 @@
 	color : grey;
 }
 
+#title{
+	font-size : 25px;
+	font-weight :  bold;
+}
+
 /*  contents */
 .element-container {
 	display: flex;
  	justify-content: space-between; 
+ 	/* border : 1px red solid; */
 }
+
+
+
 
 /*  image , agent side */
 #leftElement {
-	width: 53%;
+	width: 50%;
 	height: 220px;
-	background: orange;
+	border : 1px red solid;
 }
 
 
 /*  price , option , board side */
 #rightElement {
 	width: 46%;
-	height: 220px;
-	background: orange;
+	padding : 10px;
+	border : 1px green solid;
 }
 
-/*  price */
-#leftElement > :first-child{
-	background: white;
+
+
+
+/*  image */
+.houseImg {
+	background: magenta ;
 	margin-bottom : 10px
 }
-
-/*  option, board */
+/* 
+ option, board
 #leftElement > div{
 	background: silver;
-	height : 48%;
 }
 
-/*  agent */
+ agent
 #rightElement > div{
 	background: silver;
-	height : 48%;
 }
-
+ */
 /*  img */
 #rightElement > :first-child{
 	background: white;
-	height : 48%;
 	margin-bottom : 10px;
 }
+#board {
+	background : tomato;
+	color : white;
+}
+table {
+	border : 1px;
+	box-shadow: none;
+}
+
