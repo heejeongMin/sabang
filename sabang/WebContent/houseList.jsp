@@ -5,17 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
- div#houseMapWrap{
-    border: 1px solid red;
-    width: 720px;
-    height: 780px;
-    float: left;
-    position: absolute;
-    left: 880px;
-    top: 150px;
- }
-</style>
 </head>
 <body>
 <jsp:include page="common/top.jsp" flush="true"/> 

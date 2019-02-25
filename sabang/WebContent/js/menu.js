@@ -61,7 +61,6 @@ $(document).ready(function(){
 			filters.push("yrent" + yrent);
 		}
 		
-		
 		////// ajax 시작
 	 	$.ajax({
 			type:'get',
@@ -71,7 +70,6 @@ $(document).ready(function(){
 			},
 			dataType: "html",
 			success:function(data, status, xhr){
-				console.log(data);
 				$("div#mainWrap").html($(data).nextAll("div#mainWrap"));
 			},
 			error:function(xhr, status, error){console.log(status)}

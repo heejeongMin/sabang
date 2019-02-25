@@ -1,18 +1,12 @@
- div#houseListWrap {
- 	border: 1px solid blue;
-    width: 850px;
-    position: realtive;
-    position: absolute;
- }
  div#houseMapWrap{
     border: 1px solid red;
-    width: 780px;
+    width: 720px;
     height: 780px;
     float: left;
-    position: relative;
-    left: 880px
+    position: absolute;
+    left: 880px;
+    top: 150px;
  }
-
 #outerTable{
 	width: 850px;
 	text-align: center;

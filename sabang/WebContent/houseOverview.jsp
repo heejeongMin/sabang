@@ -21,12 +21,10 @@
 <jsp:include page="common/menu.jsp" flush="true"/>
 <hr>
 <div id="mainWrap">
-<!-- 	<div id="houseListWrap"> -->
 		<jsp:include page="house/houseOverview.jsp" flush="true"/>
-<!-- 	</div> -->
 	<div id="houseMapWrap">
 		<jsp:include page="house/houseMap.jsp" flush="true"/>
-	<div>
+	</div>
 </div>
 </body>
 </html>
