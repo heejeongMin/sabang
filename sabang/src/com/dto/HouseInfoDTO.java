@@ -24,10 +24,6 @@ public class HouseInfoDTO {
 	public HouseInfoDTO(String hcode, String htype, String rtype, String hname, String addr, String coordX,
 			String coordY, String area, int whlflr, int flr, int room, String batr, int cntwish, String himage,
 			String hetc, String registerDate, String agntid) {
-<<<<<<< HEAD
-=======
-		super();
->>>>>>> refs/remotes/origin/hyojeong
 		this.hcode = hcode;
 		this.htype = htype;
 		this.rtype = rtype;
