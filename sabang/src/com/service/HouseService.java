@@ -13,6 +13,7 @@ import com.dto.HouseInfoDTO;
 import com.dto.HouseOptionDTO;
 import com.dto.HousePriceDTO;
 import com.dto.HouseRcnlistDTO;
+import com.dto.HouseWishlistDTO;
 
 public class HouseService {
 	private static final Logger logger = LoggerFactory.getLogger(HouseService.class);
@@ -185,7 +186,7 @@ public class HouseService {
 	}
 
 	
-	// 최근 본 House 리스트 보기
+	// 최근 본 / 찜한 House 리스트 보기
 	public List<HashMap<String, Object>> rcnHouseInfo(List<String> hCodeList){
 		SqlSession session = MySqlSessionFactory.getSession();
 		List<HashMap<String, Object>> list = null;
@@ -195,6 +196,20 @@ public class HouseService {
 			session.commit();
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return list;
+	}
+	
+	
+	// 찜한 House 리스트 보기
+	public List<HouseWishlistDTO> selectWishlist(String userid){
+		SqlSession session = MySqlSessionFactory.getSession();
+		List<HouseWishlistDTO> list = null;
+		try {
+			HouseDAO dao = new HouseDAO();
+			list = dao.selectWishlist(session, userid);
 		}finally {
 			session.close();
 		}

@@ -2,7 +2,6 @@ package com.controller.house;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,9 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.dto.AgentDTO;
-import com.dto.HouseInfoDTO;
 import com.dto.HouseRcnlistDTO;
+import com.dto.HouseWishlistDTO;
 import com.dto.MemberDTO;
 import com.service.HouseService;
 
@@ -30,7 +28,6 @@ public class InterestListServlet extends HttpServlet {
 		//로그인 정보 확인
 		HttpSession session = request.getSession();
 		MemberDTO member = (MemberDTO)session.getAttribute("memberInfo");
-		AgentDTO agent = (AgentDTO)session.getAttribute("agentInfo");
 		
 		
 		
@@ -43,48 +40,31 @@ public class InterestListServlet extends HttpServlet {
 		HouseService hService = new HouseService();
 		
 		
-		
 		String nextPage=null;
+		List<String> hCodeList = new ArrayList<>();
 		if(member!=null) {
 			nextPage="interestList.jsp";
-			String memberid = member.getUserid();
+			String userid = member.getUserid();
 			// 최근 본 방
 			if(iCategory.equals("rcnlist")) {
-				List<HouseRcnlistDTO> rcnList = hService.selectRcnlist(memberid);
-				List<String> hCodeList = new ArrayList<>();
+				List<HouseRcnlistDTO> rcnList = hService.selectRcnlist(userid);
 				for(HouseRcnlistDTO rcnDto : rcnList) {
-					if(rcnDto.getUserid().equals(memberid)) {
+					if(rcnDto.getUserid().equals(userid)) {
 						hCodeList.add(rcnDto.getHcode());
 					}
 				}
-			List<HashMap<String, Object>> houseInfoList = hService.rcnHouseInfo(hCodeList);
-			request.setAttribute("houseInfoList", houseInfoList);
+				List<HashMap<String, Object>> houseInfoList = hService.rcnHouseInfo(hCodeList);
+				request.setAttribute("houseInfoRcnList", houseInfoList);
 			
 			// 찜리스트
 			}else if(iCategory.equals("wishlist")) {
-										
-			}
-		}else if(agent!=null) {
-			nextPage="interestList.jsp";
-			String agentid = agent.getAgntid();
-			System.out.println("agentid"+agentid);
-			// 최근 본 방
-			if(iCategory.equals("rcnlist")) {
-				List<HouseRcnlistDTO> rcnList = hService.selectRcnlist(agentid);
-				List<String> hCodeList = null;
-				for(int i=0 ; i<rcnList.size() ; i++) {
-					for(HouseRcnlistDTO rcnDto : rcnList) {
-						if(rcnDto.getUserid().equals(agentid)) {
-							System.out.println("agenthCode"+rcnDto.getHcode());
-							Arrays.asList(rcnDto.getHcode());
-						}
-					}
+				List<HouseWishlistDTO> wishList = hService.selectWishlist(userid);
+				for(HouseWishlistDTO wishDto : wishList) {
+					hCodeList.add(wishDto.getHcode());
 				}
+				
 				List<HashMap<String, Object>> houseInfoList = hService.rcnHouseInfo(hCodeList);
-				request.setAttribute("houseInfoList", houseInfoList);
-			// 찜리스트
-			}else if(iCategory.equals("wishlist")) {
-							
+				request.setAttribute("houseInfoWishList", houseInfoList);
 			}
 		}else {
 			nextPage="LoginUIServlet";

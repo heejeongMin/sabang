@@ -447,7 +447,7 @@
     	</where>
    	</delete>
    	
-   	<!-- 최근 본 House 리스트 보기 -->
+   	<!-- 최근 본 / 찜한 House 리스트 보기 -->
    	<select id="rcnHouseList" parameterType="list" resultType="hashmap">
    		select hcode, htype, rtype, hname, area, flr, hetc, deposit, mrent, yrent, maintc
 		from house_info join house_price using(hcode)
@@ -457,6 +457,14 @@
        		 	#{item}
   			</foreach>
     	</where>
+   	</select>
+   	
+   	
+   	<!-- 찜 한 House 테이블보기 -->
+	<select id="wishList" parameterType="string" resultType="HouseWishlistDTO">
+   		select userid,hcode
+   		from wishlist
+   		where userid = #{userid}
    	</select>
 </mapper>
   	

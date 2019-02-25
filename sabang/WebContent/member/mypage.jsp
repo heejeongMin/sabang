@@ -79,24 +79,31 @@
 		
 		// 비밀번호 유효성검사
 		$("#passwd").on("keyup",function(event){
-				$.ajax({
-					url:"MemberPwdCheckServlet",
-					type:"get",
-					data:{
-						userid:$("input[name=userid]").val(),
-						passwd:$("#passwd").val()
-					},
-					success:function(data,status,xhr){
-						$("#pwdResult").text(data);
-						if(data=="비밀번호 일치"){
-							$(".pwdChange").attr("disabled",false);
-						}else {
-							$(".pwdChange").attr("disabled",true);
+				console.log($("#passwd").val());
+				if(event.keyCode === 8 && $("#pwdResult").text() == "비밀번호 불일치"){
+					event.preventDefault();
+				}else{
+					$.ajax({
+						url:"MemberPwdCheckServlet",
+						type:"get",
+						data:{
+							userid:$("input[name=userid]").val(),
+							passwd:$("#passwd").val()
+						},
+						success:function(data,status,xhr){
+							console.log(data);
+							$("#pwdResult").text(data);
+							if(data=="비밀번호 일치"){
+								$(".pwdChange").attr("disabled",false);
+							}else {
+								$(".pwdChange").attr("disabled",true);
+							}
+						},
+						error:function(xhr,status,err){
 						}
-					},
-					error:function(xhr,status,err){
-					}
-				})
+					})
+				}
+				
 		})
 		
 		

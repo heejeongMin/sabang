@@ -33,16 +33,19 @@ public class MemberPwdCheckServlet extends HttpServlet {
 		String nextPage=null;
 		if(member!=null) {
 			String memberid = member.getUserid();
+			MemberDTO mDto = service.mypageMember(memberid);
 				map.put("userid", memberid);
 				map.put("passwd", passwd);
 				
-				if(member.getPasswd().equals(passwd)) {
-					member = service.myPageCheckMember(map);
+				MemberDTO checkMember = null;
+				if(mDto.getPasswd().equals(passwd)) {
+					checkMember = service.myPageCheckMember(map);
 				}
-			
+				
+				
 			String mesg = "비밀번호 불일치";
-			if(member != null) {
-				if(member.getPasswd().equals(passwd)) {
+			if(checkMember != null) {
+				if(checkMember.getPasswd().equals(passwd)) {
 					mesg = "비밀번호 일치";
 				};
 			}

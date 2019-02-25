@@ -38,15 +38,15 @@ public class MemberUpdateServlet extends HttpServlet {
 			
 			MemberService service = new MemberService();
 			int num = service.MemberUpdate(updateMDto);
+			
 			nextPage="MyPageServlet";
-			request.setAttribute("mesg", "성공적으로 업데이트 되었습니다.");
-			RequestDispatcher dis = request.getRequestDispatcher(nextPage);
-			dis.forward(request, response);
+			session.setAttribute("mesg", "성공적으로 업데이트 되었습니다.");
+			
+			response.sendRedirect(nextPage);
 		}else {
 			nextPage="LoginUIServlet";
-			request.setAttribute("mesg", "로그인이 필요한 작업입니다.");
-			RequestDispatcher dis = request.getRequestDispatcher(nextPage);
-			dis.forward(request, response);
+			session.setAttribute("mesg", "로그인이 필요한 작업입니다.");
+			response.sendRedirect(nextPage);
 		}
 		
 		
