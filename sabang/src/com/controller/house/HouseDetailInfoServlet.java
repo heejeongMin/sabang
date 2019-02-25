@@ -56,7 +56,6 @@ public class HouseDetailInfoServlet extends HttpServlet {
 			session.setAttribute("info", info);
 			session.setAttribute("agentInfo", agentInfo);
 			session.setAttribute("board", board);
-			System.out.println(board);
 			nextPage = "houseDetailInfo.jsp";
 		}
 		
