@@ -117,7 +117,8 @@ public class HouseRegisterServlet extends HttpServlet {
 			System.out.println(optionDTO);
 			System.out.println(optionDTO.getBltin() == 'Y');
 			//Image 업로드
-	    	File f = new File("C:\\Projects\\sabang\\masterGit\\sabang\\WebContent\\images", fileName);
+//	    	File f = new File("C:\\Projects\\sabang\\masterGit\\sabang\\WebContent\\images", fileName);
+	    	File f = new File("C:\\gitTest3\\sabang\\sabang\\WebContent\\images", fileName);
 	    	item.write(f);
 	    	
 	    	HashMap<String, Object> registerMap = new HashMap<>();

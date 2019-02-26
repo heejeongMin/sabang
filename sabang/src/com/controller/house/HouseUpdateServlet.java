@@ -102,9 +102,12 @@ public class HouseUpdateServlet extends HttpServlet {
 				     	case "etc" : optionDTO.setEtc(item.getString("utf-8")); break;
 				    	}
 				    } else { // System.currentTimeMills() 사용으로 DB에 gimage 데이터타입을 varchar2(20)에서 varchar2(80)으로 변경
-				    	String[] fileNames = item.getName().split("\\.");
-				    	fileName = fileNames[0] + System.currentTimeMillis() + "." + fileNames[1];
-				    	infoDTO.setHimage(fileName);
+				    	
+				    	if(item.getName() != null) {
+				    		String[] fileNames = item.getName().split("\\.");
+				    		fileName = fileNames[0] + System.currentTimeMillis() + "." + fileNames[1];
+				    		infoDTO.setHimage(fileName);
+				    	}
 				    }
 				}
 				System.out.println(optionDTO);

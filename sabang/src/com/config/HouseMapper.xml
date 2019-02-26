@@ -32,7 +32,7 @@
 	</delete>
 
 <!-- 매물 수정 - house_info 테이블 -->
-	<update id="houseRegister_info" parameterType="HouseInfoDTO">
+	<update id="houseUpdate_info" parameterType="HouseInfoDTO">
 		update house_info 
 		set rtype = #{rtype} and hname = #{hname} and addr = #{addr} and area = #{area} and whlflr = #{whlflr} and
 			flr = #{flr} and room = #{room} and batr = #{batr} and himage = #{himage} and hetc = #{hetc}
@@ -40,14 +40,14 @@
 	</update>
 	
 <!-- 매물 수정 - house_price 테이블 -->
-	<update id="houseRegister_price" parameterType="HousePriceDTO">
+	<update id="houseUpdate_price" parameterType="HousePriceDTO">
 		update house_price 
 		set deposit = #{deposit} and mrent = #{mrent} and yrent = #{yrent} and maintc = #{maintc} and parkf = #{parkf}
 		where hcode = #{hcode}
 	</update>
 	
 <!-- 매물 수정 - house_option 테이블 -->
-	<update id="houseRegister_option" parameterType="HousePriceDTO">
+	<update id="houseUpdate_option" parameterType="HousePriceDTO">
 		update house_option 
 		set bltin =	<if test="bltin != 'Y'"> 'N' and </if>
 					<if test = "bltin == 'Y' ">  #{bltin} and </if>
