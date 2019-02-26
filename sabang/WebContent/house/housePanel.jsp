@@ -68,7 +68,7 @@ div#btnBox>button {
 $(document).ready(function(){
 	$("#registerBtn").on("click", function(e){//등록버튼 클릭시
 		e.preventDefault();
-		location.href="houseUIControleServlet?work=register";
+		location.href="HouseUIControleServlet?work=register";
 	});
 	
 	$("#delBtn").on("click", function(e){//삭제버튼 클릭시
@@ -101,7 +101,7 @@ $(document).ready(function(){
 		} else if ( count > 1) {
 			alert ("한번에 하나의 매물만 수정이 가능합니다. 매물 한개만 체크하고 수정버튼을 눌러주세요.");
 		} else {
-			location.href="HouseUpdateServlet?hcode="+item;
+			location.href="HouseUIControleServlet?hcode="+item;
 		}
 	});
 	

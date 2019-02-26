@@ -97,9 +97,28 @@ public class HouseDAO {
 		return session.insert("HouseMapper.houseRegister_option", optionDTO);
 	}//end houseRegister_price
 	
+	
+	//매물 수정- info - info&price&option 트랜잭션 처리
+	public int houseUpdate_info(SqlSession session, HouseInfoDTO infoDTO){
+		return session.update("HouseMapper.houseUpdate_info", infoDTO);
+	}//end houseRegister_info
+
+	//매물 수정- price - info&price&option 트랜잭션 처리
+	public int houseUpdate_price(SqlSession session, HousePriceDTO priceDTO){
+		return session.update("HouseMapper.houseUpdate_price", priceDTO);
+	}//end houseRegister_price
+
+	//매물 수정- option - info&price&option 트랜잭션 처리
+	public int houseUpdate_option(SqlSession session, HouseOptionDTO optionDTO){
+		return session.update("HouseMapper.houseUpdate_option", optionDTO);
+	}//end houseRegister_price
+	
 	//매물 삭제
 	public int houseDel(SqlSession session, List<String> list){
-		return session.delete("HouseMapper.houseDel", list);
+		int n = session.delete("HouseMapper.houseDel_info", list);
+		n = session.delete("HouseMapper.houseDel_price", list);
+		n = session.delete("HouseMapper.houseDel_option", list);
+		return n;
 	}//end houseRegister_price
 		
 	

@@ -4,14 +4,71 @@
 
 <mapper namespace="HouseMapper">
 
-<!-- 매물 등록 - house_info 테이블 -->
-	<delete id="houseDel" parameterType="list">
+<!-- 매물 삭제 - house_info 테이블 -->
+	<delete id="houseDel_option" parameterType="list">
+		delete from house_option 
+		where hcode in
+		<foreach item="item" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+<!-- 매물 삭제 - house_info 테이블 -->
+	<delete id="houseDel_price" parameterType="list">
+		delete from house_price 
+		where hcode in
+		<foreach item="item" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+<!-- 매물 삭제 - house_info 테이블 -->
+	<delete id="houseDel_info" parameterType="list">
 		delete from house_info 
 		where hcode in
 		<foreach item="item" collection="list" open="(" separator="," close=")">
 			#{item}
 		</foreach>
 	</delete>
+
+<!-- 매물 수정 - house_info 테이블 -->
+	<update id="houseRegister_info" parameterType="HouseInfoDTO">
+		update house_info 
+		set rtype = #{rtype} and hname = #{hname} and addr = #{addr} and area = #{area} and whlflr = #{whlflr} and
+			flr = #{flr} and room = #{room} and batr = #{batr} and himage = #{himage} and hetc = #{hetc}
+	 	where hcode = #{hcode}		 
+	</update>
+	
+<!-- 매물 수정 - house_price 테이블 -->
+	<update id="houseRegister_price" parameterType="HousePriceDTO">
+		update house_price 
+		set deposit = #{deposit} and mrent = #{mrent} and yrent = #{yrent} and maintc = #{maintc} and parkf = #{parkf}
+		where hcode = #{hcode}
+	</update>
+	
+<!-- 매물 수정 - house_option 테이블 -->
+	<update id="houseRegister_option" parameterType="HousePriceDTO">
+		update house_option 
+		set bltin =	<if test="bltin != 'Y'"> 'N' and </if>
+					<if test = "bltin == 'Y' ">  #{bltin} and </if>
+			elev =	<if test="elev != 'Y' "> 'N' and </if>
+				  	<if test="elev == 'Y'">  #{elev} and </if>
+			pet =	<if test="pet != 'Y' "> 'N' and </if>
+					<if test="pet == 'Y'">  #{pet} and </if>
+			vrd = 	<if test="vrd != 'Y' "> 'N' and </if>
+					<if test="vrd == 'Y'"> #{vrd} and </if>
+			loan = 	<if test="loan != 'Y' "> 'N' and </if>
+					<if test="loan == 'Y'"> #{loan} and  </if>
+			park =	<if test="park != 'Y' "> 'N' and </if>
+					<if test="park == 'Y'"> #{park} and </if>
+			mdate = <if test="mdate != 'Y' "> 'N' and </if>
+					<if test="mdate == 'Y'"> #{mdate} and </if>
+			etc = #{etc}
+		where hcode = #{hcode}
+	</update>
+
+
+
 
 <!-- 매물 등록 - house_info 테이블 -->
 	<insert id="houseRegister_info" parameterType="HouseInfoDTO">

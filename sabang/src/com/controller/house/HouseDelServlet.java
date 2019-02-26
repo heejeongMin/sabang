@@ -30,7 +30,7 @@ public class HouseDelServlet extends HttpServlet {
 		} else {
 			List<String> list = Arrays.asList(delList);
 			int n = service.houseDel(list);
-			String deleteMsg = (n==1)? "성공적으로 삭제되었습니다. 다음 매물을 기다릴게요~":"삭제 실패하였습닏. 관리자에게 문의해주세요.";
+			String deleteMsg = (n>0)? "성공적으로 삭제되었습니다. 다음 매물을 기다릴게요~":"삭제 실패하였습니다. 관리자에게 문의해주세요.";
 			session.setAttribute("deleteMsg", deleteMsg);
 			response.sendRedirect("HouseManagingServlet");
 		}//end if~else

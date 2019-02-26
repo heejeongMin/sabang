@@ -291,7 +291,7 @@
 		    <div class="swiper-button-prev"></div>
 		  </div>
 			<div id="registerDiv">
-				<input type="submit" value="등록하기">
+				<input type="submit" value="수정하기">
 				<input type="reset"	value="다시작성">
 			</div>
 </form>
