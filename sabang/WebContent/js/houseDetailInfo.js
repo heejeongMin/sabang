@@ -1,7 +1,9 @@
 $(document).ready(function(){
 	$(".row").on("click", function(e){
-		window.open("house/houseDetailBoard.jsp", "mywindow","location=no, scrollbars=no, left = 400px, top = 300px, directories=no, menubar = no, width=500,height=270");
-//		window.open("house/houseDetailBoard.jsp", "location=no", " resizable=no","scrollbars=no"  );
+		window.open("house/houseDetailBoard.jsp?pcode="+$(e.target).attr('data-pcode'),"", 
+				"scrollbars=no,toolbar=no,menubar=no,location=no,resizable=no,"+
+				"left = 500px, top= 200px, width=500, height=200"
+		);
 	})
 	
 	$(".row").mouseover(function(){

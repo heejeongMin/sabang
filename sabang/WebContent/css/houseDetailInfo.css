@@ -54,9 +54,7 @@ hr#title ~ br {
 
 /*  image */
 .houseImg {
-	background: magenta;
 	margin-bottom: 10px;
-	height: 500px;
 }
 #rightElement>:first-child {
 	background: white;
@@ -86,11 +84,10 @@ td, th {
 }
 
 hr.title {
-	border 	: 1px solid magenta;
-
-
+	border 	: 1px solid black;
+}
 hr.content {
-	border : 0.5px dashed magenta;
+	border : 0.5px dashed black;
 }
 hr.content ~ br {
 	 line-height: 80%;
@@ -103,3 +100,5 @@ element-container  div{
 	margin-top : 20px;
 	margin-bottom : 30px;
 }
+
+

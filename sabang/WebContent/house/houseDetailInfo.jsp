@@ -1,7 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+=<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt"%>
 <script src="js/houseDetailInfo.js"></script>
 <link rel="stylesheet" href="css/houseDetailInfo.css">
 <div class="wrapper">
@@ -13,8 +14,8 @@
 	<div class="element-container">
 		<div class="element" id="leftElement">
 			<div class="houseImg">
-				<img src="${info.himage}.jpg" alt="${info.himage}.jpg" height="42"
-					width="42">
+				<img src="images/house/${info.himage}.jpg" alt="${info.himage}.jpg"
+					width="100%">
 			</div>
 			<br>
 			<div class="agentInfo">
@@ -81,21 +82,116 @@
 				<hr class="content">
 				<br>
 				<table>
-					<tr>
-						<c:choose>
-							<c:when test="${option.loan == 'Y'.charAt(0) }">
-								<td text-align="center"><img
-									src="images/pictograms/loan.png" height="40" width="40"><br>전세자금대출가능
-								</td>
-							</c:when>
-							<c:when test="${option.pet == 'Y'.charAt(0) }">
-								<td text-align="center"><img
-									src="images/pictograms/pet.png" height="40" width="40"><br>애완동물
-								</td>
-							</c:when>
-						</c:choose>
-					</tr>
+				<c:set var = "remainder" value="${fn:length(list)%3}"/>
+				<c:choose>
+					<c:when test="${remainder == 0 }">
+						<c:set var ="row" value="${fn:length(list)/3}"/>
+					</c:when>
+					<c:otherwise>
+						<c:set var ="row" value="${(fn:length(list)/3)}"/>
+					</c:otherwise>
+				</c:choose>
+				<c:set var="num" value="0"/>
+				<c:set var="condition" value="true"/>
+				
+<%-- 				<c:forEach var="i" begin="0" end="${row}" varStatus="status"> --%>
+<!-- 					<tr> -->
+						<c:forEach var="item" items="${list}" varStatus = "status">
+							<c:if test="${condition}">
+							 <c:if test="${num == status.index}">
+							 	<c:choose>
+							 		<c:when test="${num ==0 || num % 3 != 0 }">
+							 			<div style="display:inline-block; width:40px;">${item}</div>
+							 			<c:set var="num" value="${num + 1}"/><!-- 1,2,3 -->
+							 		
+							 		</c:when>
+							 		<c:when test="${num%3 ==0 }">
+							 			<div></div>
+							 			<div style="display:inline-block; width:40px;">${item}</div>
+										<c:set var="condition" value="false"/>
+										<c:set var="num" value="${num + 1}"/><!--4  -->
+							 		</c:when>
+							 	</c:choose>
+								</c:if>
+							</c:if>
+						</c:forEach>
+						<c:set var="condition" value="true"/>
+<!-- 					</tr> -->
+<%-- 				</c:forEach> --%>
+				
+				
+				
+				
+						<c:forEach var="item" items="${list}" varStatus = "status">
+						
+<%-- 							<c:if test="${status.index % 3 != 0  }"> --%>
+<%-- 									${status.index} :   ${item} --%>
+<%-- 							</c:if> --%>
+<%-- 							<c:if test="${status.index % 3 == 0 }"> --%>
+<!-- 						<tr> -->
+<!-- 							<td> -->
+<%-- 							${status.index} :  ${item} --%>
+<!-- 							</td> -->
+<!-- 						</tr> -->
+<%-- 						</c:if> --%>
+							
+						<%-- 	<tr>
+								<c:choose>
+									<c:when test="${option.loan == 'Y'.charAt(0) }">
+										<td text-align="center"><img
+											src="images/pictograms/loan.png" height="40" width="40"><br>전세자금대출가능
+										</td>
+									</c:when>
+								</c:choose>
+								<c:choose>
+									<c:when test="${option.pet == 'Y'.charAt(0) }">
+										<td text-align="center"><img
+											src="images/pictograms/pet.png" height="40" width="40"><br>애완동물
+										</td>
+									</c:when>
+								</c:choose>
+								<c:choose>
+									<c:when test="${option.bltin == 'Y'.charAt(0) }">
+										<td text-align="center"><img
+											src="images/pictograms/kitchen.png" height="40" width="40"><br>빌트인주방
+										</td>
+									</c:when>
+								</c:choose>
+								<c:choose>
+									<c:when test="${option.elev == 'Y'.charAt(0) }">
+										<td text-align="center"><img
+											src="images/pictograms/elevator.png" height="40" width="40"><br>애완동물
+										</td>
+									</c:when>
+								</c:choose>
+								<c:choose>
+									<c:when test="${option.park == 'Y'.charAt(0) }">
+										<td text-align="center"><img
+											src="images/pictograms/parking.png" height="40" width="40"><br>애완동물
+										</td>
+									</c:when>
+								</c:choose>
+								<c:choose>
+									<c:when test="${option.mdate == 'Y'.charAt(0) }">
+										<td text-align="center"><img
+											src="images/pictograms/date.png" height="40" width="40"><br>애완동물
+										</td>
+									</c:when>
+								</c:choose>
+									<c:otherwise>
+							${option.etc}
+						</c:otherwise>
+							</tr> --%>
+						
+					</c:forEach>
 				</table>
+
+				<%-- 						<c:if test="${i mod 3}">
+							<tr>
+								<td height="10">
+							</tr>
+						</c:if>
+						</c:forEach> --%>
 			</div>
 			<br>
 			<div id="board">
@@ -109,20 +205,15 @@
 						<th>제목</th>
 						<th>작성자</th>
 						<th>작성일</th>
-						<th>수정</th>
-						<th>삭제</th>
 					</tr>
-					<c:forEach var="board" items="${board}" varStatus="status" scope = "session">
+
+					<c:forEach var="board" items="${board}" varStatus="status">
 						<!-- 해당 보드 클릭시 팝업으로 보드 보이기 -->
-						<tr class = "row" data-pcode="${board.pcode}">
-							<%--  <c:set var="count" value="${status.count}" data-count = "${status.count}" scope="session" /> --%>
+						<tr class="row">
 							<td>${status.count}</td>
-							<td>${board.title}</td>
-							<td>${board.userid}</td>
-							<td>${board.pdate}</td>
-							<td><input type="button" value="수정" data-class="${board.pcode}"></td>
-							<td><input type="button" value="삭제"
-								data-id="${board.pcode}>"></td>
+							<td data-pcode="${board.pcode}">${board.title}</td>
+							<td data-pcode="${board.pcode}">${board.userid}</td>
+							<td data-pcode="${board.pcode}">${board.pcode}</td>
 						</tr>
 					</c:forEach>
 				</table>

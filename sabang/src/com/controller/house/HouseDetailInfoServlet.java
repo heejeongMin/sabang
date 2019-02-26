@@ -1,6 +1,7 @@
 package com.controller.house;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -46,6 +47,8 @@ public class HouseDetailInfoServlet extends HttpServlet {
 		MemberDTO agentInfo = mService.mypageMember(agntid);
 		String nextPage = null;
 		
+		
+		
 		// session 만료 검사
 		if(member == null) { 
 			nextPage = "LoginUIServlet";	
@@ -56,6 +59,39 @@ public class HouseDetailInfoServlet extends HttpServlet {
 			session.setAttribute("info", info);
 			session.setAttribute("agentInfo", agentInfo);
 			session.setAttribute("board", board);
+			
+			ArrayList<String> list = new ArrayList<String>();
+			if (option.getBltin() == 'Y') {
+				list.add("bltin");
+			}
+			if (option.getElev() == 'Y') {
+				list.add("elev");
+			}
+			if (option.getPet() == 'Y') {
+				list.add("pet");
+			}
+			if (option.getLoan() == 'Y') {
+				list.add("loan");
+			}
+			if (option.getPark() == 'Y') {
+				list.add("park");
+			}
+			if (option.getMdate() == 'Y') {
+				list.add("mdate");
+			}
+			if (option.getEtc() != null) {
+				list.add("etc");
+			}
+			
+		/*	for (int i = 0; i < 4; i++) {
+				list.add(i);*/
+			session.setAttribute("list", list);	
+		//	} // house option 3행을 기준으로 나누기 위한 iterable 객체 생성
+			System.out.println(list.size());
+			System.out.println(list.get(0));
+			System.out.println(list.get(1));
+			System.out.println(list.get(2));
+			System.out.println(list.get(3));
 			nextPage = "houseDetailInfo.jsp";
 		}
 		
