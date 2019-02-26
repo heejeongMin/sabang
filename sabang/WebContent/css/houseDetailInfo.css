@@ -1,13 +1,14 @@
 @charset "UTF-8";
 
-*{
- padding: 0;
- margin:0;
+* {
+	padding: 0;
+	margin : 0;
 }
 
 /*  상세 페이지 전체 wrap */
 .wrapper {
 	padding: 1rem;
+	margin : 0 20px 0 20px;
 }
 
 /*  title	*/
@@ -18,70 +19,87 @@
 }
 
 /*  title 텍스트	 */
-.main-element > p {
-	color : grey;
+.main-element>p {
+	color: grey;
 }
 
-#title{
-	font-size : 25px;
-	font-weight :  bold;
+#title {
+	font-size: 1.5em;
+	font-weight: bold;
 }
+hr#title ~ br {
+	
+	line-height : 180%;
+	
+}
+
 
 /*  contents */
 .element-container {
 	display: flex;
- 	justify-content: space-between; 
- 	/* border : 1px red solid; */
+	justify-content: space-between;
+	/* border : 1px red solid; */
 }
-
-
-
 
 /*  image , agent side */
 #leftElement {
 	width: 50%;
-	height: 220px;
-	border : 1px red solid;
 }
-
 
 /*  price , option , board side */
 #rightElement {
 	width: 46%;
-	padding : 10px;
-	border : 1px green solid;
+	padding: 10px;
 }
-
-
-
 
 /*  image */
 .houseImg {
-	background: magenta ;
-	margin-bottom : 10px
+	background: magenta;
+	margin-bottom: 10px;
+	height: 500px;
 }
-/* 
- option, board
-#leftElement > div{
-	background: silver;
-}
-
- agent
-#rightElement > div{
-	background: silver;
-}
- */
-/*  img */
-#rightElement > :first-child{
+#rightElement>:first-child {
 	background: white;
-	margin-bottom : 10px;
+	margin-bottom: 25px;
 }
-#board {
-	background : tomato;
-	color : white;
+#rightElement > .option {
+	color: black;
+	padding : 10px;
+	margin-bottom : 25px;
 }
-table {
-	border : 1px;
-	box-shadow: none;
+.option td{
+	text-align : center;
 }
 
+
+table {
+	border-collapse: collapse;
+	text-align: left;
+	width : 100%;
+	font-size : 1em;
+}
+
+td, th {
+	text-align: left;
+	padding: 4px;
+	color : black;
+}
+
+hr.title {
+	border 	: 1px solid magenta;
+
+
+hr.content {
+	border : 0.5px dashed magenta;
+}
+hr.content ~ br {
+	 line-height: 80%;
+}
+hr.content + br {
+	line-height: 130%;
+}
+
+element-container  div{
+	margin-top : 20px;
+	margin-bottom : 30px;
+}
