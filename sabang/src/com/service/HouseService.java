@@ -108,7 +108,23 @@ public class HouseService {
 			HouseDAO dao = new HouseDAO();
 			n = dao.houseRegister_info(session, (HouseInfoDTO) registerMap.get("info"));
 			n = dao.houseRegister_price(session, (HousePriceDTO) registerMap.get("price"));
-//			n = dao.houseRegister_option(session, (HouseOptionDTO) registerMap.get("option"));
+			n = dao.houseRegister_option(session, (HouseOptionDTO) registerMap.get("option"));
+			session.commit();
+		} catch (Exception e) {
+			session.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return n;
+	}//end getLastCode
+	
+	public int houseDel(List<String> list) {//마지막으로 등록된 코드 가져오기
+		SqlSession session = MySqlSessionFactory.getSession();
+		int n = 0;
+		try {
+			HouseDAO dao = new HouseDAO();
+			n = dao.houseDel(session, list);
 			session.commit();
 		} catch (Exception e) {
 			session.rollback();
@@ -123,12 +139,12 @@ public class HouseService {
 	
 	///////////////////////////////////////////////////////////
 	// Basic : House 자세히보기
-	public HouseInfoDTO HouseRetrieve(String hcode){
+	public HouseInfoDTO houseRetrieve(String hcode){
 	SqlSession session = MySqlSessionFactory.getSession();
 	HouseInfoDTO dto = null;
 	try {
 	HouseDAO dao = new HouseDAO();
-	dto = dao.HouseRetrieve(session,hcode);
+	dto = dao.houseRetrieve(session,hcode);
 	}finally {
 	session.close();
 	}
@@ -136,12 +152,12 @@ public class HouseService {
 	}
 	
 	// Basic : house 가격 
-	public HousePriceDTO HousePrice(String hcode) {
+	public HousePriceDTO housePrice(String hcode) {
 		SqlSession session = MySqlSessionFactory.getSession();
 		HousePriceDTO dto = null;
 		try {
 			HouseDAO dao = new HouseDAO();
-			dto = dao.HousePrice(session, hcode);
+			dto = dao.housePrice(session, hcode);
 		} finally {
 			session.close();
 		}
@@ -149,12 +165,12 @@ public class HouseService {
 	}
 	
 	// Basic : house 옵션
-	public HouseOptionDTO HouseOption(String hcode) {
+	public HouseOptionDTO houseOption(String hcode) {
 		SqlSession session = MySqlSessionFactory.getSession();
 		HouseOptionDTO dto = null;
 		try {
 			HouseDAO dao = new HouseDAO();
-			dto = dao.HouseOption(session, hcode);
+			dto = dao.houseOption(session, hcode);
 		} finally {
 			session.close();
 		}

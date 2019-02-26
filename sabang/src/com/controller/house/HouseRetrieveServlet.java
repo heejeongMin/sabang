@@ -34,7 +34,7 @@ public class HouseRetrieveServlet extends HttpServlet {
 		String hcode = request.getParameter("hcode");
 		
 		HouseService service = new HouseService();
-		HouseInfoDTO hDto = service.HouseRetrieve(hcode);
+		HouseInfoDTO hDto = service.houseRetrieve(hcode);
 		
 		
 		HttpSession session = request.getSession();	

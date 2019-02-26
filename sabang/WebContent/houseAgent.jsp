@@ -15,6 +15,18 @@ div#houseControlWrap{    width: 900px;
 p#initalMsg{font-size: 50px; font-weight: bold; color: darkblue; display: inline-block;
     margin-top: 200px;}
 </style>
+<c:if test="${registerMsg !=null}">
+	<script>
+		alert("${registerMsg}");
+	</script>
+	<c:remove  var="registerMsg" scope="session"/>
+</c:if>
+<c:if test="${deleteMsg !=null}">
+	<script>
+		alert("${deleteMsg}");
+	</script>
+	<c:remove  var="deleteMsg" scope="session"/>
+</c:if>
 </head>
 <body>
 <jsp:include page="common/top.jsp" flush="true"/><br>
@@ -25,6 +37,7 @@ p#initalMsg{font-size: 50px; font-weight: bold; color: darkblue; display: inline
 	<c:choose>
 		<c:when test="${empty work}"><p id="initalMsg">안녕하세요 ${login.username}님 :)</p></c:when>
 		<c:when test='${work.equals("register")}'><jsp:include page="house/houseRegister.jsp" flush="true"/></c:when>
+		<c:when test='${work.equals("update")}'><jsp:include page="house/houseUpdate.jsp" flush="true"/></c:when>
 	</c:choose>
 </div>
 </body>

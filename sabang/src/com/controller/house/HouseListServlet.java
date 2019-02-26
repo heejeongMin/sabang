@@ -1,6 +1,7 @@
 package com.controller.house;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -104,6 +105,8 @@ public class HouseListServlet extends HttpServlet {
 			pagingMap = service.listByFilter(queryMap, Integer.parseInt(curPage));
 			request.setAttribute("filters", filters);
 			request.setAttribute("pagingMap", pagingMap);
+			PrintWriter out = response.getWriter();
+			out.print(pagingMap);
 			RequestDispatcher dis = request.getRequestDispatcher("houseList.jsp");
 			dis.forward(request, response);
 			

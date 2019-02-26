@@ -97,21 +97,27 @@ public class HouseDAO {
 		return session.insert("HouseMapper.houseRegister_option", optionDTO);
 	}//end houseRegister_price
 	
+	//매물 삭제
+	public int houseDel(SqlSession session, List<String> list){
+		return session.delete("HouseMapper.houseDel", list);
+	}//end houseRegister_price
+		
+	
 	
 	///////////////////////////////////////////////////////////
 	// Basic: House 자세히보기
-	public HouseInfoDTO HouseRetrieve(SqlSession session, String hcode){
+	public HouseInfoDTO houseRetrieve(SqlSession session, String hcode){
 	HouseInfoDTO dto = session.selectOne("HouseMapper.houseRetrieve",hcode);
 	return dto;
 	}
 	
 	// Basic: House 가격
-	public HousePriceDTO HousePrice(SqlSession session, String hcode){
+	public HousePriceDTO housePrice(SqlSession session, String hcode){
 	HousePriceDTO dto = session.selectOne("HouseMapper.housePrice",hcode);
 	return dto;
 	}
 	// Basic: House 옵션
-	public HouseOptionDTO HouseOption(SqlSession session, String hcode){
+	public HouseOptionDTO houseOption(SqlSession session, String hcode){
 	HouseOptionDTO dto = session.selectOne("HouseMapper.houseOption",hcode);
 	return dto;
 	}

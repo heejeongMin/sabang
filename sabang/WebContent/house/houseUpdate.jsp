@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.6/css/swiper.min.css">
 <style type="text/css">
 	form#register{
@@ -29,56 +31,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("select[name=htype]").on("change", function(e){ //상품 코드 값 정하기
-			$.ajax({
-				type:'get',
-				url:'HouseRegisterServlet',
-				data:{ htype:$(e.target).val()},
-				dataType:'text',
-				success:function(data, status, xhr){
-					var newCode = Number.parseInt(data)+1;
-					switch($(e.target).val()){
-					case "o": 
-						if(newCode < 10){
-							$("#hcode>input").val("O00"+newCode);
-						} else if (newCode < 100){
-							$("#hcode>input").val("O0"+newCode);
-						} else {
-							$("#hcode>input").val("O"+newCode);
-						}
-						 break;
-					case "t": 
-						if(newCode < 10 ){
-							$("#hcode>input").val("T00"+newCode); 
-						} else if (newCode < 100){
-							$("#hcode>input").val("T0"+newCode);
-						} else {
-							$("#hcode>input").val("T"+newCode);
-						}
-						break;
-					case "f": 
-						if(newCode < 10){
-							$("#hcode>input").val("F00"+newCode);
-						} else if (newCode < 100){
-							$("#hcode>input").val("F0"+newCode);
-						} else {
-							$("#hcode>input").val("F"+newCode);
-						}
-						 break;
-					case "p":
-						if(newCode < 10){
-							$("#hcode>input").val("P00"+newCode);
-						} else if (newCode < 100){
-							$("#hcode>input").val("P0"+newCode);
-						} else {
-							$("#hcode>input").val("P"+newCode);
-						}
-						break;
-					}
-				},
-				error:function(xhr, status, data){ console.log(status); }
-			});//end ajax
-		});//end select gcategory change
 		
 		$("form").on("submit", function(e){//submit전 유효성체크
 			console.log(Number.isNaN(Number.parseInt($("input[name=whlflr]").val())));
@@ -108,8 +60,8 @@
 		
 	});//end ready
 </script>
-	<h1 id="registerH1">새로운 매물 등록하기</h1>
-	<form method="POST" enctype="multipart/form-data" action="HouseRegisterServlet" id="register">
+	<h1 id="registerH1">매물 수정하기</h1>
+	<form method="POST" enctype="multipart/form-data" action="HouseUpdateServlet" id="register">
 	 	<div class="swiper-container">
 		    <div class="swiper-wrapper">
 		      <div class="swiper-slide">
@@ -124,41 +76,41 @@
 							<tr> <td height="10"></td> </tr>
 							<td class="td_title">매물타입</td>
 							<td class="td_default update" id="updateName" colspan="2" style='padding-left: 30px;text-align: left;'>
-								<select name="htype">
-									<option value="">선택해주세요</option>	
-									<option value="o">원룸</option>	
-									<option value="t">투룸</option>	
-									<option value="f">오피스텔</option>	
-									<option value="p">아파트</option>	
-								</select>
+								<input type="text" name="htype" value="${infoDTO.htype}" readonly>
 							</td>
 							<tr> <td height="10"></td> </tr>
 							<tr>
 								<td class="td_title">매물코드</td>
 								<td class="td_default" colspan="2" style='padding-left: 30px' id="hcode">
-									<input type="text" name="hcode" value="" readonly>
+									<input type="text" name="hcode" value="${infoDTO.hcode}" readonly>
 								</td>
 							</tr>
 							<tr> <td height="10"></td> </tr>
 							<tr>
 								<td class="td_title">세타입</td>
 								<td class="td_default update" id="" colspan="2" style='padding-left: 30px;text-align: left;'>
-									<input type="radio" name="rtype" value="월세"><span style="margin-left: -15px;">월세</span>
-									<input type="radio" name="rtype" value="전세" style="float: left; position: relative; left: 50px;"><span style="margin-left: 35px;">전세</span>
+	 								<c:if test='${infoDTO.rtype.equals("월세")}'>
+										<input type="radio" name="rtype" value="월세" checked><span style="margin-left: -15px;">월세</span>
+										<input type="radio" name="rtype" value="전세" style="float: left; position: relative; left: 50px;"><span style="margin-left: 35px;">전세</span>
+									</c:if>
+									<c:if test='${infoDTO.rtype.equals("전세")}'>
+										<input type="radio" name="rtype" value="월세"><span style="margin-left: -15px;">월세</span>
+										<input type="radio" name="rtype" value="전세" checked style="float: left; position: relative; left: 50px;"><span style="margin-left: 35px;">전세</span>
+									</c:if>
 								</td>
 							</tr>
 							<tr> <td height="10"></td> </tr>
 							<tr>
 								<td class="td_title">매물명</td>
 								<td class="td_default" id="" colspan="2" style='padding-left: 30px'>
-									<input type="text" name="hname" placeholder="50자 이내" size=40 required>
+									<input type="text" name="hname" placeholder="50자 이내" size=40 value="${infoDTO.hname}" >
 								</td>
 							</tr>
 							<tr> <td height="10"></td> </tr>
 							<tr>
 								<td class="td_title">매물설명</td>
 								<td class="td_default" id="" colspan="2" style="padding-left: 30px; text-align: left; position:relative">
-									<textarea cols="70" rows="10" name="hetc" maxlength="250" required></textarea>
+									<textarea cols="70" rows="10" name="hetc" maxlength="250" required>${infoDTO.hetc}</textarea>
 									<p id="textLength">(<span>0</span>/250)</p>
 								</td>
 							</tr>
@@ -166,37 +118,37 @@
 							<tr>
 								<td class="td_title">평수</td>
 								<td class="td_red" id="" colspan="2" style='padding-left: 30px; text-align: left;' >
-									<input type="text" name="area" size ="4" style="margin-right: 10px;"> (단위: 제곱미터)
+									<input type="text" name="area" size ="4" style="margin-right: 10px;" value="${infoDTO.area}"> (단위: 제곱미터)
 								</td>
 							</tr>
 							<tr> <td height="10"></td> </tr>
 							<tr>
 								<td class="td_title">층수</td>
 								<td class="td_red" id="" colspan="2"  style='padding-left: 30px; text-align: left;' >
-									<input type="text" name="flr" size="2" placeholder="매물층" style="margin-right:10px;">/
-									<input type="text" name="whflr" size="2" placeholder="건물층" style="position: absolute; margin-left: 10px;">
+									<input type="text" name="flr" size="2" placeholder="매물층" value="${infoDTO.flr}" style="margin-right:10px; ">/
+									<input type="text" name="whflr" size="2" placeholder="건물층" value="${infoDTO.whlflr}" style="position: absolute; margin-left: 10px;">
 								</td>
 							</tr>
 							<tr> <td height="10"></td> </tr>
 							<tr>
 								<td class="td_title">방개수</td>
 								<td class="td_red" id="" colspan="2" style='padding-left: 30px; text-align:left; ' >
-									<input type="text" name="room" size="2" style="margin-right:10px;"> 개
+									<input type="text" name="room" size="2" value="${infoDTO.room}" style="margin-right:10px;"> 개
 								</td>
 							</tr>
 							<tr> <td height="10"></td> </tr>
 							<tr>
 								<td class="td_title">욕실개수</td>
 								<td class="td_red" id="" colspan= "2" style='padding-left: 30px; text-align:left;' >
-									<input type="text" name="batr" size="2" style="margin-right:10px;"> 개 
+									<input type="text" name="batr" size="2" value="${infoDTO.batr}" style="margin-right:10px;"> 개 
 								</td>
 							</tr>
 							<tr> <td height="10"></td> </tr>
 							<tr> <td class="td_title">주소</td>
 								 <td class="td_red" colspan="2" style='padding-left: 30px' >
-									<input type="text" name="post" id="sample4_postcode" placeholder="우편번호">
-									<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" style="margin: 0 10px;">
-									<input type="text" name="addr" id="sample4_roadAddress" placeholder="도로명주소">
+									<input type="text" name="post" id="sample4_postcode" value="" placeholder="우편번호">
+									<input type="button" onclick="sample4_execDaumPostcode()" value="주소 찾기" style="margin: 0 10px;">
+									<input type="text" name="addr" id="sample4_roadAddress" value="${infoDTO.addr}" placeholder="도로명주소">
 									<input type="text" id="sample4_jibunAddress" placeholder="지번주소" style="display: none;">
 									<span id="guide"></span>	
 								 </td>
@@ -226,35 +178,35 @@
 							<tr>
 								<td class="td_title">보증금</td>
 								<td class="td_red" id="" colspan="2" style='padding-left: 30px; text-align: left;' >
-									<input type="text" name="deposit" size ="4" style="margin-right: 10px;"> (단위: 만원)
+									<input type="text" name="deposit" size ="4" value="${priceDTO.deposit}" style="margin-right: 10px;"> (단위: 만원)
 								</td>
 							</tr>
 							<tr> <td height="10"></td> </tr>
 							<tr>
 								<td class="td_title">월세</td>
 								<td class="td_red" id="" colspan="2"  style='padding-left: 30px; text-align: left;' >
-									<input type="text" name="mrent" size="4" style="margin-right:10px;"> (단위: 만원)
+									<input type="text" name="mrent" size="4" value="${priceDTO.mrent}" style="margin-right:10px;"> (단위: 만원)
 								</td>
 							</tr>
 							<tr> <td height="10"></td> </tr>
 							<tr>
 								<td class="td_title">전세</td>
 								<td class="td_red" id="" colspan="2" style='padding-left: 30px; text-align:left; ' >
-									<input type="text" name="yrent" size="4" style="margin-right:10px;"> (단위: 만원)
+									<input type="text" name="yrent" size="4" value="${priceDTO.yrent}" style="margin-right:10px;"> (단위: 만원)
 								</td>
 							</tr>
 							<tr> <td height="10"></td> </tr>
 							<tr>
 								<td class="td_title">관리비</td>
 								<td class="td_red" id="" colspan="2" style='padding-left: 30px; text-align:left; ' >
-									<input type="text" name="maintc" size="4" style="margin-right:10px;"> (단위: 만원)
+									<input type="text" name="maintc" size="4" value="${priceDTO.maintc}" style="margin-right:10px;"> (단위: 만원)
 								</td>
 							</tr>
 							<tr> <td height="10"></td> </tr>
 							<tr>
 								<td class="td_title">주차비</td>
 								<td class="td_red" id="" colspan="2" style='padding-left: 30px; text-align:left; ' >
-									<input type="text" name="parkf" size="4" style="margin-right:10px;"> (단위: 만원)
+									<input type="text" name="parkf" size="4" value="${priceDTO.parkf}" style="margin-right:10px;"> (단위: 만원)
 								</td>
 							</tr>
 						</table>
@@ -274,20 +226,55 @@
 							<tr>
 								<td class="td_title">옵션유무</td>
 								<td class="td_red" id="" colspan="2" style='padding-left: 30px; text-align: left;' >
+								<c:if test="${optionDTO.bltin == 'Y'.charAt(0)}">
+									<input type="checkbox" name="options" value="BLTIN" checked style="margin-right: 10px;"> 빌트인<br>
+								</c:if>
+								<c:if test="${optionDTO.bltin != 'Y'.charAt(0)}">
 									<input type="checkbox" name="options" value="BLTIN" style="margin-right: 10px;"> 빌트인<br>
+								</c:if>
+								<c:if test="${optionDTO.elev == 'Y'.charAt(0)}">
+									<input type="checkbox" name="options" value="ELEV" checked style="margin-right: 10px;"> 엘레베이터<br>
+								</c:if>
+								<c:if test="${optionDTO.elev != 'Y'.charAt(0)}">
 									<input type="checkbox" name="options" value="ELEV" style="margin-right: 10px;"> 엘레베이터<br>
+								</c:if>
+								<c:if test="${optionDTO.pet == 'Y'.charAt(0)}">
+									<input type="checkbox" name="options" value="PET" checked style="margin-right: 10px;"> 반려동물<br>
+								</c:if>
+								<c:if test="${optionDTO.pet != 'Y'.charAt(0)}">
 									<input type="checkbox" name="options" value="PET" style="margin-right: 10px;"> 반려동물<br>
+								</c:if>
+								<c:if test="${optionDTO.vrd == 'Y'.charAt(0)}">
+									<input type="checkbox" name="options" value="VRD" checked style="margin-right: 10px;"> 베란다/발코니<br>
+								</c:if>
+								<c:if test="${optionDTO.vrd != 'Y'.charAt(0)}">
 									<input type="checkbox" name="options" value="VRD" style="margin-right: 10px;"> 베란다/발코니<br>
+								</c:if>
+								<c:if test="${optionDTO.loan == 'Y'.charAt(0)}">
+									<input type="checkbox" name="options" value="LOAN" checked style="margin-right: 10px;"> 전세자금대출<br>
+								</c:if>
+								<c:if test="${optionDTO.loan != 'Y'.charAt(0)}">
 									<input type="checkbox" name="options" value="LOAN" style="margin-right: 10px;"> 전세자금대출<br>
+								</c:if>
+								<c:if test="${optionDTO.park == 'Y'.charAt(0)}">
+									<input type="checkbox" name="options" value="PARK" checked style="margin-right: 10px;"> 주차<br>
+								</c:if>
+								<c:if test="${optionDTO.park != 'Y'.charAt(0)}">
 									<input type="checkbox" name="options" value="PARK" style="margin-right: 10px;"> 주차<br>
+								</c:if>
+								<c:if test="${optionDTO.mdate == 'Y'.charAt(0)}">
+									<input type="checkbox" name="options" value="MDDATE" checked style="margin-right: 10px;"> 입주날짜 협의 가능<br>
+								</c:if>
+								<c:if test="${optionDTO.mdate != 'Y'.charAt(0)}">
 									<input type="checkbox" name="options" value="MDDATE" style="margin-right: 10px;"> 입주날짜 협의 가능<br>
+								</c:if>	
 								</td>
 							</tr>
 							<tr> <td height="10"></td> </tr>
 							<tr>
 								<td class="td_title">기타사항</td>
 								<td class="td_default" id="updateName" colspan="2" style="padding-left: 30px; text-align: left; position:relative">
-									<textarea cols="70" rows="10" name="etc" maxlength="250" placeholder="냉장고, 책상, 에어컨..."></textarea>
+									<textarea cols="70" rows="10" name="etc" maxlength="250" placeholder="냉장고, 책상, 에어컨...">${optionDTO.etc}</textarea>
 									<p id="textLength">(<span>0</span>/250)</p>
 								</td>
 							</tr>

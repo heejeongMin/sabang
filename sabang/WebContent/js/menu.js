@@ -1,6 +1,4 @@
 $(document).ready(function(){
-	jQuery.ajaxSetup({cache:false});
-	
 	
 	//메뉴 드롭다운 슬라이드 효과
 	$("li.filterOpt").on("click", function(e){
@@ -64,8 +62,6 @@ $(document).ready(function(){
 			filters.push("yrent" + yrent);
 		}
 		
-		console.log(filters);
-		
 		////// ajax 시작
 	 	$.ajax({
 			type:'get',
@@ -77,7 +73,7 @@ $(document).ready(function(){
 			success:function(data, status, xhr){
 				$("div#mainWrap").html($(data).nextAll("div#mainWrap"));
 			},
-			error:function(xhr, status, error){console.log(error)}
+			error:function(xhr, status, error){console.log(status)}
 		});//end ajax 
 	}); // end input[name=rtype] onChange 
 	
