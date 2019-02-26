@@ -12,9 +12,9 @@
 <hr>
 <div id="mainWrap">
 	<jsp:include page="house/houseList.jsp" flush="true"/>
+</div>
 	<div id="houseMapWrap">
 		<jsp:include page="house/houseMap.jsp" flush="true"/>
 	</div>
-</div>
 </body>
 </html>

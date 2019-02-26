@@ -11,9 +11,9 @@
 <hr>
 <div id="mainWrap">
 	<jsp:include page="house/houseOverview.jsp" flush="true"/>
+</div>
 	<div id="houseMapWrap">
 		<jsp:include page="house/houseMap.jsp" flush="true"/>
 	</div>
-</div>
 </body>
 </html>

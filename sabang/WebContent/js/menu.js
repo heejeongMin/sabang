@@ -1,4 +1,6 @@
 $(document).ready(function(){
+	jQuery.ajaxSetup({cache:false});
+	
 	
 	//메뉴 드롭다운 슬라이드 효과
 	$("li.filterOpt").on("click", function(e){
@@ -61,6 +63,9 @@ $(document).ready(function(){
 		if(yrent != undefined){
 			filters.push("yrent" + yrent);
 		}
+		
+		console.log(filters);
+		
 		////// ajax 시작
 	 	$.ajax({
 			type:'get',
@@ -72,29 +77,29 @@ $(document).ready(function(){
 			success:function(data, status, xhr){
 				$("div#mainWrap").html($(data).nextAll("div#mainWrap"));
 			},
-			error:function(xhr, status, error){console.log(status)}
+			error:function(xhr, status, error){console.log(error)}
 		});//end ajax 
 	}); // end input[name=rtype] onChange 
 	
 	$("li#filterInitializer").on("click", function(e){
-		console.log(1);
-		$("input.filter").each(function(idx, ele){
-			if(ele.checked) {
-				$(ele).prop("checked", false);
-			};
-		});//방타입, 월세/전세, 관리비 버튼 초기화
-		
-		$("select.filter").find("option").each(function(idx, ele){
-			if($(ele).val() == "선택해주세요"){
-				$(ele).prop("selected", true);
-			}
-		});// 가격대 버튼 월세값 초기화 
-			
-		var yrent;
-		$("input[type=range]").val(10000);
-		$("span.searchRange").text("");
-		
-		$("input.filter, select.filter").trigger("change");
+		location.href="HouseListServlet";
+//		$("input.filter").each(function(idx, ele){
+//			if(ele.checked) {
+//				$(ele).prop("checked", false);
+//			};
+//		});//방타입, 월세/전세, 관리비 버튼 초기화
+//		
+//		$("select.filter").find("option").each(function(idx, ele){
+//			if($(ele).val() == "선택해주세요"){
+//				$(ele).prop("selected", true);
+//			}
+//		});// 가격대 버튼 월세값 초기화 
+//			
+//		var yrent;
+//		$("input[type=range]").val(10000);
+//		$("span.searchRange").text("");
+//		
+//		$("input.filter, select.filter").trigger("change");
 		 
 	});
 	

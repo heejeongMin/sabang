@@ -70,14 +70,14 @@
 
 <!-- houseOverview.jsp에서 신매물 최근 3일기준 w/o paging  -->
 	<select id="retrieveNewItems" resultType="hashmap">
-		select hcode, htype, rtype, hname, area, flr, hetc, deposit, mrent, yrent, maintc
+		select hcode, htype, rtype, hname, area, coordx, coordy, flr, hetc, deposit, mrent, yrent, maintc
 		from house_info join house_price using(hcode)
 		where registerdate > sysdate-3
 	</select>
 
 <!-- houseOverview.jsp에서 핫매물 cntwish 기준   w/o paging -->
 	<select id="retrieveHotItems" resultType="hashmap">
-		select hcode, htype, rtype, hname, area, flr, hetc, deposit, mrent, yrent, maintc
+		select hcode, htype, rtype, hname, area, coordx, coordy, flr, hetc, deposit, mrent, yrent, maintc
 		from house_info join house_price using(hcode)
 		where cntwish > (select
 		max(cntwish) - 3 from house_info)

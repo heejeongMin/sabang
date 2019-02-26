@@ -1,10 +1,10 @@
 package com.controller.house;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -110,6 +110,7 @@ public class HouseListServlet extends HttpServlet {
 		} else {//main.jsp를 통해서 houseOverview.jsp로 처음 넘어오는 경우
 			List<HashMap<String, Object>> newList = service.retrieveNewItems();
 			List<HashMap<String, Object>> hotList = service.retrieveHotItems();
+			
 			request.setAttribute("newList", newList);
 			request.setAttribute("hotList", hotList);
 			RequestDispatcher dis = request.getRequestDispatcher("houseOverview.jsp");
