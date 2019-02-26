@@ -108,4 +108,21 @@ public class MemberDAO {
 		int n = session.update("MemberMapper.agentUpdate",dto);
 		return n;
 	}
+	
+	/////////////////////Naver Login//////////////////////////
+	public int naverUser(SqlSession session, HashMap<String, String> naverMap) {
+		String uniqId = naverMap.get("uniqId");
+		System.out.println(uniqId);
+		int n = session.selectOne("MemberMapper.naverUser", naverMap);
+		if (n==0) naverSignUp(session, naverMap);
+		return n;
+	}//end naverIdCheck
+	
+	private int naverSignUp(SqlSession session, HashMap<String, String> naverMap) {
+		return session.insert("MemberMapper.naverSignUp", naverMap);
+	}//end naverSignUp
+	
+	public MemberDTO getNaverUser(SqlSession session, String uniqId) {
+		return session.selectOne("MemberMapper.getNaverUser", uniqId);
+	}//end naverSignUp
 }

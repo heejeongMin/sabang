@@ -268,4 +268,37 @@ public class MemberService {
 		}
 		return n;
 	}
+	
+	/////////////////////Naver Login//////////////////////////
+	public int naverUser(HashMap<String, String> naverMap) {
+		SqlSession session = MySqlSessionFactory.getSession();
+		int n = 0;
+		try {
+			MemberDAO dao = new MemberDAO();
+			n = dao.naverUser(session, naverMap);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return n;
+	} //naverUser
+	
+	public MemberDTO getNaverUser(String uniqId) {
+		SqlSession session = MySqlSessionFactory.getSession();
+		MemberDTO dto = null;
+		try {
+			MemberDAO dao = new MemberDAO();
+			dto = dao.getNaverUser(session, uniqId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return dto;
+	} //naverUser
+	
+	
+	
 }

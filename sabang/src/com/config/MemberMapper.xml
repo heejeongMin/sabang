@@ -154,4 +154,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    		set passwd = #{passwd}, phone = #{phone}
    		where userid = #{userid}
    	</update>
+   	
+   	<!-- /////////////////////Naver Login////////////////////////// -->
+   	<select id="naverUser" parameterType="hashmap" resultType="int">
+   		select count(*) from member 
+   		where userid = #{uniqId}
+   	</select>
+   	
+   	<insert id="naverSignUp" parameterType="hashmap">
+   		insert into member (userid, passwd, ssn, username, post, addr, phone, email)
+		values (#{uniqId}, 'naver', #{uniqId}, #{name}, 'na',  'na', #{uniqId}, #{email})
+   	</insert>
+   	
+   	 <select id="getNaverUser" parameterType="string" resultType="MemberDTO">
+   		select userid, passwd, ssn, username, post, addr, phone, email, agent
+		from member 
+		where userid = #{uniqId}
+   	</select>
+   	
 </mapper>

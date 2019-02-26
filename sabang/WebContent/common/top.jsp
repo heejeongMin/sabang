@@ -6,7 +6,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.6/css/swiper.min.css"> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -57,7 +56,7 @@ $(document).ready(function(){
 							</li>
 						</ul>
 					</li>
-					<li><a href="LogoutServlet">로그아웃</a></li>
+					<li><a href="LogoutServlet" id="logout">로그아웃</a></li>
 					<li><a href="MyPageServlet">mypage</a></li>
 					<li><a href = "#" id ="delMbr">회원탈퇴 </a> </li>
 				</ul>
@@ -103,9 +102,10 @@ $(document).ready(function(){
 			} else {
 				alert("감사합니다, "+'${name}'+"님께 더 나은 서비스를 제공하는 사방이 되겠습니다.");
 			}
-		})
-	})
+		});
+	});
 </script>
+
        	
        	
        	

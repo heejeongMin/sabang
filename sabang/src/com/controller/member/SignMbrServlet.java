@@ -43,7 +43,7 @@ public class SignMbrServlet extends HttpServlet {
 		
 		MemberDTO member = new MemberDTO(userid, passwd, ssn, username, post, addr, phone, email,agent);
 		
-		System.out.println("* * * * SignMbrServlet  :  agent is     " + agent); 
+//		System.out.println("* * * * SignMbrServlet  :  agent is     " + agent); 
 		
 		
 		MemberService service = new MemberService();
