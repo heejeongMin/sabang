@@ -53,6 +53,7 @@ $(document).ready(function(){
 		$("input.filter").each(function(idx, ele){
 			if(ele.checked) filters.push($(ele).val());
 		});//end each
+		console.log(yrent);
 		
 		if($("select.filter").val() != "선택해주세요") {
 			filters.push($(this).val());
@@ -90,7 +91,7 @@ $(document).ready(function(){
 			}
 		});// 가격대 버튼 월세값 초기화 
 			
-		var yrent;
+		yrent = undefined;
 		$("input[type=range]").val(10000);
 		$("span.searchRange").text("");
 		
