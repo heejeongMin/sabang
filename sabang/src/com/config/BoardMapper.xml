@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- basic : hcode에 따른 보드가져오기 -->
 
 	<select id="boardList" parameterType="string" resultType="BoardDTO">
-		select pcode, pdate, ppwd, phone, title, content, filename, hcode
+		select pcode, TO_CHAR(pdate, 'YYYY.MM.DD HH:MI') pdate, ppwd, title, content, filename, hcode, userid
 		from board
 		where hcode = #{hcode}
 	</select>
