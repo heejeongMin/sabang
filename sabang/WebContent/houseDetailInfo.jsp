@@ -9,7 +9,7 @@
 </head>
 <body>
 <jsp:include page="common/top.jsp" flush="true"/>
-<jsp:include page="common/menu.jsp" flush="true"/>
+<jsp:include page="common/search.jsp" flush="true"/>
 <hr>
 <jsp:include page="house/houseDetailInfo.jsp" flush="true"/>
 </body>
