@@ -99,15 +99,11 @@ public class MemberDAO {
 	}
 	
 	
-	public int MemberUpdate(SqlSession session, MemberDTO dto) {
+	public int memberUpdate(SqlSession session, MemberDTO dto) {
 		int n = session.update("MemberMapper.memberUpdate",dto);
 		return n;
 	}
-	
-	public int AgentUpdate(SqlSession session, AgentDTO dto) {
-		int n = session.update("MemberMapper.agentUpdate",dto);
-		return n;
-	}
+
 	
 	/////////////////////Naver Login//////////////////////////
 	public int naverUser(SqlSession session, HashMap<String, String> naverMap) {

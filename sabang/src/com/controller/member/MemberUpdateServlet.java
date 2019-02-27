@@ -39,7 +39,7 @@ public class MemberUpdateServlet extends HttpServlet {
 			MemberDTO updateMDto = new MemberDTO(userid, passwd, phone);
 			
 			
-			int num = service.MemberUpdate(updateMDto);
+			int num = service.memberUpdate(updateMDto);
 			
 			nextPage="MyPageServlet";
 			session.setAttribute("mesg", "성공적으로 업데이트 되었습니다.");
