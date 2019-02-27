@@ -95,7 +95,7 @@ public class HouseDAO {
 	//매물 올리기- option - info&price&option 트랜잭션 처리
 	public int houseRegister_option(SqlSession session, HouseOptionDTO optionDTO){
 		return session.insert("HouseMapper.houseRegister_option", optionDTO);
-	}//end houseRegister_price
+	}//end houseRegister_option
 	
 	
 	//매물 수정- info - info&price&option 트랜잭션 처리
@@ -111,7 +111,7 @@ public class HouseDAO {
 	//매물 수정- option - info&price&option 트랜잭션 처리
 	public int houseUpdate_option(SqlSession session, HouseOptionDTO optionDTO){
 		return session.update("HouseMapper.houseUpdate_option", optionDTO);
-	}//end houseRegister_price
+	}//end houseUpdate_option
 	
 	//매물 삭제
 	public int houseDel(SqlSession session, List<String> list){
@@ -119,8 +119,37 @@ public class HouseDAO {
 		n = session.delete("HouseMapper.houseDel_price", list);
 		n = session.delete("HouseMapper.houseDel_option", list);
 		return n;
-	}//end houseRegister_price
+	}//end houseDel
+	
+	//매물 cntwish 값 업데이트
+	public int updateCntWish(SqlSession session, String hcode) {
+		int n = getCntWish(session, hcode);
 		
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("hcode", hcode);
+		map.put("cntwish", n);
+		
+		n = session.update("HouseMapper.updateCntWish", map);
+		return n;
+	}//updateCntWish
+	
+	
+	//매물 cntwish 값 가져오기 
+	private int getCntWish(SqlSession session, String hcode) {
+		return session.selectOne("HouseMapper.getCntWish", hcode);
+	}//getCntWish
+		
+	// 유저가 찜한 매물 저장하기
+	public int addWish(SqlSession session, HouseWishlistDTO dto) {
+		int n = getNoOfWishes(session, dto.getUserid());
+		int result = (n >= 6)? 0 : session.insert("HouseMapper.addWish", dto);
+		return result;
+	}//updateCntWish
+	
+	//한 유저당 찜 한 개수 가지고 오기
+	private int getNoOfWishes(SqlSession session, String userid) {
+		return session.selectOne("HouseMapper.getNoOfWishes", userid);
+	}//getCntWish
 	
 	
 	///////////////////////////////////////////////////////////

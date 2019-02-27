@@ -4,6 +4,27 @@
 
 <mapper namespace="HouseMapper">
 
+	<insert id="addWish" parameterType="hashmap">
+	 	insert into wishlist (userid, hcode) 
+	 	values (#{userid}, #{hcode})
+	</insert>
+	
+	<select id="getNoOfWishes" parameterType="string" resultType="int">
+		 select count(*) from wishlist where userid= #{userid}
+	</select>
+
+<!-- 매물의 cntwish 값 올리기 -->
+	<update id="updateCntWish" parameterType="hashmap">
+	 	update house_info
+        set cntwish  = #{cntwish}+1
+        where hcode = #{hcode}
+	</update>
+	
+<!-- 매물의 cntwish 값 가져오기  -->
+	<select id="getCntWish" parameterType="string" resultType="int">
+		select cntwish from house_info where hcode = #{hcode}
+	</select>
+
 <!-- 매물 삭제 - house_info 테이블 -->
 	<delete id="houseDel_option" parameterType="list">
 		delete from house_option 

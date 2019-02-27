@@ -27,6 +27,7 @@ var naverLogin = new naver.LoginWithNaverId(
 			var email = naverLogin.user.getEmail();//email
 			var name = naverLogin.user.getName(); // name
 			var uniqId = naverLogin.user.getId(); //43415424 -> id 
+			console.log(email);
 			
 			var result = "";
 			if (uniqId != null){

@@ -10,11 +10,19 @@
 <script src="js/houseDetailInfo.js"></script>
 <script src="js/geoLocation.js"></script>
 
+<c:set var="mesg" value="${mesg}" scope="session" />
+<c:if test="${!(empty mesg)}">
+	<script>
+		alert('${mesg}');
+	</script>
+	<c:remove var="mesg" />
+</c:if>
+
 <div class="wrapper">
 	<div class="main-element">
 		<h2><p id="hcodeBar">매물코드 : ${info.hcode}</p></h2>
 		<div id="likeAndShare">
-			<div class="func" id="like"><i class="fas fa-heart"></i> 찜하기</div>
+			<div class="func" id="like" data-code="${info.hcode}"><i class="fas fa-heart"></i> 찜하기</div>
 			<div class="func" id="share" onclick="share()">
 				<span>
 					<script type="text/javascript" src="https://ssl.pstatic.net/share/js/naver_sharebutton.js"></script>
@@ -23,7 +31,7 @@
 					</script>
 				</span>
 			공유하기</div>
-			<form id="myform" style="dispaly:none;">
+			<form id="myform" style="dispaly:none;"><!-- form 부분은 없으면 네이버 공유가 작동을 안해서 넣어놈. display 안됨 -->
 				<input type="hidden" style="dispaly:none;" id="url" value="https://search.naver.com/search.naver?sm=tab_hty.top&where=nexearch&oquery=%EB%84%A4%EC%9D%B4%EB%B2%84+%EA%B0%9C%EB%B0%9C%EC%9E%90%EC%84%BC%ED%84%B0&ie=utf8&query=%EB%84%A4%EC%9D%B4%EB%B2%84+%EA%B0%9C%EB%B0%9C%EC%9E%90%EC%84%BC%ED%84%B0"><br/>
     			<input type="hidden" style="dispaly:none;" id="title" value="사방 매물 공유 ${info.hcode} "><br/>
 			</form>
@@ -68,8 +76,6 @@
 			</div>
 		</div>
 		<div class="option"></div>
-
-
 		<div class="element" id="rightElement">
 			<div class="housePrice">
 				<h3>가격 정보</h3>
@@ -142,10 +148,6 @@
 						<c:set var="condition" value="true"/>
 <!-- 					</tr> -->
 <%-- 				</c:forEach> --%>
-				
-				
-				
-				
 						<c:forEach var="item" items="${list}" varStatus = "status">
 						
 <%-- 							<c:if test="${status.index % 3 != 0  }"> --%>
@@ -230,7 +232,6 @@
 						<th>작성자</th>
 						<th>작성일</th>
 					</tr>
-
 					<c:forEach var="board" items="${board}" varStatus="status">
 						<!-- 해당 보드 클릭시 팝업으로 보드 보이기 -->
 						<tr class="row">
@@ -246,14 +247,33 @@
 	</div>
 <script type="text/javascript">
 $(document).ready(function(){
-	getLocation();
+	getLocation();// 화면뜨자마자 현재위치 기반 날씨 가져오기
+	
+	$("div#like").on("click", function(e){//찜하기 누르면 house_info의 cntwish 값 증가와 wishlist 추가
+		$.ajax({
+			type:'get',
+			url:'HouseLikeServlet',
+			data: {hcode:$(e.target).attr("data-code")},
+			dataType: 'text',
+			success:function(data, status, xhr){
+				if (data == 0){
+					alert ("찜을 아쉽지만 6개 까지만 가능합니다~");
+				} else {
+					alert ("I like it~ 찜하기에 성공하였습니다.");
+				}
+				console.log(data);
+			},
+			error: function(xhr, status, error){console.log(status);}
+		});//end ajax
+	});//click
+	
+	
 });//end ready	
 	function share() { //네이버 share 기능
-	      var url = encodeURI(encodeURIComponent(myform.url.value));
-	      var title = encodeURI(myform.title.value);
-	      var shareURL = "https://share.naver.com/web/shareView.nhn?url=" + url + "&title=" + title;
-	      alert("많이 공유해주세요~~")
-	      window.open (shareURL, "naver공유", "_blank", "width=100, height=100");
+	    var url = encodeURI(encodeURIComponent(myform.url.value));
+	    var title = encodeURI(myform.title.value);
+	    var shareURL = "https://share.naver.com/web/shareView.nhn?url=" + url + "&title=" + title;
+	    alert("많이 공유해주세요~~");
+	    window.open (shareURL, "naver공유", "_blank", "width=100, height=100");
 	}
-
 </script>

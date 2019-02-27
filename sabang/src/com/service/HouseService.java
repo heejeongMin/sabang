@@ -154,6 +154,22 @@ public class HouseService {
 		return n;
 	}//end houseDel
 	
+	public int updateCntWish(HouseWishlistDTO dto) {//매물 cnthwish 업데이트
+		SqlSession session = MySqlSessionFactory.getSession();
+		int n = 0;
+		try {
+			HouseDAO dao = new HouseDAO();
+			n = dao.updateCntWish(session, dto.getHcode());
+			n = dao.addWish(session, dto);
+			session.commit();
+		} catch (Exception e) {
+			session.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return n;
+	}//end updateCntWish
 	
 	
 	///////////////////////////////////////////////////////////
