@@ -6,8 +6,6 @@
 <style>
 </style>
 <form action="HouseListServlet" method="get" id="searchBar">
-	<input type="text" name="search" id="search" placeholder="연희동, 신촌, 신축 ...">
-	<button id="searchBtn">검색</button>
 	<ul id="filterList">
 		<li class="filterOpt">방타입
 			<ul class="sublist subListHide">
