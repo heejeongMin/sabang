@@ -54,8 +54,8 @@
 	var naverLogin = new naver.LoginWithNaverId(
 		{
 			clientId: "QN3lv2J2hB8uD9Nm2s90",
-			callbackUrl: "http://localhost:8090/sabang/main.jsp",
-			isPopup: false, /* 팝업을 통한 연동처리 여부 */
+			callbackUrl: "http://localhost:8090/sabang/naverJumpPage.jsp",
+			isPopup: true, /* 팝업을 통한 연동처리 여부 */
 			loginButton: {color: "green", type: 1, height: 25} /* 로그인 버튼의 타입을 지정 */
 		}
 	);
@@ -89,9 +89,7 @@
 					naverLogin.logout();
 					location.href = "LogoutServlet";
 				});
-			} else {
-				console.log("?");
-			}
+			} 
 		}//end setLoginStatus
 		
 		function sabangSignUp (uniqId, name, email){
@@ -113,6 +111,8 @@
 			});//end ajax
 			return result;
 		}//end sabangSignUp
+		
+		
 </script>	
 	
 	
