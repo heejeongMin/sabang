@@ -6,7 +6,7 @@ public class TimeFetcher {
 	
 	public Calendar getBaseTime() {
 		Calendar c = Calendar.getInstance();
-		System.out.println(getLastBaseTime(c));
+//		System.out.println(getLastBaseTime(c));
 		return getLastBaseTime(c);
 	}
 	

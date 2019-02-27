@@ -28,7 +28,7 @@ public class WeatherServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String coordX = request.getParameter("nx");
 		String coordY = request.getParameter("ny");
-//		System.out.println(coordX + "\t" + coordY);
+		System.out.println(coordX + "\t" + coordY);
 		
 		//요청 일자, 시간 만들기
 		TimeFetcher test = new TimeFetcher();
@@ -50,7 +50,7 @@ public class WeatherServlet extends HttpServlet {
 		String[] asLocation = new String[]{"서울특별시", "서초구", "반포1동"};  
 		String x = null;
 		String y = null;
-		if(coordX==null || coordY == null) {
+		if(coordX.equals("0") || coordY.equals("0")) {
 			CoordFetcher cf = new CoordFetcher();
 			Coord coord = cf.fetchCoord(asLocation);
 			x = coord.getSx();
@@ -63,7 +63,7 @@ public class WeatherServlet extends HttpServlet {
 		 reqURL += "ServiceKey=VD5ItN1ersyBmcioWetkmK%2B4gwxiWRfmz4XKtGg%2FntXHP4CtGSLuAkL4VDjr8rPJEy1S6eYO0BdsVK8C%2FeqL0A%3D%3D";
 		 reqURL += "&base_date="+base_date;
 		 reqURL += "&base_time="+base_time;
-		 if (coordX==null||coordY==null) {
+		 if (coordX.equals("0") || coordY.equals("0")) {
 			 reqURL += "&nx="+x+"&ny="+y;
 		 } else {
 			 reqURL += "&nx="+coordX+"&ny="+coordY;

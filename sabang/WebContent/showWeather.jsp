@@ -9,9 +9,7 @@
 <script src="js/geoLocation.js"></script>
 <script>
 $(document).ready(function(){
-	
 	getLocation();
-// 	$("form").submit();
 });//end ready
 </script>
 </head>

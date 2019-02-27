@@ -1,6 +1,7 @@
-function myPosition (nx, ny){
+function myPosition (nx, ny, errorCode){
 	$("#x").val(nx);
 	$("#y").val(ny);
+	console.log(nx, ny);
 	
 	$.ajax({
 		type:'get',
@@ -19,7 +20,6 @@ function myPosition (nx, ny){
 			} else {
 				weatherMsg = (result.TMX < 27)? "오늘은 비가 올 수도 있겠어요! 우산을 챙기고 강동원 닯은 공인중개사님을 만나볼까요? <i class='fas fa-smile-wink'></i>": "오늘 불쾌지수 오마이갓! 그래도 방 보는걸 막을 수 없다! 공인중개사님과 약속을 먼저 잡아 보는건 어떠세요? <i class='fas fa-grin-squint-tears'></i>";
 			}
-			
 			$("p#weatherForcast").html(weatherMsg);
 		},
 		error:function(xhr, status, error){
@@ -28,8 +28,9 @@ function myPosition (nx, ny){
 	});//end ajax
 	
 //	location.href="WeatherServlet?x="+nx+"&y="+ny;
-//	console.log($("#x").val());
+	console.log($("#x").val());
 }//end myPosition
+
 function getLocation(){
     if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition(locationSuccess, locationError, geo_options);
@@ -44,7 +45,7 @@ function getLocation(){
         longitude = p.coords.longitude;
         var rs = dfs_xy_conv("toXY",latitude,longitude);
         // 위도/경도 -> 기상청 좌표x / 좌표 y 변환
-//        console.log(rs.nx, rs.ny);
+        console.log(rs.nx, rs.ny);
         myPosition(rs.nx, rs.ny);
     }
 // locationSuccess
@@ -57,7 +58,10 @@ function getLocation(){
             3 : "응답시간 지남"
         };
         var errorMsg = errorTypes[error.code];
-        console.log(errorMsg)
+        console.log(errorMsg);
+        if (errorMsg == '위치가 안잡힘' || errorMesg == '응답시간 지남'){
+        	myPosition(0,0,2);
+        }
 }// locationError
  
     var geo_options = {
