@@ -1,4 +1,4 @@
-form#searchBar{padding: 10px; width: 800px;}
+form#searchBar{ padding: 10px; width: 800px;}
 button, ul, li.filterOpt, input, span.rangeValue{float:left;}
 div.rangeWrap{ height: 50px; width:350px; padding: 0 10px 0 10px; color: darkblue; }
 

@@ -2,7 +2,7 @@
 <%@page import="com.dto.MemberDTO"%> 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="css/menu.css">
+<link rel="stylesheet" href="css/sabangTest.css">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -39,12 +39,12 @@ $(document).ready(function(){
 })
 	
 </script>
-<span style="color: white"> <img src="images/logo/sabanglogo_w.png" width="23px" height = "100%"> Sabang
+<a href="main.jsp" id="logo"></a>
 	<c:choose>
              <c:when test="${memberInfo ne null}">
              <c:set var="name" value="${memberInfo.username}" scope="request" />
-				<c:out value="${name}" />님을 위한 사방팔방 곳곳의 방
-				<ul id="filterListRgn">
+				<span id="welUser"><c:out value="${name}" />님을 위한 사방팔방 곳곳의 방</span>
+				<ul id="loginOnMenu">
 					<li class="filterRgn">지역별 매물
 						<ul class="sublist subListHide" id="rgn">
 							<li class="subFilter">
@@ -60,15 +60,13 @@ $(document).ready(function(){
 					<li><a href="MyPageServlet">mypage</a></li>
 					<li><a href = "#" id ="delMbr">회원탈퇴 </a> </li>
 				</ul>
-				
              </c:when>
 
              <c:when test="${agentInfo ne null}">
               <c:set var="name" value="${agentInfo.agntname}" scope="request" />
-				<c:out value="${name}" />님을 위한 사방팔방 곳곳의 방
-				<a href="LogoutServlet">로그아웃</a> 
-				<ul id="filterListRgn">
-					<li class="filterRgn">지역별 매물
+				<span id="welUser"><c:out value="${name}" />님을 위한 사방팔방 곳곳의 방</span>
+				<ul id="loginOnAgentMenu">
+					<li class="filterRgn"><a href="#">지역별 매물</a>
 						<ul class="sublist subListHide" id="rgn">
 							<li class="subFilter">
 								<div class="rangeWrapRgn" >
@@ -86,11 +84,13 @@ $(document).ready(function(){
              </c:when> 
               
               <c:otherwise>
-              	<a href="LoginUIServlet" id="login">로그인</a> 
-              	<a href="SignCheckMbrServlet">회원가입</a>
+              	<ul id="loginOffMenu">
+              		<li><a href="LoginUIServlet" id="login">로그인</a></li>
+              		<li><a href="SignCheckMbrServlet">회원가입</a></li>
+              	</ul>
               </c:otherwise>
        </c:choose>
-       	</span>
+       	
 <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
