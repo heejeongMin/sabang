@@ -159,7 +159,7 @@ public class HouseService {
 		int n = 0;
 		try {
 			HouseDAO dao = new HouseDAO();
-			n = dao.updateCntWish(session, dto.getHcode());
+//			n = dao.updateCntWish(session, dto.getHcode());
 			n = dao.addWish(session, dto);
 			session.commit();
 		} catch (Exception e) {

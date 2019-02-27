@@ -7,7 +7,7 @@
 
 <!-- 유저가 찜한 매물이 이미 찜했던 매물인지 확인 -->	
 	<select id ="duplicateHouseCheck" parameterType="string" resultType="int">
-		select count(*) from wishlist where hcode = #{hcode}
+		select count(*) from wishlist where hcode = #{hcode} and userid = #{userid}
 	</select>
 
 <!-- 유저가 찜한 매물 저장하기 -->	
@@ -165,19 +165,23 @@
 		'%'||#{search}||'%'
 	</select>
 
-<!-- houseOverview.jsp에서 신매물 최근 3일기준 w/o paging  -->
-	<select id="retrieveNewItems" resultType="hashmap">
+<!-- houseOverview.jsp에서 신매물 가장 최근에 올린 애부터 7일 사이  -->
+	<select id="retrieveNewItems" parameterType="string" resultType="hashmap">
 		select hcode, htype, rtype, hname, area, coordx, coordy, flr, hetc, deposit, mrent, yrent, maintc
 		from house_info join house_price using(hcode)
-		where registerdate > sysdate-3
+		where registerdate > #{maxSeven}
 	</select>
-
+	
+<!-- 신매물 기준이 되는 최신 매물에서 7일전꺼 -->
+    <select id="test" resultType="string">
+    	select to_char(max(registerdate)-7, 'yyyymmdd') from house_info
+    </select>
+    
 <!-- houseOverview.jsp에서 핫매물 cntwish 기준   w/o paging -->
 	<select id="retrieveHotItems" resultType="hashmap">
 		select hcode, htype, rtype, hname, area, coordx, coordy, flr, hetc, deposit, mrent, yrent, maintc
 		from house_info join house_price using(hcode)
-		where cntwish > (select
-		max(cntwish) - 3 from house_info)
+		where cntwish >= (select AVG(cntwish) from house_info)
 		order by cntwish desc
 	</select>
 
