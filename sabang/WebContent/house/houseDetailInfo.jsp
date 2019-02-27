@@ -111,113 +111,60 @@
 				<br>
 				<hr class="content">
 				<br>
-				<table>
-				<c:set var = "remainder" value="${fn:length(list)%3}"/>
+				<c:set var="remainder" value="${fn:length(list)%3}" />
 				<c:choose>
 					<c:when test="${remainder == 0 }">
-						<c:set var ="row" value="${fn:length(list)/3}"/>
+						<c:set var="row" value="${fn:length(list)/3}" />
 					</c:when>
 					<c:otherwise>
-						<c:set var ="row" value="${(fn:length(list)/3)}"/>
+						<c:set var="row" value="${(fn:length(list)/3)}" />
 					</c:otherwise>
 				</c:choose>
-				<c:set var="num" value="0"/>
-				<c:set var="condition" value="true"/>
-				
-<%-- 				<c:forEach var="i" begin="0" end="${row}" varStatus="status"> --%>
-<!-- 					<tr> -->
-						<c:forEach var="item" items="${list}" varStatus = "status">
-							<c:if test="${condition}">
-							 <c:if test="${num == status.index}">
-							 	<c:choose>
-							 		<c:when test="${num ==0 || num % 3 != 0 }">
-							 			<div style="display:inline-block; width:40px;">${item}</div>
-							 			<c:set var="num" value="${num + 1}"/><!-- 1,2,3 -->
-							 		
-							 		</c:when>
-							 		<c:when test="${num%3 ==0 }">
-							 			<div></div>
-							 			<div style="display:inline-block; width:40px;">${item}</div>
-										<c:set var="condition" value="false"/>
-										<c:set var="num" value="${num + 1}"/><!--4  -->
-							 		</c:when>
-							 	</c:choose>
-								</c:if>
-							</c:if>
-						</c:forEach>
-						<c:set var="condition" value="true"/>
-<!-- 					</tr> -->
-<%-- 				</c:forEach> --%>
-						<c:forEach var="item" items="${list}" varStatus = "status">
-						
-<%-- 							<c:if test="${status.index % 3 != 0  }"> --%>
-<%-- 									${status.index} :   ${item} --%>
-<%-- 							</c:if> --%>
-<%-- 							<c:if test="${status.index % 3 == 0 }"> --%>
-<!-- 						<tr> -->
-<!-- 							<td> -->
-<%-- 							${status.index} :  ${item} --%>
-<!-- 							</td> -->
-<!-- 						</tr> -->
-<%-- 						</c:if> --%>
-							
-						<%-- 	<tr>
+				<c:set var="num" value="0" />
+				<c:set var="condition" value="true" />
+				<div style="margint-left: auto; margin-right: auto; text-align : center;" >
+					<c:forEach var="item" items="${list}" varStatus="status">
+						<c:if test="${condition}">
+							<c:if test="${num == status.index}">
 								<c:choose>
-									<c:when test="${option.loan == 'Y'.charAt(0) }">
-										<td text-align="center"><img
-											src="images/pictograms/loan.png" height="40" width="40"><br>전세자금대출가능
-										</td>
-									</c:when>
-								</c:choose>
-								<c:choose>
-									<c:when test="${option.pet == 'Y'.charAt(0) }">
-										<td text-align="center"><img
-											src="images/pictograms/pet.png" height="40" width="40"><br>애완동물
-										</td>
-									</c:when>
-								</c:choose>
-								<c:choose>
-									<c:when test="${option.bltin == 'Y'.charAt(0) }">
-										<td text-align="center"><img
-											src="images/pictograms/kitchen.png" height="40" width="40"><br>빌트인주방
-										</td>
-									</c:when>
-								</c:choose>
-								<c:choose>
-									<c:when test="${option.elev == 'Y'.charAt(0) }">
-										<td text-align="center"><img
-											src="images/pictograms/elevator.png" height="40" width="40"><br>애완동물
-										</td>
-									</c:when>
-								</c:choose>
-								<c:choose>
-									<c:when test="${option.park == 'Y'.charAt(0) }">
-										<td text-align="center"><img
-											src="images/pictograms/parking.png" height="40" width="40"><br>애완동물
-										</td>
-									</c:when>
-								</c:choose>
-								<c:choose>
-									<c:when test="${option.mdate == 'Y'.charAt(0) }">
-										<td text-align="center"><img
-											src="images/pictograms/date.png" height="40" width="40"><br>애완동물
-										</td>
-									</c:when>
-								</c:choose>
-									<c:otherwise>
-							${option.etc}
-						</c:otherwise>
-							</tr> --%>
-						
-					</c:forEach>
-				</table>
+									<c:when test="${num ==0 || num % 3 != 0 }">
+										<div id = "pics" style="display: inline-block; margin: 10px 0 10px 0 ; padding: 0 10px 0 10px">
+											<img src="images/pictograms/${item}.png" height="40"
+												width="40">
+											<c:if test="${item eq 'bltin'}">
+												<br>빌트인 주방
+										</c:if>
+											<c:if test="${item eq 'loan'}">
+												<br>전세자금대출가능
+										</c:if>
+											<c:if test="${item eq 'mdate'}">
+												<br>즉시 입주
+										</c:if>
+											<c:if test="${item eq 'pet'}">
+												<br>애완동물
+										</c:if>
+											<c:if test="${item eq 'elev'}">
+												<br>엘레베이터
+										</c:if>
 
-				<%-- 						<c:if test="${i mod 3}">
-							<tr>
-								<td height="10">
-							</tr>
+										</div>
+										<c:set var="num" value="${num + 1}" />
+									</c:when>
+									<c:when test="${num%3 ==0 }">
+										<div></div>
+										<div style="display: inline-block; width: 40px;">${item}</div>
+										<c:set var="condition" value="false" />
+										<c:set var="num" value="${num + 1}" />
+									</c:when>
+								</c:choose>
+							</c:if>
 						</c:if>
-						</c:forEach> --%>
+					</c:forEach>
+					<br> 기타 사항 ( ${etc} )
+					<c:set var="condition" value="true" />
+					<c:forEach var="item" items="${list}" varStatus="status">
+					</c:forEach>
+				</div>
 			</div>
 			<br>
 			<div id="board">
@@ -232,13 +179,14 @@
 						<th>작성자</th>
 						<th>작성일</th>
 					</tr>
+
 					<c:forEach var="board" items="${board}" varStatus="status">
 						<!-- 해당 보드 클릭시 팝업으로 보드 보이기 -->
 						<tr class="row">
 							<td>${status.count}</td>
 							<td data-pcode="${board.pcode}">${board.title}</td>
 							<td data-pcode="${board.pcode}">${board.userid}</td>
-							<td data-pcode="${board.pcode}">${board.pcode}</td>
+							<td data-pcode="${board.pcode}">${board.pdate}</td>
 						</tr>
 					</c:forEach>
 				</table>

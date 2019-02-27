@@ -79,19 +79,13 @@ public class HouseDetailInfoServlet extends HttpServlet {
 			if (option.getMdate() == 'Y') {
 				list.add("mdate");
 			}
-			if (option.getEtc() != null) {
-				list.add("etc");
-			}
+			session.setAttribute("etc", option.getEtc());
+			
 			
 		/*	for (int i = 0; i < 4; i++) {
 				list.add(i);*/
 			session.setAttribute("list", list);	
 		//	} // house option 3행을 기준으로 나누기 위한 iterable 객체 생성
-			System.out.println(list.size());
-			System.out.println(list.get(0));
-			System.out.println(list.get(1));
-			System.out.println(list.get(2));
-			System.out.println(list.get(3));
 			nextPage = "houseDetailInfo.jsp";
 		}
 		
