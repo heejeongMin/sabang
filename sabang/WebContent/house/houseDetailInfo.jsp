@@ -258,10 +258,11 @@ $(document).ready(function(){
 			success:function(data, status, xhr){
 				if (data == 0){
 					alert ("찜을 아쉽지만 6개 까지만 가능합니다~");
-				} else {
+				} else if (data==1){
 					alert ("I like it~ 찜하기에 성공하였습니다.");
+				} else if (data==2){
+					alert ("이미 찜을 하셨네요~");
 				}
-				console.log(data);
 			},
 			error: function(xhr, status, error){console.log(status);}
 		});//end ajax

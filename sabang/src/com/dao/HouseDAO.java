@@ -141,15 +141,39 @@ public class HouseDAO {
 		
 	// 유저가 찜한 매물 저장하기
 	public int addWish(SqlSession session, HouseWishlistDTO dto) {
-		int n = getNoOfWishes(session, dto.getUserid());
-		int result = (n >= 6)? 0 : session.insert("HouseMapper.addWish", dto);
+		int n = getNoOfWishes(session, dto); //유저의 찜 개수 가지고 오기
+		int result = 0;
+		int dupleCheck = 0;
+		
+		 // result 0: 찜 개수 다 찼음
+		// result 1: 찜 성공
+		// result 2 : 찜 대상 매물 중복
+		
+		if (n >=6) {// 이미 찜한개수가 6개가 다 찼을때 result 는 0
+			result = 0;
+		} else {// 찜은 할 수 있는 블럭
+			if (n==0) {//찜을 단 한번도 하지 않은 상태니까 그냥 insert 해주고,
+				result = session.insert("HouseMapper.addWish", dto);
+			} else {//찜을 한번이라도 한 이력이 있으니까, 중복매물인지 확인
+				dupleCheck = duplicateHouseCheck(session, dto.getHcode());
+				if (dupleCheck == 0) {//중복매물이 아니면 insert진행 
+					result = session.insert("HouseMapper.addWish", dto);
+				} else {//중복매물이면 2 리턴
+					result = 2;
+				}
+			}//if~else
+		}
 		return result;
 	}//updateCntWish
 	
 	//한 유저당 찜 한 개수 가지고 오기
-	private int getNoOfWishes(SqlSession session, String userid) {
-		return session.selectOne("HouseMapper.getNoOfWishes", userid);
+	private int getNoOfWishes(SqlSession session, HouseWishlistDTO dto) {
+		return session.selectOne("HouseMapper.getNoOfWishes", dto.getUserid());
 	}//getCntWish
+	
+	private int duplicateHouseCheck(SqlSession session, String hcode) {
+		return session.selectOne("HouseMapper.duplicateHouseCheck", hcode);
+	};
 	
 	
 	///////////////////////////////////////////////////////////

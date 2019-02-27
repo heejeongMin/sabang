@@ -4,11 +4,19 @@
 
 <mapper namespace="HouseMapper">
 
+
+<!-- 유저가 찜한 매물이 이미 찜했던 매물인지 확인 -->	
+	<select id ="duplicateHouseCheck" parameterType="string" resultType="int">
+		select count(*) from wishlist where hcode = #{hcode}
+	</select>
+
+<!-- 유저가 찜한 매물 저장하기 -->	
 	<insert id="addWish" parameterType="hashmap">
 	 	insert into wishlist (userid, hcode) 
 	 	values (#{userid}, #{hcode})
 	</insert>
 	
+<!-- 한 유저가 찜한 개수 가져오기 -->	
 	<select id="getNoOfWishes" parameterType="string" resultType="int">
 		 select count(*) from wishlist where userid= #{userid}
 	</select>
