@@ -11,4 +11,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from board
 		where hcode = #{hcode}
 	</select>
+	
+	<!-- basic : 보드 삭제 -->
+	<delete id="deleteBoard" parameterType="hashmap">
+		delete 
+		from board
+		where pcode = #{pcode}
+		and ppwd = #{ppwd}
+	</delete>
+	
+	
+	<!-- basic : 보드 수정 -->
+ 	<update id="updateBoard" parameterType="BoardDTO" >
+		update board
+		from board
+		set title = #{title}, content = #{content}, pdate = sysdate
+		where pcode = #{pcode}
+	</update>
 </mapper>
