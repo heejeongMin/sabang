@@ -25,21 +25,26 @@ div#JumpImageWrap, div#JumpTextWrap{
 	width:100vw;
 	text-align:center;
 }
-
 </style>
 <div id="NavertoSabang">
-<div id="JumpImageWrap"> <img src="images/logo/sabanglogo_w.png" width="300px" height = "300px" id="enterSabangIMG">	</div>
-<div id="JumpTextWrap"><button id="enterSabang">사방으로 입장</button></div>
+	<div id="JumpImageWrap"> 
+		<img src="images/logo/sabanglogo_w.png" width="300px" height = "300px" id="enterSabangIMG">
+	</div>
+	<div id="JumpTextWrap">
+		<button id="enterSabang">사방으로 입장</button>
+	</div>
 </div>
-	<div class="container" style="display:none;">
-			<div class="jumbotron">
-				<p>
-					<div id="naverIdLogin">
-						<a id="naverIdLogin_loginButton" href="#" role="button" style="display:none;">
-						</a>
-					</div>
-				</p>
-			</div>
+
+<!-- 아래는 없으면 네이버 스크립트에서 오류가 나서 내비둠.   -->
+<div class="container" style="display: none;">
+	<div class="jumbotron">
+		<p>
+		<div id="naverIdLogin">
+			<a id="naverIdLogin_loginButton" href="#" role="button"
+				style="display: none;"> </a>
+		</div>
+		</p>
+	</div>
 </div>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -106,19 +111,11 @@ div#JumpImageWrap, div#JumpTextWrap{
 			return result;
 		}//end sabangSignUp
 		
-		
-// 		$("a#logout").click(function(e){
-// 			e.preveDefault();
-// 			naverLogin.logout();
-// 			location.href = "LogoutServlet";
-// 		});
-		
 		$(document).ready(function(){
 			$("button#enterSabang").on("click", function(e){
 				setLoginStatus();
 				opener.location.href="main.jsp";
 				window.close();
 			});
-			
 		});
 </script>
