@@ -5,9 +5,10 @@
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="css/houseDetailInfo.css">
-<link rel="stylesheet" href="css/houseDetailMainElement.css">
+<link rel="stylesheet" href="css/houseDetailInfo2.css">
 
 <script src="js/houseDetailInfo.js"></script>
+<script src="js/geoLocation.js"></script>
 
 <div class="wrapper">
 	<div class="main-element">
@@ -60,6 +61,10 @@
 						<td>${agentInfo.addr}</td>
 					</tr>
 				</table>
+				<div id="weatherBlock">
+					<p><i class="fas fa-umbrella"></i> 강수량: <span id="pop"></span>&percnt; <i class="fas fa-sun"></i> 낮 최고기온: <span id="tmx"></span>&#8451;</p>
+					<p id="weatherForcast"></p>
+				</div>
 			</div>
 		</div>
 		<div class="option"></div>
@@ -240,6 +245,9 @@
 		</div>
 	</div>
 <script type="text/javascript">
+$(document).ready(function(){
+	getLocation();
+});//end ready	
 	function share() { //네이버 share 기능
 	      var url = encodeURI(encodeURIComponent(myform.url.value));
 	      var title = encodeURI(myform.title.value);

@@ -38,3 +38,17 @@ img#naver{
 	position: relative;
     top: 3px;
 }
+div#weatherBlock{
+	margin-top:20px;
+	
+}
+i.fa-umbrella{
+	color: blue;
+}
+i.fa-sun{
+	color:orange;
+}
+i.fa-smile-wink, i.fa-grin-squint-tears, i.fa-grin-hearts, i.fa-meh-rolling-eyes{
+	color: hotpink;
+}
+
