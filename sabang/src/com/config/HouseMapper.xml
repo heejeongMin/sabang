@@ -34,35 +34,39 @@
 <!-- 매물 수정 - house_info 테이블 -->
 	<update id="houseUpdate_info" parameterType="HouseInfoDTO">
 		update house_info 
-		set rtype = #{rtype} and hname = #{hname} and addr = #{addr} and area = #{area} and whlflr = #{whlflr} and
-			flr = #{flr} and room = #{room} and batr = #{batr} and himage = #{himage} and hetc = #{hetc}
+		set rtype = #{rtype}, hname = #{hname}, addr = #{addr}, area = #{area}, whlflr = #{whlflr},
+			flr = #{flr}, room = #{room}, batr = #{batr}, 
+			<if test="himage != null">
+				himage = #{himage},
+			</if>
+			hetc = #{hetc}
 	 	where hcode = #{hcode}		 
 	</update>
 	
 <!-- 매물 수정 - house_price 테이블 -->
 	<update id="houseUpdate_price" parameterType="HousePriceDTO">
 		update house_price 
-		set deposit = #{deposit} and mrent = #{mrent} and yrent = #{yrent} and maintc = #{maintc} and parkf = #{parkf}
+		set deposit = #{deposit}, mrent = #{mrent}, yrent = #{yrent}, maintc = #{maintc}, parkf = #{parkf}
 		where hcode = #{hcode}
 	</update>
 	
 <!-- 매물 수정 - house_option 테이블 -->
 	<update id="houseUpdate_option" parameterType="HousePriceDTO">
 		update house_option 
-		set bltin =	<if test="bltin != 'Y'"> 'N' and </if>
-					<if test = "bltin == 'Y' ">  #{bltin} and </if>
-			elev =	<if test="elev != 'Y' "> 'N' and </if>
-				  	<if test="elev == 'Y'">  #{elev} and </if>
-			pet =	<if test="pet != 'Y' "> 'N' and </if>
-					<if test="pet == 'Y'">  #{pet} and </if>
-			vrd = 	<if test="vrd != 'Y' "> 'N' and </if>
-					<if test="vrd == 'Y'"> #{vrd} and </if>
-			loan = 	<if test="loan != 'Y' "> 'N' and </if>
-					<if test="loan == 'Y'"> #{loan} and  </if>
-			park =	<if test="park != 'Y' "> 'N' and </if>
-					<if test="park == 'Y'"> #{park} and </if>
-			mdate = <if test="mdate != 'Y' "> 'N' and </if>
-					<if test="mdate == 'Y'"> #{mdate} and </if>
+		set bltin =	<if test="bltin != 'Y'"> 'N', </if>
+					<if test = "bltin == 'Y' ">  #{bltin}, </if>
+			elev =	<if test="elev != 'Y' "> 'N', </if>
+				  	<if test="elev == 'Y'">  #{elev}, </if>
+			pet =	<if test="pet != 'Y' "> 'N', </if>
+					<if test="pet == 'Y'">  #{pet}, </if>
+			vrd = 	<if test="vrd != 'Y' "> 'N', </if>
+					<if test="vrd == 'Y'"> #{vrd}, </if>
+			loan = 	<if test="loan != 'Y' "> 'N', </if>
+					<if test="loan == 'Y'"> #{loan},  </if>
+			park =	<if test="park != 'Y' "> 'N', </if>
+					<if test="park == 'Y'"> #{park}, </if>
+			mdate = <if test="mdate != 'Y' "> 'N', </if>
+					<if test="mdate == 'Y'"> #{mdate}, </if>
 			etc = #{etc}
 		where hcode = #{hcode}
 	</update>

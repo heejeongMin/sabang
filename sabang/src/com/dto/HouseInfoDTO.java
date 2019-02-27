@@ -43,6 +43,15 @@ public class HouseInfoDTO {
 		this.agntid = agntid;
 	}
 
+	
+	@Override
+	public String toString() {
+		return "HouseInfoDTO [hcode=" + hcode + ", htype=" + htype + ", rtype=" + rtype + ", hname=" + hname + ", addr="
+				+ addr + ", coordX=" + coordX + ", coordY=" + coordY + ", area=" + area + ", whlflr=" + whlflr
+				+ ", flr=" + flr + ", room=" + room + ", batr=" + batr + ", cntwish=" + cntwish + ", himage=" + himage
+				+ ", hetc=" + hetc + ", registerDate=" + registerDate + ", agntid=" + agntid + "]";
+	}
+
 	public String getHcode() {
 		return hcode;
 	}

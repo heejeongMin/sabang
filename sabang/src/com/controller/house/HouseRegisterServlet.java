@@ -95,7 +95,7 @@ public class HouseRegisterServlet extends HttpServlet {
 			    	case "mrent" : priceDTO.setMrent(Integer.parseInt(item.getString("utf-8"))); break;
 			    	case "yrent" : priceDTO.setYrent(Integer.parseInt(item.getString("utf-8"))); break;
 			    	case "maintc" : priceDTO.setMaintc(Integer.parseInt(item.getString("utf-8"))); break;
-			    	case "parkf" : priceDTO.setParkf(Integer.parseInt(item.getString("utf-8"))); break;
+			    	case "parkf" : priceDTO.setParkf(Double.parseDouble(item.getString("utf-8"))); break;
 			    	case "options" :
 			    		switch (item.getString("utf-8")) {
 			    		case "BLTIN" : optionDTO.setBltin('Y'); break;
@@ -109,21 +109,21 @@ public class HouseRegisterServlet extends HttpServlet {
 			     	case "etc" : optionDTO.setEtc(item.getString("utf-8")); break;
 			    	}
 			    } else { // System.currentTimeMills() 사용으로 DB에 gimage 데이터타입을 varchar2(20)에서 varchar2(80)으로 변경
-			    	String[] fileNames = item.getName().split("\\.");
-			    	fileName = fileNames[0] + System.currentTimeMillis() + "." + fileNames[1];
-			    	infoDTO.setHimage(fileName);
+			    	if(item.getName().length() != 0) {
+			    		String[] fileNames = item.getName().split("\\.");
+			    		fileName = fileNames[0] + System.currentTimeMillis() + "." + fileNames[1];
+			    		infoDTO.setHimage(fileName);
+				    	File f = new File("C:\\Projects\\sabang\\masterGit\\sabang\\WebContent\\images", fileName);
+//				    	File f = new File("C:\\gitTest3\\sabang\\sabang\\WebContent\\images", fileName);
+				    	item.write(f);
+			    	}
 			    }
 			}
-			System.out.println(optionDTO);
-			System.out.println(optionDTO.getBltin() == 'Y');
 			//Image 업로드
-//	    	File f = new File("C:\\Projects\\sabang\\masterGit\\sabang\\WebContent\\images", fileName);
-	    	File f = new File("C:\\gitTest3\\sabang\\sabang\\WebContent\\images", fileName);
-	    	item.write(f);
-	    	
+
 	    	HashMap<String, Object> registerMap = new HashMap<>();
 	    	infoDTO.setAgntid(member.getUserid());//session에 잇는 에이전트의 유저 아이디도 가져온다. 
-	    	
+	    	System.out.println(infoDTO);
 	    	registerMap.put("info", infoDTO);
 	    	registerMap.put("price", priceDTO);
 	    	registerMap.put("option", optionDTO);
