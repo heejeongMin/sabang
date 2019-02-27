@@ -1,13 +1,68 @@
-=<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt"%>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <script src="js/houseDetailInfo.js"></script>
 <link rel="stylesheet" href="css/houseDetailInfo.css">
+<style>
+p#hcodeBar{
+	padding: 10px;
+    margin: 10px 0;
+    background: cadetblue;
+    color: white;
+        text-shadow: 3px 2px grey;
+}
+i.fa-heart{
+	color: white;
+}
+div#likeAndShare{
+	height: 40px;
+}
+div#like{
+	display:inline-block;
+	position: absolute;
+	right:155px;
+	cursor: pointer;
+	background-color:red;
+	padding: 6px;
+	border-radius : 3px; 
+	color: white;
+	font-weight: bold;
+	
+}
+div#share{
+	display:inline-block;
+	position: absolute;
+	right:45px;
+	cursor: pointer;
+	background-color:palegreen;;
+	padding: 5px 6px 6px 6px;
+	border-radius : 3px; 
+	color: forestgreen;
+	font-weight: bold;
+}
+img#naver{
+	position: relative;
+    top: 3px;
+}
+
+</style>
 <div class="wrapper">
 	<div class="main-element">
-		<p>${info.hcode}</p>
+		<h2><p id="hcodeBar">매물코드 : ${info.hcode}</p></h2>
+		<div id="likeAndShare">
+			<div class="func" id="like"><i class="fas fa-heart"></i> 찜하기</div>
+			<div class="func" id="share" onclick="share()">
+				<span>
+					<script type="text/javascript" src="https://ssl.pstatic.net/share/js/naver_sharebutton.js"></script>
+					<script type="text/javascript">
+						new ShareNaver.makeButton({"type": "b"});
+					</script>
+				</span>
+			공유하기</div>
+		</div>
 		<span id="title">${info.hname}</span>
 	</div>
 	<br>
@@ -220,3 +275,12 @@
 			</div>
 		</div>
 	</div>
+	
+<script>
+    function share() {
+      var url = encodeURI(encodeURIComponent(myform.url.value));
+      var title = encodeURI(myform.title.value);
+      var shareURL = "https://share.naver.com/web/shareView.nhn?url=" + url + "&title=" + title;
+      document.location = shareURL;
+    }
+ </script>
