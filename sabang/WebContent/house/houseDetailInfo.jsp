@@ -1,54 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt"%>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<script src="js/houseDetailInfo.js"></script>
-<link rel="stylesheet" href="css/houseDetailInfo.css">
-<style>
-p#hcodeBar{
-	padding: 10px;
-    margin: 10px 0;
-    background: cadetblue;
-    color: white;
-        text-shadow: 3px 2px grey;
-}
-i.fa-heart{
-	color: white;
-}
-div#likeAndShare{
-	height: 40px;
-}
-div#like{
-	display:inline-block;
-	position: absolute;
-	right:155px;
-	cursor: pointer;
-	background-color:red;
-	padding: 6px;
-	border-radius : 3px; 
-	color: white;
-	font-weight: bold;
-	
-}
-div#share{
-	display:inline-block;
-	position: absolute;
-	right:45px;
-	cursor: pointer;
-	background-color:palegreen;;
-	padding: 5px 6px 6px 6px;
-	border-radius : 3px; 
-	color: forestgreen;
-	font-weight: bold;
-}
-img#naver{
-	position: relative;
-    top: 3px;
-}
 
-</style>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="css/houseDetailInfo.css">
+<link rel="stylesheet" href="css/houseDetailMainElement.css">
+
+<script src="js/houseDetailInfo.js"></script>
+
 <div class="wrapper">
 	<div class="main-element">
 		<h2><p id="hcodeBar">매물코드 : ${info.hcode}</p></h2>
@@ -62,6 +22,10 @@ img#naver{
 					</script>
 				</span>
 			공유하기</div>
+			<form id="myform" style="dispaly:none;">
+				<input type="hidden" style="dispaly:none;" id="url" value="https://search.naver.com/search.naver?sm=tab_hty.top&where=nexearch&oquery=%EB%84%A4%EC%9D%B4%EB%B2%84+%EA%B0%9C%EB%B0%9C%EC%9E%90%EC%84%BC%ED%84%B0&ie=utf8&query=%EB%84%A4%EC%9D%B4%EB%B2%84+%EA%B0%9C%EB%B0%9C%EC%9E%90%EC%84%BC%ED%84%B0"><br/>
+    			<input type="hidden" style="dispaly:none;" id="title" value="사방 매물 공유 ${info.hcode} "><br/>
+			</form>
 		</div>
 		<span id="title">${info.hname}</span>
 	</div>
@@ -275,12 +239,13 @@ img#naver{
 			</div>
 		</div>
 	</div>
-	
-<script>
-    function share() {
-      var url = encodeURI(encodeURIComponent(myform.url.value));
-      var title = encodeURI(myform.title.value);
-      var shareURL = "https://share.naver.com/web/shareView.nhn?url=" + url + "&title=" + title;
-      document.location = shareURL;
-    }
- </script>
+<script type="text/javascript">
+	function share() { //네이버 share 기능
+	      var url = encodeURI(encodeURIComponent(myform.url.value));
+	      var title = encodeURI(myform.title.value);
+	      var shareURL = "https://share.naver.com/web/shareView.nhn?url=" + url + "&title=" + title;
+	      alert("많이 공유해주세요~~")
+	      window.open (shareURL, "naver공유", "_blank", "width=100, height=100");
+	}
+
+</script>
