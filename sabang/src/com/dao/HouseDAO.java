@@ -45,7 +45,8 @@ public class HouseDAO {
 	
 	//신매물 리스트
 	public List<HashMap<String, Object>> retrieveNewItems(SqlSession session){
-		return session.selectList("HouseMapper.retrieveNewItems");
+		String maxSeven = session.selectOne("HouseMapper.test");
+		return session.selectList("HouseMapper.retrieveNewItems", maxSeven);
 	}//end retrieveNewItems
 	
 	//핫매물 리스트
@@ -95,13 +96,87 @@ public class HouseDAO {
 	//매물 올리기- option - info&price&option 트랜잭션 처리
 	public int houseRegister_option(SqlSession session, HouseOptionDTO optionDTO){
 		return session.insert("HouseMapper.houseRegister_option", optionDTO);
+	}//end houseRegister_option
+	
+	
+	//매물 수정- info - info&price&option 트랜잭션 처리
+	public int houseUpdate_info(SqlSession session, HouseInfoDTO infoDTO){
+		return session.update("HouseMapper.houseUpdate_info", infoDTO);
+	}//end houseRegister_info
+
+	//매물 수정- price - info&price&option 트랜잭션 처리
+	public int houseUpdate_price(SqlSession session, HousePriceDTO priceDTO){
+		return session.update("HouseMapper.houseUpdate_price", priceDTO);
 	}//end houseRegister_price
+
+	//매물 수정- option - info&price&option 트랜잭션 처리
+	public int houseUpdate_option(SqlSession session, HouseOptionDTO optionDTO){
+		return session.update("HouseMapper.houseUpdate_option", optionDTO);
+	}//end houseUpdate_option
 	
 	//매물 삭제
 	public int houseDel(SqlSession session, List<String> list){
-		return session.delete("HouseMapper.houseDel", list);
-	}//end houseRegister_price
+		int n = session.delete("HouseMapper.houseDel_info", list);
+		n = session.delete("HouseMapper.houseDel_price", list);
+		n = session.delete("HouseMapper.houseDel_option", list);
+		return n;
+	}//end houseDel
+	
+	//매물 cntwish 값 업데이트
+	public int updateCntWish(SqlSession session, String hcode) {
+		int n = getCntWish(session, hcode);
 		
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("hcode", hcode);
+		map.put("cntwish", n);
+		
+		n = session.update("HouseMapper.updateCntWish", map);
+		return n;
+	}//updateCntWish
+	
+	
+	//매물 cntwish 값 가져오기 
+	private int getCntWish(SqlSession session, String hcode) {
+		return session.selectOne("HouseMapper.getCntWish", hcode);
+	}//getCntWish
+		
+	// 유저가 찜한 매물 저장하기
+	public int addWish(SqlSession session, HouseWishlistDTO dto) {
+		int n = getNoOfWishes(session, dto); //유저의 찜 개수 가지고 오기
+		int result = 0;
+		int dupleCheck = 0;
+		
+		 // result 0: 찜 개수 다 찼음
+		// result 1: 찜 성공
+		// result 2 : 찜 대상 매물 중복
+		
+		if (n >=6) {// 이미 찜한개수가 6개가 다 찼을때 result 는 0
+			result = 0;
+		} else {// 찜은 할 수 있는 블럭
+			if (n==0) {//찜을 단 한번도 하지 않은 상태니까 그냥 insert 해주고,
+				result = session.insert("HouseMapper.addWish", dto);
+				result = updateCntWish(session, dto.getHcode());
+			} else {//찜을 한번이라도 한 이력이 있으니까, 중복매물인지 확인
+				dupleCheck = duplicateHouseCheck(session, dto);
+				if (dupleCheck == 0) {//중복매물이 아니면 insert진행 
+					result = session.insert("HouseMapper.addWish", dto);
+					result = updateCntWish(session, dto.getHcode());
+				} else {//중복매물이면 2 리턴
+					result = 2;
+				}
+			}//if~else
+		}
+		return result;
+	}//updateCntWish
+	
+	//한 유저당 찜 한 개수 가지고 오기
+	private int getNoOfWishes(SqlSession session, HouseWishlistDTO dto) {
+		return session.selectOne("HouseMapper.getNoOfWishes", dto.getUserid());
+	}//getCntWish
+	
+	private int duplicateHouseCheck(SqlSession session, HouseWishlistDTO dto) {
+		return session.selectOne("HouseMapper.duplicateHouseCheck", dto);
+	};
 	
 	
 	///////////////////////////////////////////////////////////

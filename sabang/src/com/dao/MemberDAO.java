@@ -100,15 +100,11 @@ public class MemberDAO {
 	}
 	
 	
-	public int MemberUpdate(SqlSession session, MemberDTO dto) {
+	public int memberUpdate(SqlSession session, MemberDTO dto) {
 		int n = session.update("MemberMapper.memberUpdate",dto);
 		return n;
 	}
-	
-	public int AgentUpdate(SqlSession session, AgentDTO dto) {
-		int n = session.update("MemberMapper.agentUpdate",dto);
-		return n;
-	}
+
 	
 	
 	public List<HashMap<String, String>> myPageBoard(SqlSession session,String userid) {

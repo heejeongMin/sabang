@@ -243,26 +243,12 @@ public class MemberService {
 	}
 	
 	
-	public int MemberUpdate(MemberDTO dto) {
+	public int memberUpdate(MemberDTO dto) {
 		SqlSession session = MySqlSessionFactory.getSession();
 		int n = 0;
 		try {
 			MemberDAO dao = new MemberDAO();
-			n = dao.MemberUpdate(session, dto);
-			session.commit();
-		}finally {
-			session.close();
-		}
-		return n;
-	}
-	
-	
-	public int AgentUpdate(AgentDTO dto) {
-		SqlSession session = MySqlSessionFactory.getSession();
-		int n = 0;
-		try {
-			MemberDAO dao = new MemberDAO();
-			n = dao.AgentUpdate(session, dto);
+			n = dao.memberUpdate(session, dto);
 			session.commit();
 		}finally {
 			session.close();

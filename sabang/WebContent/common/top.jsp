@@ -35,11 +35,17 @@ $(document).ready(function(){
 		if ($(this).val() != '신촌') {
 			alert("준비중입니다.")
 		}
-	})
-})
+	});
+	
+	$("img#logoImg").on("click", function(e){
+		location.href="main.jsp";
+	});
+	
+	
+});//end ready
 	
 </script>
-<span style="color: white"> <img src="images/logo/sabanglogo_w.png" width="23px" height = "100%"> Sabang
+<span style="color: white"> <img src="images/logo/sabanglogo_w.png" width="23px" height = "100%" id="logoImg" style="cursor: pointer;"> Sabang
 	<c:choose>
              <c:when test="${memberInfo ne null}">
              <c:set var="name" value="${memberInfo.username}" scope="request" />

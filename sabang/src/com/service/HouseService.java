@@ -101,7 +101,7 @@ public class HouseService {
 		return lastCode;
 	}//end getLastCode
 	
-	public int houseRegister(HashMap<String, Object> registerMap) {//마지막으로 등록된 코드 가져오기
+	public int houseRegister(HashMap<String, Object> registerMap) {//매물등록
 		SqlSession session = MySqlSessionFactory.getSession();
 		int n = 0;
 		try {
@@ -117,9 +117,28 @@ public class HouseService {
 			session.close();
 		}
 		return n;
-	}//end getLastCode
+	}//end houseRegister
 	
-	public int houseDel(List<String> list) {//마지막으로 등록된 코드 가져오기
+	public int houseUpdate(HashMap<String, Object> registerMap) {//매물 수정
+		SqlSession session = MySqlSessionFactory.getSession();
+		int n = 0;
+		try {
+			HouseDAO dao = new HouseDAO();
+			n = dao.houseUpdate_info(session, (HouseInfoDTO) registerMap.get("info"));
+			n = dao.houseUpdate_price(session, (HousePriceDTO) registerMap.get("price"));
+			n = dao.houseUpdate_option(session, (HouseOptionDTO) registerMap.get("option"));
+			session.commit();
+		} catch (Exception e) {
+			session.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return n;
+	}//end houseUpdate
+	
+	
+	public int houseDel(List<String> list) {//매물삭제
 		SqlSession session = MySqlSessionFactory.getSession();
 		int n = 0;
 		try {
@@ -133,8 +152,24 @@ public class HouseService {
 			session.close();
 		}
 		return n;
-	}//end getLastCode
+	}//end houseDel
 	
+	public int updateCntWish(HouseWishlistDTO dto) {//매물 cnthwish 업데이트
+		SqlSession session = MySqlSessionFactory.getSession();
+		int n = 0;
+		try {
+			HouseDAO dao = new HouseDAO();
+//			n = dao.updateCntWish(session, dto.getHcode());
+			n = dao.addWish(session, dto);
+			session.commit();
+		} catch (Exception e) {
+			session.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return n;
+	}//end updateCntWish
 	
 	
 	///////////////////////////////////////////////////////////

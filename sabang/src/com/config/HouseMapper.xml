@@ -4,14 +4,104 @@
 
 <mapper namespace="HouseMapper">
 
-<!-- 매물 등록 - house_info 테이블 -->
-	<delete id="houseDel" parameterType="list">
+
+<!-- 유저가 찜한 매물이 이미 찜했던 매물인지 확인 -->	
+	<select id ="duplicateHouseCheck" parameterType="string" resultType="int">
+		select count(*) from wishlist where hcode = #{hcode} and userid = #{userid}
+	</select>
+
+<!-- 유저가 찜한 매물 저장하기 -->	
+	<insert id="addWish" parameterType="hashmap">
+	 	insert into wishlist (userid, hcode) 
+	 	values (#{userid}, #{hcode})
+	</insert>
+	
+<!-- 한 유저가 찜한 개수 가져오기 -->	
+	<select id="getNoOfWishes" parameterType="string" resultType="int">
+		 select count(*) from wishlist where userid= #{userid}
+	</select>
+
+<!-- 매물의 cntwish 값 올리기 -->
+	<update id="updateCntWish" parameterType="hashmap">
+	 	update house_info
+        set cntwish  = #{cntwish}+1
+        where hcode = #{hcode}
+	</update>
+	
+<!-- 매물의 cntwish 값 가져오기  -->
+	<select id="getCntWish" parameterType="string" resultType="int">
+		select cntwish from house_info where hcode = #{hcode}
+	</select>
+
+<!-- 매물 삭제 - house_info 테이블 -->
+	<delete id="houseDel_option" parameterType="list">
+		delete from house_option 
+		where hcode in
+		<foreach item="item" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+<!-- 매물 삭제 - house_info 테이블 -->
+	<delete id="houseDel_price" parameterType="list">
+		delete from house_price 
+		where hcode in
+		<foreach item="item" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+<!-- 매물 삭제 - house_info 테이블 -->
+	<delete id="houseDel_info" parameterType="list">
 		delete from house_info 
 		where hcode in
 		<foreach item="item" collection="list" open="(" separator="," close=")">
 			#{item}
 		</foreach>
 	</delete>
+
+<!-- 매물 수정 - house_info 테이블 -->
+	<update id="houseUpdate_info" parameterType="HouseInfoDTO">
+		update house_info 
+		set rtype = #{rtype}, hname = #{hname}, addr = #{addr}, area = #{area}, whlflr = #{whlflr},
+			flr = #{flr}, room = #{room}, batr = #{batr}, 
+			<if test="himage != null">
+				himage = #{himage},
+			</if>
+			hetc = #{hetc}
+	 	where hcode = #{hcode}		 
+	</update>
+	
+<!-- 매물 수정 - house_price 테이블 -->
+	<update id="houseUpdate_price" parameterType="HousePriceDTO">
+		update house_price 
+		set deposit = #{deposit}, mrent = #{mrent}, yrent = #{yrent}, maintc = #{maintc}, parkf = #{parkf}
+		where hcode = #{hcode}
+	</update>
+	
+<!-- 매물 수정 - house_option 테이블 -->
+	<update id="houseUpdate_option" parameterType="HousePriceDTO">
+		update house_option 
+		set bltin =	<if test="bltin != 'Y'"> 'N', </if>
+					<if test = "bltin == 'Y' ">  #{bltin}, </if>
+			elev =	<if test="elev != 'Y' "> 'N', </if>
+				  	<if test="elev == 'Y'">  #{elev}, </if>
+			pet =	<if test="pet != 'Y' "> 'N', </if>
+					<if test="pet == 'Y'">  #{pet}, </if>
+			vrd = 	<if test="vrd != 'Y' "> 'N', </if>
+					<if test="vrd == 'Y'"> #{vrd}, </if>
+			loan = 	<if test="loan != 'Y' "> 'N', </if>
+					<if test="loan == 'Y'"> #{loan},  </if>
+			park =	<if test="park != 'Y' "> 'N', </if>
+					<if test="park == 'Y'"> #{park}, </if>
+			mdate = <if test="mdate != 'Y' "> 'N', </if>
+					<if test="mdate == 'Y'"> #{mdate}, </if>
+			etc = #{etc}
+		where hcode = #{hcode}
+	</update>
+
+
+
 
 <!-- 매물 등록 - house_info 테이블 -->
 	<insert id="houseRegister_info" parameterType="HouseInfoDTO">
@@ -75,19 +165,23 @@
 		'%'||#{search}||'%'
 	</select>
 
-<!-- houseOverview.jsp에서 신매물 최근 3일기준 w/o paging  -->
-	<select id="retrieveNewItems" resultType="hashmap">
+<!-- houseOverview.jsp에서 신매물 가장 최근에 올린 애부터 7일 사이  -->
+	<select id="retrieveNewItems" parameterType="string" resultType="hashmap">
 		select hcode, htype, rtype, hname, area, coordx, coordy, flr, hetc, deposit, mrent, yrent, maintc
 		from house_info join house_price using(hcode)
-		where registerdate > sysdate-3
+		where registerdate > #{maxSeven}
 	</select>
-
+	
+<!-- 신매물 기준이 되는 최신 매물에서 7일전꺼 -->
+    <select id="test" resultType="string">
+    	select to_char(max(registerdate)-7, 'yyyymmdd') from house_info
+    </select>
+    
 <!-- houseOverview.jsp에서 핫매물 cntwish 기준   w/o paging -->
 	<select id="retrieveHotItems" resultType="hashmap">
 		select hcode, htype, rtype, hname, area, coordx, coordy, flr, hetc, deposit, mrent, yrent, maintc
 		from house_info join house_price using(hcode)
-		where cntwish > (select
-		max(cntwish) - 3 from house_info)
+		where cntwish >= (select AVG(cntwish) from house_info)
 		order by cntwish desc
 	</select>
 

@@ -1,0 +1,54 @@
+p#hcodeBar{
+	padding: 10px;
+    margin: 10px 0;
+    background: cadetblue;
+    color: white;
+        text-shadow: 3px 2px grey;
+}
+i.fa-heart{
+	color: white;
+}
+div#likeAndShare{
+	height: 40px;
+}
+div#like{
+	display:inline-block;
+	position: absolute;
+	right:155px;
+	cursor: pointer;
+	background-color:red;
+	padding: 6px;
+	border-radius : 3px; 
+	color: white;
+	font-weight: bold;
+	
+}
+div#share{
+	display:inline-block;
+	position: absolute;
+	right:45px;
+	cursor: pointer;
+	background-color:palegreen;;
+	padding: 5px 6px 6px 6px;
+	border-radius : 3px; 
+	color: forestgreen;
+	font-weight: bold;
+}
+img#naver{
+	position: relative;
+    top: 3px;
+}
+div#weatherBlock{
+	margin-top:20px;
+	
+}
+i.fa-umbrella{
+	color: blue;
+}
+i.fa-sun{
+	color:orange;
+}
+i.fa-smile-wink, i.fa-grin-squint-tears, i.fa-grin-hearts, i.fa-meh-rolling-eyes{
+	color: hotpink;
+}
+
