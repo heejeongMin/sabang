@@ -64,7 +64,7 @@ public class HouseRegisterServlet extends HttpServlet {
 		// 파일 크기
 		// b ---> kb ---> mb ---> gb
 		// 1mb 가 1024 kb
-		upload.setFileSizeMax(1024 * 1024 * 2); // 개별 파일 업로드 가능한 최대 크기  지금은 2mb로 설정
+		upload.setFileSizeMax(1024 * 1024 * 3); // 개별 파일 업로드 가능한 최대 크기  지금은 2mb로 설정
 		upload.setSizeMax(1024 * 1024 * 5); // 총 파일 크기, -1을 주면 기본값으로 무제한이다. 지금은 5mb 로 설정
 	
 		HouseInfoDTO infoDTO = new HouseInfoDTO();

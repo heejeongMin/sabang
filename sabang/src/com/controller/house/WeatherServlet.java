@@ -42,6 +42,8 @@ public class WeatherServlet extends HttpServlet {
 		int hour = c1.get(Calendar.HOUR) ;
 		int d = 0 ;
 		String m = "";
+		
+		
 		if (hour < 11) {
 			if (c.get(Calendar.DATE) == 1) {//만약에 1일이면 
 				m = (month - 1 < 10 )? "0"+ (month - 1) : String.valueOf(month - 1);

@@ -52,7 +52,7 @@ div#JumpImageWrap, div#JumpTextWrap{
 	var naverLogin = new naver.LoginWithNaverId(
 			{
 				clientId: "QN3lv2J2hB8uD9Nm2s90",
-				callbackUrl: "http://192.168.0.117:8090/sabang/main.jsp",
+				callbackUrl: "http://localhost:8090/sabang/main.jsp",
 				isPopup: false, /* 팝업을 통한 연동처리 여부 */
 				loginButton: {color: "green", type: 1, height: 25} /* 로그인 버튼의 타입을 지정 */
 			}
