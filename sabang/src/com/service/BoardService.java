@@ -44,16 +44,35 @@ public class BoardService {
 			return deleteBoard;
 		}
 	// 보드 수정
-	 public int updateBoard(BoardDTO board) {
+/*	 public int updateBoard(HashMap<String,BoardDTO> map) {
 			SqlSession session = MySqlSessionFactory.getSession();
-			int n = 0;
+			int updateBoard = 0;
 			try {
 				BoardDAO dao = new BoardDAO();
-				n = dao.updateBoard(session, board);
+				updateBoard = dao.updateBoard(session, map);
 				session.commit();
-			}finally {
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
 				session.close();
 			}
-			return n;
+			return updateBoard;
+		}*/
+	 
+	 
+	 
+	 public int updateBoard(BoardDTO board) {
+			SqlSession session = MySqlSessionFactory.getSession();
+			int updateBoard = 0;
+			try {
+				BoardDAO dao = new BoardDAO();
+				updateBoard = dao.updateBoard(session, board);
+				session.commit();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				session.close();
+			}
+			return updateBoard;
 		}
 }

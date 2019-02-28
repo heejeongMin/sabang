@@ -24,11 +24,15 @@ public class BoardDAO {
 	}
 	
 	// 보드 수정, dto와 게시물 비밀번호를 받는다
+//	public int updateBoard(SqlSession session, HashMap<String,BoardDTO> map){
+//		int x = session.update("BoardMapper.updateBoard", map);
+//		return x;
+//	}
+	
 	public int updateBoard(SqlSession session, BoardDTO board){
 		int x = session.update("BoardMapper.updateBoard", board);
 		return x;
 	}
-	
 	//보드 수정과 삭제를 위한 게시물 비밀번호로 보드 데이터 가져오기
 /*	public List<BoardDTO> boardList(SqlSession session, String hcode){
 		List<BoardDTO> list = session.selectList("BoardMapper.boardList", hcode);
