@@ -13,7 +13,7 @@
 		<jsp:include page="common/top.jsp" flush="true" /><br>
 	</div>
 </div>
-<div id="section_loginForm">
+<div id="section_wrap">
 	<div id="article_loginForm">
 		<h1>로그인</h1>
 		<jsp:include page="member/loginForm.jsp" flush="true" />

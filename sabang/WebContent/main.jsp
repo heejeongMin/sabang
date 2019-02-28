@@ -15,19 +15,18 @@
 	<c:remove var="mesg" />
 </c:if>
 </head>
-<body id="wrap">
-<div id="wrap">
+<body>
+<div id="wrap"></div>
 	<div id="header">
 		<div id="inner_header">
 			<jsp:include page="common/top.jsp" flush="true"/>
 			
 		</div>
 	</div>
-	<div id="section_main">
+	<div id="section_wrap">
 		<div id="article_main">
 			<a href="HouseListServlet">houseOverview</a>
 		</div>
 	</div>
-</div>
 </body>
 </html>
