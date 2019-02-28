@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="css/sabangTest.css">
+<link rel="stylesheet" href="css/sabang.css">
 <c:set var="mesg" value="${mesg}" scope="session" />
 <c:if test="${!(empty mesg)}">
 	<script>
@@ -18,8 +18,15 @@
 <body id="wrap">
 <div id="wrap">
 	<div id="header">
-		<jsp:include page="common/top.jsp" flush="true" /><br>
-		<a href="HouseListServlet">houseOverview</a> <br>
+		<div id="inner_header">
+			<jsp:include page="common/top.jsp" flush="true"/>
+			
+		</div>
+	</div>
+	<div id="section_main">
+		<div id="article_main">
+			<a href="HouseListServlet">houseOverview</a>
+		</div>
 	</div>
 </div>
 </body>
