@@ -59,7 +59,7 @@ function getLocation(){
         };
         var errorMsg = errorTypes[error.code];
         console.log(errorMsg);
-        if (errorMsg == '위치가 안잡힘' || errorMesg == '응답시간 지남'){
+        if (errorMsg == '위치가 안잡힘' || errorMesg == '응답시간 지남' || errorMesg == '허용 안눌렀음' || errorMesg == '무슨 에러냥~' ){
         	myPosition(0,0,2);
         }
 }// locationError

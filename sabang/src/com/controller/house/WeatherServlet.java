@@ -48,17 +48,20 @@ public class WeatherServlet extends HttpServlet {
 				if ((month -1) % 2  != 0) {//홀수 달들
 					d = 31;
 				} else {//짝수 달들 
-					m = (month<10)? "0"+month :String.valueOf(month);
+					
 					if ((month -1)==2) {//만약에 2월이면
 						GregorianCalendar cal = new GregorianCalendar();
 						if(cal.isLeapYear(c.getWeekYear())) {//윤달인지 확인
 //						    System.out.print("Given year is leap year.");
+							m = ((month-1)<10)? "0"+month :String.valueOf(month);
 						    d = 29;
 						} else {
 //						    System.out.print("Given year is not leap year.");
+							m = ((month-1)<10)? "0"+month :String.valueOf(month);
 						    d= 28;
 						}
 					} else {
+						m = (month<10)? "0"+month :String.valueOf(month);
 						d=30;
 					}//end if~else 윤달 확인
 				}//end if~else 홀수 짝수 달
@@ -86,7 +89,8 @@ public class WeatherServlet extends HttpServlet {
 		 String reqURL ;
 		 reqURL = "http://newsky2.kma.go.kr/service/SecndSrtpdFrcstInfoService2/ForecastSpaceData?";
 		 reqURL += "ServiceKey=VD5ItN1ersyBmcioWetkmK%2B4gwxiWRfmz4XKtGg%2FntXHP4CtGSLuAkL4VDjr8rPJEy1S6eYO0BdsVK8C%2FeqL0A%3D%3D";
-		 reqURL += "&base_date="+base_date;
+		 reqURL += "&base_date=20190228";
+//		 reqURL += "&base_date="+base_date;
 		 reqURL += "&base_time=1100"; //11시여야 items에 예보정보가 나옴 .... 
 		 if (coordX.equals("0") || coordY.equals("0")) {
 			 reqURL += "&nx="+x+"&ny="+y;
