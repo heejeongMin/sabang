@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -30,22 +31,46 @@ public class WeatherServlet extends HttpServlet {
 		String coordY = request.getParameter("ny");
 		System.out.println(coordX + "\t" + coordY);
 		
+		
+		
+		
 		//요청 일자, 시간 만들기
 		TimeFetcher test = new TimeFetcher();
-		Calendar c1 = Calendar.getInstance();
 		Calendar c = test.getBaseTime();
-//		System.out.println("c:" + c.get(Calendar.HOUR_OF_DAY));
-//		System.out.println("c1:" + c1.get(Calendar.HOUR_OF_DAY));
-		for (int i = 0; i<10; i++) {
-		}
+		Calendar c1 = Calendar.getInstance();
+		int month = c1.MONTH;
+		int hour = c1.get(Calendar.HOUR) ;
+		int d = 0 ;
+		String m = "";
+		if (hour < 11) {
+			if (c.get(Calendar.DATE) == 1) {//만약에 1일이면 
+				m = (month - 1 < 10 )? "0"+ (month - 1) : String.valueOf(month - 1);
+				if ((month -1) % 2  != 0) {//홀수 달들
+					d = 31;
+				} else {//짝수 달들 
+					m = (month<10)? "0"+month :String.valueOf(month);
+					if ((month -1)==2) {//만약에 2월이면
+						GregorianCalendar cal = new GregorianCalendar();
+						if(cal.isLeapYear(c.getWeekYear())) {//윤달인지 확인
+//						    System.out.print("Given year is leap year.");
+						    d = 29;
+						} else {
+//						    System.out.print("Given year is not leap year.");
+						    d= 28;
+						}
+					} else {
+						d=30;
+					}//end if~else 윤달 확인
+				}//end if~else 홀수 짝수 달
+			} else {//1일이 아니면 그냥 1빼기
+				m = (month<10)? "0"+month :String.valueOf(month);
+				System.out.println(m);
+				d = c.get(Calendar.DATE) - 1;
+			}//end if~else 일이 1일인지 아닌지 확인		
+		}//가지고온 시간이 11보다 작으면 
 		
-//		System.out.println("c" + c);
-//		System.out.println("그냥" + Calendar.HOUR_OF_DAY);
-		String m = (c.MONTH<10)? "0"+c.MONTH :String.valueOf(c.MONTH);
-		String base_date = String.valueOf(c.getWeekYear())+m+c.get(Calendar.DATE);
-		String base_time = String.valueOf(c.HOUR_OF_DAY)+"00";
-//		System.out.println(base_time);
-		
+		String base_date = String.valueOf(c.getWeekYear())+m+d;
+		System.out.println(base_date);
 		//요청 동네의 좌표 만들기
 		String[] asLocation = new String[]{"서울특별시", "서초구", "반포1동"};  
 		String x = null;
@@ -62,14 +87,13 @@ public class WeatherServlet extends HttpServlet {
 		 reqURL = "http://newsky2.kma.go.kr/service/SecndSrtpdFrcstInfoService2/ForecastSpaceData?";
 		 reqURL += "ServiceKey=VD5ItN1ersyBmcioWetkmK%2B4gwxiWRfmz4XKtGg%2FntXHP4CtGSLuAkL4VDjr8rPJEy1S6eYO0BdsVK8C%2FeqL0A%3D%3D";
 		 reqURL += "&base_date="+base_date;
-		 reqURL += "&base_time="+base_time;
+		 reqURL += "&base_time=1100"; //11시여야 items에 예보정보가 나옴 .... 
 		 if (coordX.equals("0") || coordY.equals("0")) {
 			 reqURL += "&nx="+x+"&ny="+y;
 		 } else {
 			 reqURL += "&nx="+coordX+"&ny="+coordY;
 		 }
 		 reqURL += "&_type=json";
-//		 System.out.println(reqURL);
 		 //내가 만든 String을 url로 만들기
 		 URL url = new URL(reqURL);
 		 BufferedReader bf; 
