@@ -14,33 +14,15 @@ import javax.servlet.http.HttpSession;
 
 import com.service.BoardService;
 
-@WebServlet("/DeleteBoardServlet")
-public class DeleteBoardServlet extends HttpServlet {
+@WebServlet("/PostBoardServlet")
+public class PostBoardServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		String pcode = request.getParameter("pcode");
-		String ppwd = request.getParameter("ppwd");
+		session.setAttribute("pcode", request.getParameter("pcode"));
+		session.setAttribute("ppwd", request.getParameter("ppwd"));
 		
-		HashMap<String,String> list = new HashMap<>();
-		
-		list.put("pcode",pcode);
-		list.put("ppwd",ppwd);
-		
-		BoardService bService = new BoardService();
-		int delBrd = bService.deleteBoard(list);
-		
-		
-		if( delBrd != 1 ) {
-			session.setAttribute("mesg", "게시물 비밀번호를 확인해주세요");
-		}else {
-			session.setAttribute("mesg", "삭제되었습니다.");
-		}
-		
-		session.setAttribute("func", "window.close()");
-		RequestDispatcher dis = request.getRequestDispatcher("board/houseDetailBoard.jsp");
+		RequestDispatcher dis = request.getRequestDispatcher("board/postBoard.jsp");
 		dis.forward(request, response);
-		
-		/*response.sendRedirect("board/houseDetailBoard.jsp");*/
 		
 	}//doGet
 

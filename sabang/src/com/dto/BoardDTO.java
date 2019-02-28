@@ -25,6 +25,14 @@ public class BoardDTO {
 		this.filename = filename;
 		this.hcode = hcode;
 	}
+	
+	public BoardDTO( String pcode, String title, String content) {
+		this.pcode = pcode;
+		this.title = title;
+		this.content = content;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "BoardDTO [userid=" + userid + ", pcode=" + pcode + ", pdate=" + pdate + ", ppwd=" + ppwd + ", title="

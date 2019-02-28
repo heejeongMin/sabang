@@ -19,30 +19,28 @@ public class EditBoardServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		
+	/*	String pcode = (String)session.getAttribute("pcode");*/
+		
 		String pcode = (String)session.getAttribute("pcode");
+		String ppwd = (String)session.getAttribute("ppwd");
 		
-	/*	String pcode = request.getParameter("pcode");*/
-		String ppwd = request.getParameter("ppwd");
+		String confirmPw = request.getParameter("confirmPw").trim();
 		
-		System.out.println(pcode);
-		System.out.println(ppwd);
-		
-		String confirmPw = request.getParameter("confirmPw");
 		String content = request.getParameter("content");
 		String title = request.getParameter("title");
 		
-		if (ppwd != confirmPw ) {
-			session.setAttribute("mesg", "게시물 비밀번호를 확인해주세요.");
-		}else {
-			BoardDTO edit = new BoardDTO();
-			edit.setContent(content);
-			edit.setTitle(title);
-			edit.setPcode(pcode);
+		if (ppwd.equals(confirmPw)) {
 			BoardService bService = new BoardService();
+			BoardDTO edit = new BoardDTO(pcode, title, content);
 			int updBrd = bService.updateBoard(edit);
-			session.setAttribute("mesg", "수정되었습니다.");
+			if (updBrd != 1) {
+				session.setAttribute("mesg", "게시물 비밀번호를 확인해주세요.");
+			} else {
+				session.setAttribute("mesg", "수정되었습니다.");
+			}
 		}
 		
+		session.setAttribute("func", "window.close()");
 		RequestDispatcher dis = request.getRequestDispatcher("board/houseDetailBoard.jsp");
 		dis.forward(request, response);
 		

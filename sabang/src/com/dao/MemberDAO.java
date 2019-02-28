@@ -1,6 +1,7 @@
 package com.dao;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -104,6 +105,14 @@ public class MemberDAO {
 		return n;
 	}
 
+	
+	
+	public List<HashMap<String, String>> myPageBoard(SqlSession session,String userid) {
+		return session.selectList("MemberMapper.myPageBoard",userid);
+	}
+	
+	
+	
 	
 	/////////////////////Naver Login//////////////////////////
 	public int naverUser(SqlSession session, HashMap<String, String> naverMap) {

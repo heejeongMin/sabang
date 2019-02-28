@@ -1,4 +1,4 @@
-package com.controller.house;
+package com.controller.member;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,62 +16,42 @@ import javax.servlet.http.HttpSession;
 import com.dto.HouseRcnlistDTO;
 import com.dto.HouseWishlistDTO;
 import com.dto.MemberDTO;
-import com.service.HouseService;
+import com.service.MemberService;
 
 /**
  * Servlet implementation class InterestServlet
  */
-@WebServlet("/InterestListServlet")
-public class InterestListServlet extends HttpServlet {
+@WebServlet("/MyPageBoardServlet")
+public class MyPageBoardServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//로그인 정보 확인
 		HttpSession session = request.getSession();
 		MemberDTO member = (MemberDTO)session.getAttribute("memberInfo");
 		
-		
-		// 최근본방 & 찜한방
-		String iCategory = request.getParameter("iCategory");
-		if(iCategory==null) {
-			iCategory = "rcnlist";
-		}
-		
-		HouseService hService = new HouseService();
-		
+		MemberService mService = new MemberService();
 		
 		String nextPage=null;
-		List<String> hCodeList = new ArrayList<>();
+		
+		//로그인 여부 검사
 		if(member!=null) {
-			nextPage="interestList.jsp";
+			nextPage="myPageBoard.jsp";
 			String userid = member.getUserid();
-			// 최근 본 방
-			if(iCategory.equals("rcnlist")) {
-				List<HouseRcnlistDTO> rcnList = hService.selectRcnlist(userid);
-				for(HouseRcnlistDTO rcnDto : rcnList) {
-					if(rcnDto.getUserid().equals(userid)) {
-						hCodeList.add(rcnDto.getHcode());
-					}
-				}
-				List<HashMap<String, Object>> houseInfoList = hService.rcnHouseInfo(hCodeList);
-				request.setAttribute("houseInfoRcnList", houseInfoList);
 			
-			// 찜리스트
-			}else if(iCategory.equals("wishlist")) {
-				List<HouseWishlistDTO> wishList = hService.selectWishlist(userid);
-				for(HouseWishlistDTO wishDto : wishList) {
-					hCodeList.add(wishDto.getHcode());
-				}
-				
-				List<HashMap<String, Object>> houseInfoList = hService.rcnHouseInfo(hCodeList);
-				request.setAttribute("houseInfoWishList", houseInfoList);
-			}
-		}else {
+			
+			List<HashMap<String,String>> list = mService.myPageBoard(userid);
+			
+			System.out.println(list);
+			
+			session.setAttribute("map", list);
+			
+		}
+		else {
 			nextPage="LoginUIServlet";
 			session.setAttribute("mesg", "로그인이 필요한 작업입니다.");
 		}
 		RequestDispatcher dis = request.getRequestDispatcher(nextPage);
 		dis.forward(request, response);
-	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
