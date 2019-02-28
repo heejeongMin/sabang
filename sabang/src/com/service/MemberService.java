@@ -1,6 +1,7 @@
 package com.service;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -268,6 +269,21 @@ public class MemberService {
 		}
 		return n;
 	}
+	
+	public List<HashMap<String,String>> myPageBoard(String userid) {
+		SqlSession session = MySqlSessionFactory.getSession();
+		List<HashMap<String,String>> dto = null;
+		try {
+			MemberDAO dao = new MemberDAO();
+			dto = dao.myPageBoard(session, userid);
+		} catch ( Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return dto;
+	}
+	
 	
 	/////////////////////Naver Login//////////////////////////
 	public int naverUser(HashMap<String, String> naverMap) {
