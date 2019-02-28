@@ -45,7 +45,8 @@ public class HouseDAO {
 	
 	//신매물 리스트
 	public List<HashMap<String, Object>> retrieveNewItems(SqlSession session){
-		return session.selectList("HouseMapper.retrieveNewItems");
+		String maxSeven = session.selectOne("HouseMapper.test");
+		return session.selectList("HouseMapper.retrieveNewItems", maxSeven);
 	}//end retrieveNewItems
 	
 	//핫매물 리스트
@@ -154,10 +155,12 @@ public class HouseDAO {
 		} else {// 찜은 할 수 있는 블럭
 			if (n==0) {//찜을 단 한번도 하지 않은 상태니까 그냥 insert 해주고,
 				result = session.insert("HouseMapper.addWish", dto);
+				result = updateCntWish(session, dto.getHcode());
 			} else {//찜을 한번이라도 한 이력이 있으니까, 중복매물인지 확인
-				dupleCheck = duplicateHouseCheck(session, dto.getHcode());
+				dupleCheck = duplicateHouseCheck(session, dto);
 				if (dupleCheck == 0) {//중복매물이 아니면 insert진행 
 					result = session.insert("HouseMapper.addWish", dto);
+					result = updateCntWish(session, dto.getHcode());
 				} else {//중복매물이면 2 리턴
 					result = 2;
 				}
@@ -171,8 +174,8 @@ public class HouseDAO {
 		return session.selectOne("HouseMapper.getNoOfWishes", dto.getUserid());
 	}//getCntWish
 	
-	private int duplicateHouseCheck(SqlSession session, String hcode) {
-		return session.selectOne("HouseMapper.duplicateHouseCheck", hcode);
+	private int duplicateHouseCheck(SqlSession session, HouseWishlistDTO dto) {
+		return session.selectOne("HouseMapper.duplicateHouseCheck", dto);
 	};
 	
 	
