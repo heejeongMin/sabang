@@ -4,10 +4,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="css/sabangTest.css">
+<link rel="stylesheet" href="css/sabang.css">
 </head>
 <body>
-<jsp:include page="common/top.jsp" flush="true" /><br>
-<jsp:include page="member/signCheckMbrForm.jsp" flush="true" />
+<div id="header">
+	<div id="inner_header">
+		<jsp:include page="common/top.jsp" flush="true" />
+	</div>
+</div>
+
+<div id="section_wrap">
+	<div id="article_main">
+		<jsp:include page="member/signCheckMbrForm.jsp" flush="true" />
+	</div>
+</div>
 </body>
 </html>
