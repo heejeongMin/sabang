@@ -17,7 +17,6 @@ a.unfocusedPage{
     text-decoration: none;
 }
 </style>
-<div id="wrap">
 <c:set var="HInfoRcn" value="${houseInfoRcnList}"/>
 <c:set var="HInfoWish" value="${houseInfoWishList}"/>
 <c:set var="HInfoRcnLength" value="${fn:length(houseInfoRcnList)}"/>
@@ -160,4 +159,3 @@ a.unfocusedPage{
 			</tr>
 		</table>
 	</c:if>
-</div>

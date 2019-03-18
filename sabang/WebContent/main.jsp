@@ -20,7 +20,6 @@
 	<div id="header">
 		<div id="inner_header">
 			<jsp:include page="common/top.jsp" flush="true"/>
-			
 		</div>
 	</div>
 	<div id="section_wrap">

@@ -5,7 +5,7 @@
 ol,ul { list-style: none; }
 a { outline:0; text-decoration:none; color:#555; }
 img { border:0;}
-body { font-family:orbitron; } 
+body {font-family:orbitron; } 
 
 
 h1,h3, a, p{
@@ -46,27 +46,17 @@ background: url(../images/mainback/bg_afternoon.jpg) no-repeat center center; ba
 #loginOnMenu li { float:left; margin-left:20px; font-size:15px; font-weight:bold; color:#00008b;}
 #loginOnMenu li a { font-size:15px; font-weight:bold; color:#00008b; }
 
-.filterRgn { cursor:pointer; }
-ul.sublist { display:none; }
+
+/* Menu */
+#section_overview_menu {
+	position:fixed; top:60px; width:100%; height:40px; background:#00008b; border-bottom:3px solid #cccccc; z-index:9999;
+}
+
+#inner_menu {
+	width:1200px; height:40px; margin:auto;
+}
 
 /* Section */
 #section_wrap {
-	position:absolute; top:60px; width:100%;
+	position:absolute; top:100px; width:100%;
 }
-
-/* Section - main */
-#article_main {
-	width:1200px; margin:auto; text-align:center;
-}
-
-
-/* Section - login */
-#article_loginForm {
-	width:1200px; margin:auto; text-align:center;
-}
-
-/* Section - signCheakMbrForm */
-#article_signCheakMbrForm {
-	width:1200px; margin:auto; text-align:center;
-}
-

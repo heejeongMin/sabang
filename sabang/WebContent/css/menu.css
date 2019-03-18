@@ -3,10 +3,11 @@ button, ul, li.filterOpt, input, span.rangeValue{float:left;}
 div.rangeWrap{ height: 50px; width:350px; padding: 0 10px 0 10px; color: darkblue; }
 
 ul{list-style:none;}
-ul#filterList{ display:inline-block; margin-top:0; }
+ul#filterList{ display:inline-block; margin-top: -25px; margin-left: 30px; }
 
 
-li.filterOpt{ margin-right: 20px; border-radius:10px; padding: 4px 8px 8px 8px; background-color: darkblue; color: white; font-weight: bold; cursor: pointer; }
+li.filterOpt{ margin-right: 20px; border-radius:10px; padding: 2px 6px 5px 7px; background-color: darkblue; color: white; font-weight: bold; cursor: pointer; box-shadow: 0px 2px 0px 2px white;
+    font-size: 15px;}
 ul.sublist{ display: none; background-color: white; color: darkblue; padding:5px 5px 8px 5px ; margin-top: 15px; position: absolute; float: left; box-shadow: 1px 1px 3px 3px #888888; }
 
 input[type='range']{ padding: 0; margin: 0; float: left; margin-top: 10px; }

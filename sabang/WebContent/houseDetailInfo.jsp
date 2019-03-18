@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="css/sabangTest.css">
+<link rel="stylesheet" href="css/sabang.css">
 </head>
 <body>
 <jsp:include page="common/top.jsp" flush="true"/>

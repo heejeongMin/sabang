@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
-<link rel="stylesheet" href="css/sabangTest.css">
+<link rel="stylesheet" href="css/sabang.css">
 <c:set var="mesg" value="${mesg}" scope="session" />
 <c:if test="${!(empty mesg)}">
 	<script>

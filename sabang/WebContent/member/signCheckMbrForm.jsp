@@ -7,11 +7,14 @@
 </style>     
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src = 'js/signEvents.js'></script><br>    
+<body>
+	Member <input type = "radio" id = "selectMbr" name = "selectType" value = 'N' >
+	Agent <input type = "radio" id = "selectAgnt" name = "selectType" value = 'Y'> 
+	<div id="signForm"></div>
+</body>
 
-Member <input type = "radio" id = "selectMbr" name = "selectType" value = 'N' >
-Agent <input type = "radio" id = "selectAgnt" name = "selectType" value = 'Y'> 
 
-<div id = "signForm">
+
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>

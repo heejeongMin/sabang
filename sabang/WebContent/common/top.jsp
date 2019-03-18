@@ -2,7 +2,6 @@
 <%@page import="com.dto.MemberDTO"%> 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="css/sabangTest.css">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -15,7 +14,7 @@ $(document).ready(function(){
 			if(ele.clientHeight != 0) $(ele).hide(); 
 		});//end ul.sublist반복
 		
-	$(e.target).find("ul.sublist").slideToggle();
+		$(e.target).find("ul.sublist").slideToggle();
 	});//end .filterRgn onClick
 	
 	//sub메뉴가 열렸을 때 누르면 부모인 li.filterRgn에 이벤트 전파 방지
@@ -23,7 +22,7 @@ $(document).ready(function(){
 		e.stopPropagation();
 	});//end ul.sublist onClick
 
-	$(document).mouseup(function(e){// 버튼 눌렀다가 다른데 누르면 드롭다온 사라짐. 
+	$(document).on("click",function(e){// 버튼 눌렀다가 다른데 누르면 드롭다온 사라짐. 
 		if($(e.target).parents().filter("ul#filterList").length == 0){
 			$("li.filterRgn").find("ul.sublist").each(function(idx, ele){//다른 버튼을 누르면 이미 열린애들은 닫아주기
 				if(ele.clientHeight != 0) $(ele).hide(); 
