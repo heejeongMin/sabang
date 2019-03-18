@@ -18,6 +18,8 @@
 		<jsp:include page="common/filter.jsp" flush="true"/>
 	</div>
 </div>
+
+
 <hr>
 <div id="section_wrap">
 	<div id="mainWrap">
