@@ -75,6 +75,9 @@ public class MemberDAO {
 		return checkMbrPw;
 	}
 
+	public String overDay(SqlSession session, String userid) {
+		return session.selectOne("MemberMapper.overDay", userid);
+	}
 	
 	
 	//////////////////////////////////////////////////////////////////

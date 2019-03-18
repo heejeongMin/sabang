@@ -130,6 +130,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 
+	<select id="overDay" parameterType="string" resultType="string">
+		select TO_CHAR(droptime + 1,'YYYYMMDDHH24')
+		from wdMbr
+		where userid = #{userid}
+	</select> 
+
 
 
 	<!-- 마이페이지  -->

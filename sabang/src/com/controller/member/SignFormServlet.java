@@ -23,24 +23,9 @@ public class SignFormServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		
-		
 		char agent = request.getParameter("page").charAt(0);
 		
 		session.setAttribute("agent", agent);
-		
-		System.out.println("SignFormServlet    agent is~~~~~" + agent); 
-		
-/*		String nextPage = null;
-		if (page.equals("member")) {
-			 nextPage = "member/signMbrForm.jsp";
-		}else {
-			 nextPage = "member/signAgntForm.jsp";
-		}
-		
-		RequestDispatcher dis = request.getRequestDispatcher(member/signMbrForm.jsp);
-		dis.forward(request, response);
-		
-		*/
 		
 		RequestDispatcher dis = request.getRequestDispatcher("member/signMbrForm.jsp");
 		dis.forward(request, response);

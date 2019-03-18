@@ -180,7 +180,19 @@ public class MemberService {
 		return checkMbrPw;
 	}// end checkMbrPw
 	
-	
+	public String overDay(String userid) {
+		SqlSession session = MySqlSessionFactory.getSession();
+		String overDay = null;
+		try {
+			MemberDAO dao = new MemberDAO();
+			overDay = dao.overDay(session, userid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return overDay;
+	}//end overDay
 	
 	
 	// 마이페이지
